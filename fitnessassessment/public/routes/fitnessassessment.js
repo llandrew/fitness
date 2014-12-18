@@ -45,7 +45,7 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	}
 	    })
 	    .state('edit company', {
-	    	url: '/fitnessassessment/company/:companyID/edit',
+	    	url: '/fitnessassessment/company/:companyId/edit',
 	    	templateUrl: 'fitnessassessment/views/company-edit.html',
 	    	resolve: {
 	    		loggedin: checkLoggedin

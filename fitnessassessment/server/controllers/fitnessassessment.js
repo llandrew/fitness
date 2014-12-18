@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Company = mongoose.model('Company');
+	Company = mongoose.model('Company'),
+	_ = require('lodash');
 
 exports.company = function(req, res, next, id) {
 	console.log('in company');
@@ -69,6 +70,8 @@ exports.destroy = function(req, res) {
  */
 exports.update = function(req, res) {
   var company = req.company;
+
+  company = _.extend(company, req.body);
 
   company.save(function(err) {
     if (err) {

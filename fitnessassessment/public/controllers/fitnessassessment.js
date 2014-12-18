@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies',
-  function($scope, $stateParams, $location, Global, Fitnessassessment, Companies) {
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies',
+  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies) {
     $scope.global = Global;
     $scope.package = {
       name: 'fitnessassessment'
@@ -47,13 +47,14 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     $scope.update = function(isValid) {
       if (isValid) {
         var company = $scope.company;
+      	$log.log(company);
         if (!company.updated) {
           company.updated = [];
         }
         company.updated.push(new Date().getTime());
 
         company.$update(function() {
-          $location.path('companies/' + company._id);
+          $location.path('fitnessassessment/company/' + company._id);
         });
       } else {
         $scope.submitted = true;
