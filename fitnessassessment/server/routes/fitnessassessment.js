@@ -29,6 +29,14 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   	assessmentController.show(req, res);
   });
 
+  app.delete('/fitnessassessment/companies/:companyId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.destroy(req, res);
+  });
+
+  app.put('fitnessassessment/companies/:companyId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.update(req, res);
+  });
+
   app.get('/fitnessassessment/example/render', function(req, res, next) {
     Fitnessassessment.render('index', {
       package: 'fitnessassessment'

@@ -45,3 +45,38 @@ exports.show = function(req, res) {
 	console.log(req.company);
 	res.json(req.company);
 };
+
+/**
+ * Delete a company
+ */
+exports.destroy = function(req, res) {
+	//console.log('destroying company');
+  var company = req.company;
+
+  company.remove(function(err) {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot delete the company'
+      });
+    }
+    res.json(company);
+
+  });
+};
+
+/**
+ * Update a company
+ */
+exports.update = function(req, res) {
+  var company = req.company;
+
+  company.save(function(err) {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot update the company'
+      });
+    }
+    res.json(company);
+
+  });
+};

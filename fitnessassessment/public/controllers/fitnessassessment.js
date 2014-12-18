@@ -40,7 +40,44 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		companyId: $stateParams.companyId
     	}, function(company) {
     		$scope.company = company;
+    		console.log(company);
     	});
+    };
+
+    $scope.update = function(isValid) {
+      if (isValid) {
+        var company = $scope.company;
+        if (!company.updated) {
+          company.updated = [];
+        }
+        company.updated.push(new Date().getTime());
+
+        company.$update(function() {
+          $location.path('companies/' + company._id);
+        });
+      } else {
+        $scope.submitted = true;
+      }
+    };
+
+    /**
+     * Remove Company
+     */
+    $scope.remove = function(company) {
+		if (company) {
+			company.$remove(function(response) {
+				for (var i in $scope.companies) {
+					if ($scope.companies[i] === company) {
+						$scope.companies.splice(i, 1);
+					}
+				}
+				$location.path('fitnessassessment/company/');
+        	});
+      	} else {
+        	$scope.article.$remove(function(response) {
+          		$location.path('fitnessassessment/company/');
+        	});
+      	}
     };
   }
 ]);

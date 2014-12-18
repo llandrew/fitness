@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').factory('Fitnessassessment', [
-  function() {
-    return {
-      name: 'fitnessassessment'
-    };
-  }
+angular.module('mean.fitnessassessment')
+.factory('Fitnessassessment', [
+	function() {
+		return {
+			name: 'fitnessassessment'
+		};
+	}
 ])
 .factory('Companies', ['$resource',
 	function($resource) {
