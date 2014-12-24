@@ -7,11 +7,23 @@ var Module = require('meanio').Module;
 
 var Fitnessassessment = new Module('fitnessassessment');
 
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
+
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
 Fitnessassessment.register(function(app, auth, database) {
+
+	var userModel = database.connection.model('User');
+	userModel.schema.add({
+		test: 'String',
+		companies: [{
+			type: Schema.Types.ObjectId,
+			ref: 'Company'
+		}]
+	});
 
   //We enable routing. By default the Package Object is passed to the routes
   Fitnessassessment.routes(app, auth, database);
@@ -30,6 +42,11 @@ Fitnessassessment.register(function(app, auth, database) {
   }).add({
   	title: 'Create Company',
   	link: 'create company',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  }).add({
+  	title: 'My Profile',
+  	link: 'user by id',
   	roles: ['authenticated'],
   	menu: 'main'
   });

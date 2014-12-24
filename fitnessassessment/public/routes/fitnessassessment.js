@@ -23,6 +23,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	      url: '/fitnessassessment/example',
 	      templateUrl: 'fitnessassessment/views/index.html'
 	    })
+	    .state('user by id', {
+	    	url: '/my-profile',
+	    	templateUrl: 'fitnessassessment/views/my-profile.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 	    .state('list companies', {
 	    	url: '/fitnessassessment/company',
 	    	templateUrl: 'fitnessassessment/views/companies.html',

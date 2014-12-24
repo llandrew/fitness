@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
-
+	Schema = mongoose.Schema;
 
 /**
  * Company Schema
@@ -203,3 +202,4 @@ mongoose.model('Client', ClientSchema);
 mongoose.model('Journal', JournalSchema);
 mongoose.model('Goal', GoalSchema);
 mongoose.model('Measurement', MeasurementSchema);
+mongoose.model('Team', TeamSchema);

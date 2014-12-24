@@ -1,0 +1,18 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findUser()">
+  <span>{{user.created | date:'medium'}}</span> /
+  <span>{{user.name}}</span>
+  <h2>{{user.test}}</h2>
+  <div data-ng-if="hasAuthorization(user)">
+    <a class="btn" href="/#!/my-profile/{{user._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(user);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>
+  <ul>
+  	<li data-ng-repeat="company in user.companies">{{company.name}}</li>
+  	</ul>
+  </div>
+</section>

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies',
-  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies) {
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Users',
+  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Users) {
     $scope.global = Global;
     $scope.package = {
       name: 'fitnessassessment'
@@ -41,6 +41,15 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	}, function(company) {
     		$scope.company = company;
     		console.log(company);
+    	});
+    };
+
+    $scope.findUser = function() {
+    	console.log('in find user');
+    	Users.get({
+    		userId: $scope.global.user._id
+    	}, function(user) {
+    		$scope.user = user;
     	});
     };
 

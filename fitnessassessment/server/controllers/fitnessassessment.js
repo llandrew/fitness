@@ -1,8 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Company = mongoose.model('Company'),
-	_ = require('lodash');
+	Company  = mongoose.model('Company'),
+	User 	 = mongoose.model('User'),
+	_ 		 = require('lodash');
 
 exports.company = function(req, res, next, id) {
 	console.log('in company');
@@ -10,6 +11,18 @@ exports.company = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!company) return next(new Error('Failed to load company ' + id));
 		req.company = company;
+		next();
+	});
+};
+exports.user = function(req, res, next, id) {
+	User.findOne({
+		_id: id
+	})
+	.populate('companies')
+	.exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load user ' + id));
+		req.user = user;
 		next();
 	});
 };
@@ -44,7 +57,14 @@ exports.show = function(req, res) {
 	console.log('in show');
 	console.log('after show');
 	console.log(req.company);
+	User.findByIdAndUpdate(req.user._id, { $set : { test: 'Second String', companies: req.company._id } }, function (err, doc) {
+		console.log(doc);
+	});
 	res.json(req.company);
+};
+
+exports.showUser = function(req, res) {
+	res.json(req.user);
 };
 
 /**

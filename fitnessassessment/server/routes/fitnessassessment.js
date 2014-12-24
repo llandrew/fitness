@@ -17,6 +17,10 @@ module.exports = function(Fitnessassessment, app, auth, database) {
     res.send('Only users with Admin role can access this');
   });
 
+  app.get('/admin/users/:userId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.showUser(req, res);
+  });
+
   app.get('/fitnessassessment/companies', auth.requiresLogin, function(req, res, next) {
   	assessmentController.all(req, res);
   });
@@ -47,4 +51,5 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   });
 
   app.param('companyId', assessmentController.company);
+  app.param('userId', assessmentController.user);
 };
