@@ -17,27 +17,30 @@ module.exports = function(Fitnessassessment, app, auth, database) {
     res.send('Only users with Admin role can access this');
   });
 
-  app.get('/admin/users/:userId', auth.isMongoId, function(req, res, next) {
+  app.get('/profiles/:profileId', auth.isMongoId, function(req, res, next) {
   	assessmentController.showUser(req, res);
   });
-
-  app.get('/fitnessassessment/companies', auth.requiresLogin, function(req, res, next) {
-  	assessmentController.all(req, res);
+  app.put('/profiles/:profileId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.updateProfile(req, res);
   });
 
-  app.post('/fitnessassessment/companies', auth.requiresLogin, function(req, res, next) {
+  app.get('/companies', auth.requiresLogin, function(req, res, next) {
+  	assessmentController.listCompanies(req, res);
+  });
+
+  app.post('/companies', auth.requiresLogin, function(req, res, next) {
   	assessmentController.create(req, res);
   });
 
-  app.get('/fitnessassessment/companies/:companyId', auth.isMongoId, function(req, res, next) {
+  app.get('/companies/:companyId', auth.isMongoId, function(req, res, next) {
   	assessmentController.show(req, res);
   });
 
-  app.put('/fitnessassessment/companies/:companyId', auth.isMongoId, function(req, res, next) {
+  app.put('/companies/:companyId', auth.isMongoId, function(req, res, next) {
   	assessmentController.update(req, res);
   });
 
-  app.delete('/fitnessassessment/companies/:companyId', auth.isMongoId, function(req, res, next) {
+  app.delete('/companies/:companyId', auth.isMongoId, function(req, res, next) {
   	assessmentController.destroy(req, res);
   });
 
@@ -50,6 +53,6 @@ module.exports = function(Fitnessassessment, app, auth, database) {
     });
   });
 
-  app.param('companyId', assessmentController.company);
-  app.param('userId', assessmentController.user);
+  app.param('companyId', assessmentController.findCompany);
+  app.param('profileId', assessmentController.findProfile);
 };

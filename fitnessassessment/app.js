@@ -22,6 +22,14 @@ Fitnessassessment.register(function(app, auth, database) {
 		companies: [{
 			type: Schema.Types.ObjectId,
 			ref: 'Company'
+		}],
+		trainers: [{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}],
+		clients: [{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
 		}]
 	});
 
@@ -46,7 +54,7 @@ Fitnessassessment.register(function(app, auth, database) {
   	menu: 'main'
   }).add({
   	title: 'My Profile',
-  	link: 'user by id',
+  	link: 'my profile',
   	roles: ['authenticated'],
   	menu: 'main'
   });

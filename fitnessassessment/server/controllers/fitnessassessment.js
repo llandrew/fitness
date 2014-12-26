@@ -5,20 +5,18 @@ var mongoose = require('mongoose'),
 	User 	 = mongoose.model('User'),
 	_ 		 = require('lodash');
 
-exports.company = function(req, res, next, id) {
-	console.log('in company');
-	Company.load(id, function(err, company) {
-		if (err) return next(err);
-		if (!company) return next(new Error('Failed to load company ' + id));
-		req.company = company;
-		next();
-	});
-};
-exports.user = function(req, res, next, id) {
+/**
+ * 
+ * PROFILE CONTROLLERS
+ * 
+ */
+
+exports.findProfile = function(req, res, next, id) {
 	User.findOne({
 		_id: id
 	})
 	.populate('companies')
+	.populate('clients')
 	.exec(function(err, user) {
 		if (err) return next(err);
 		if (!user) return next(new Error('Failed to load user ' + id));
@@ -27,7 +25,36 @@ exports.user = function(req, res, next, id) {
 	});
 };
 
-exports.all = function(req, res) {
+/**
+ *
+ * CLIENT CONTROLLERS
+ * 
+ */
+
+/**
+ *
+ * TRAINER CONTROLLERS
+ * 
+ */
+
+/**
+ *
+ * COMPANY CONTROLLERS
+ * 
+ */
+
+exports.findCompany = function(req, res, next, id) {
+	console.log('in company');
+	Company.load(id, function(err, company) {
+		if (err) return next(err);
+		if (!company) return next(new Error('Failed to load company ' + id));
+		req.company = company;
+		next();
+	});
+};
+
+
+exports.listCompanies = function(req, res) {
 	Company.find().sort('-created').populate('user', 'name username').exec(function(err, companies) {
 		if (err) {
 			return res.status(500).json({
@@ -41,7 +68,7 @@ exports.all = function(req, res) {
 exports.create = function(req, res) {
 	console.log('in create');
 	var company = new Company(req.body);
-	company.user = req.user;
+	company.owner = req.user;
 
 	company.save(function(err) {
 		if (err) {
@@ -49,17 +76,21 @@ exports.create = function(req, res) {
 				error: 'Cannot save the company'
 			});
 		}
-		res.json(company);
+		console.log(company);
+		User.findByIdAndUpdate(req.user._id, { $push : { companies : company._id } }, function(err, user) {
+			console.log(user);
+			console.log(err);
+			res.json(company);
+		});
 	});
 };
 
 exports.show = function(req, res) {
-	console.log('in show');
-	console.log('after show');
-	console.log(req.company);
-	User.findByIdAndUpdate(req.user._id, { $set : { test: 'Second String', companies: req.company._id } }, function (err, doc) {
-		console.log(doc);
-	});
+/*	User.findOne({username: 'hyuugurt'}, function(err, client) {
+		User.findByIdAndUpdate(req.user._id, { $push: {clients: client._id}}, function (err, doc) {
+			console.log(doc._doc);
+		});
+	});*/
 	res.json(req.company);
 };
 

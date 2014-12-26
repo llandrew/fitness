@@ -15,16 +15,9 @@
     <ul>
   	  <li data-ng-repeat="company in user.companies">{{company.name}}</li>
   	</ul>
-  	<span>
-  	 <a class="btn" data-ng-href="/#!/company/create">
-      <i class="glyphicon glyphicon-plus"></i>
-     </a>
-  	</span>
   	<h3>Clients</h3>
     <ul>
-  	  <li data-ng-repeat="client in user.clients">
-  	  <a data-ng-href="#!/profile/{{client._id}}">{{client.name}}</a>
-  	  </li>
+  	  <li data-ng-repeat="client in user.clients">{{client.name}}</li>
   	</ul>
   </div>
 </section>

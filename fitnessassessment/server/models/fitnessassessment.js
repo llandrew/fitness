@@ -24,7 +24,7 @@ var CompanySchema = new Schema({
     required: true,
     trim: true
   },
-  user: {
+  owner: {
     type: Schema.ObjectId,
     ref: 'User'
   }
