@@ -137,8 +137,6 @@ var ClientSchema = new Schema({
 		required: true,
 		default: Date.now
 	},
-	journals: [JournalSchema],
-	goals: [GoalSchema]
 });
 
 var TeamSchema = new Schema({
