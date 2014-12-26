@@ -6,31 +6,6 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-
-/**
- * Company Schema
- */
-var CompanySchema = new Schema({
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  content: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  }
-});
-
 var JournalSchema = new Schema({
 	title: {
 		type: String,
@@ -179,6 +154,31 @@ var TeamSchema = new Schema({
 });
 
 /**
+ * Company Schema
+ */
+var CompanySchema = new Schema({
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  content: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  teams: [TeamSchema]
+});
+
+/**
  * Validations
  */
 CompanySchema.path('name').validate(function(name) {
@@ -198,8 +198,13 @@ CompanySchema.statics.load = function(id, cb) {
   }).populate('user', 'name username').exec(cb);
 };
 
+/**
+ * Instantiate the models
+ */
+
 mongoose.model('Company', CompanySchema);
 mongoose.model('Client', ClientSchema);
 mongoose.model('Journal', JournalSchema);
 mongoose.model('Goal', GoalSchema);
 mongoose.model('Measurement', MeasurementSchema);
+mongoose.model('Team', TeamSchema);
