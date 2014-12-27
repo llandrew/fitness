@@ -1,0 +1,209 @@
+<section data-ng-controller="FitnessassessmentController">
+  <form name="assessmentForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(assessmentForm.$valid)" novalidate>
+    <div class="form-group">
+      <label mean-token="'create-weight'" class="col-md-3 control-label">Weight</label>
+      <div class="col-md-9">
+        <input name="weight" type="text" class="form-control" data-ng-model="weight" id="weight" placeholder="Weight" required>
+        <div ng-show="submitted && assessmentForm.weight.$invalid" class="help-block">
+          <p ng-show="assessmentForm.weight.$error.required">Weight is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-height'" class="col-md-3 control-label">Height</label>
+      <div class="col-md-9">
+        <input name="height" type="text" class="form-control" data-ng-model="height" id="height" placeholder="Height" required>
+        <div ng-show="submitted && assessmentForm.height.$invalid" class="help-block">
+          <p ng-show="assessmentForm.height.$error.required">Height is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-triceps'" class="col-md-3 control-label">Triceps</label>
+      <div class="col-md-9">
+        <input name="triceps" type="text" class="form-control" data-ng-model="triceps" id="triceps" placeholder="Triceps" required>
+        <div ng-show="submitted && assessmentForm.triceps.$invalid" class="help-block">
+          <p ng-show="assessmentForm.triceps.$error.required">Triceps is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-pectoral'" class="col-md-3 control-label">Pectoral</label>
+      <div class="col-md-9">
+        <input name="pectoral" type="text" class="form-control" data-ng-model="pectoral" id="pectoral" placeholder="Pectoral" required>
+        <div ng-show="submitted && assessmentForm.pectoral.$invalid" class="help-block">
+          <p ng-show="assessmentForm.pectoral.$error.required">Pectoral is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-midaxilla'" class="col-md-3 control-label">Midaxilla</label>
+      <div class="col-md-9">
+        <input name="midaxilla" type="text" class="form-control" data-ng-model="midaxilla" id="midaxilla" placeholder="Midaxilla" required>
+        <div ng-show="submitted && assessmentForm.midaxilla.$invalid" class="help-block">
+          <p ng-show="assessmentForm.midaxilla.$error.required">Midaxilla is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-subscapular'" class="col-md-3 control-label">Subscapular</label>
+      <div class="col-md-9">
+        <input name="subscapular" type="text" class="form-control" data-ng-model="subscapular" id="subscapular" placeholder="Subscapular" required>
+        <div ng-show="submitted && assessmentForm.subscapular.$invalid" class="help-block">
+          <p ng-show="assessmentForm.subscapular.$error.required">Subscapular is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-abdomen'" class="col-md-3 control-label">Abdomen</label>
+      <div class="col-md-9">
+        <input name="abdomen" type="text" class="form-control" data-ng-model="abdomen" id="abdomen" placeholder="Abdomen" required>
+        <div ng-show="submitted && assessmentForm.abdomen.$invalid" class="help-block">
+          <p ng-show="assessmentForm.abdomen.$error.required">Abdomen is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-suprailiac'" class="col-md-3 control-label">Suprailiac</label>
+      <div class="col-md-9">
+        <input name="suprailiac" type="text" class="form-control" data-ng-model="suprailiac" id="suprailiac" placeholder="Suprailiac" required>
+        <div ng-show="submitted && assessmentForm.suprailiac.$invalid" class="help-block">
+          <p ng-show="assessmentForm.suprailiac.$error.required">Suprailiac is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-quadraceps'" class="col-md-3 control-label">Quadraceps</label>
+      <div class="col-md-9">
+        <input name="quadraceps" type="text" class="form-control" data-ng-model="quadraceps" id="quadraceps" placeholder="Quadraceps" required>
+        <div ng-show="submitted && assessmentForm.quadraceps.$invalid" class="help-block">
+          <p ng-show="assessmentForm.quadraceps.$error.required">Quadraceps is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-chest_bust'" class="col-md-3 control-label">Chest/Bust</label>
+      <div class="col-md-9">
+        <input name="chest_bust" type="text" class="form-control" data-ng-model="chest_bust" id="chest_bust" placeholder="Chest/Bust" required>
+        <div ng-show="submitted && assessmentForm.chest_bust.$invalid" class="help-block">
+          <p ng-show="assessmentForm.chest_bust.$error.required">Chest/Bust is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-arm_right'" class="col-md-3 control-label">Arm - Right</label>
+      <div class="col-md-9">
+        <input name="arm_right" type="text" class="form-control" data-ng-model="arm_right" id="arm_right" placeholder="Arm - Right" required>
+        <div ng-show="submitted && assessmentForm.arm_right.$invalid" class="help-block">
+          <p ng-show="assessmentForm.arm_right.$error.required">Arm - Right is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-arm_left'" class="col-md-3 control-label">Arm - Left</label>
+      <div class="col-md-9">
+        <input name="arm_left" type="text" class="form-control" data-ng-model="arm_left" id="arm_left" placeholder="Arm - Left" required>
+        <div ng-show="submitted && assessmentForm.arm_left.$invalid" class="help-block">
+          <p ng-show="assessmentForm.arm_left.$error.required">Arm - Left is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-waist'" class="col-md-3 control-label">Waist</label>
+      <div class="col-md-9">
+        <input name="waist" type="text" class="form-control" data-ng-model="waist" id="waist" placeholder="Waist" required>
+        <div ng-show="submitted && assessmentForm.waist.$invalid" class="help-block">
+          <p ng-show="assessmentForm.waist.$error.required">Waist is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-hips'" class="col-md-3 control-label">Hips</label>
+      <div class="col-md-9">
+        <input name="hips" type="text" class="form-control" data-ng-model="hips" id="hips" placeholder="Hips" required>
+        <div ng-show="submitted && assessmentForm.hips.$invalid" class="help-block">
+          <p ng-show="assessmentForm.hips.$error.required">Hips is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-thigh_right'" class="col-md-3 control-label">Thigh - Right</label>
+      <div class="col-md-9">
+        <input name="thigh_right" type="text" class="form-control" data-ng-model="thigh_right" id="thigh_right" placeholder="Thigh - Right" required>
+        <div ng-show="submitted && assessmentForm.thigh_right.$invalid" class="help-block">
+          <p ng-show="assessmentForm.thigh_right.$error.required">Thigh - Right is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-thigh_left'" class="col-md-3 control-label">Thigh - Left</label>
+      <div class="col-md-9">
+        <input name="thigh_left" type="text" class="form-control" data-ng-model="thigh_left" id="thigh_left" placeholder="Thigh - Left" required>
+        <div ng-show="submitted && assessmentForm.thigh_left.$invalid" class="help-block">
+          <p ng-show="assessmentForm.thigh_left.$error.required">Thigh - Left is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-knee_right'" class="col-md-3 control-label">Knee - Right</label>
+      <div class="col-md-9">
+        <input name="knee_right" type="text" class="form-control" data-ng-model="knee_right" id="knee_right" placeholder="Knee - Right" required>
+        <div ng-show="submitted && assessmentForm.knee_right.$invalid" class="help-block">
+          <p ng-show="assessmentForm.knee_right.$error.required">Knee - Right is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-knee_left'" class="col-md-3 control-label">Knee - Left</label>
+      <div class="col-md-9">
+        <input name="knee_left" type="text" class="form-control" data-ng-model="knee_left" id="knee_left" placeholder="Knee - Left" required>
+        <div ng-show="submitted && assessmentForm.knee_left.$invalid" class="help-block">
+          <p ng-show="assessmentForm.knee_left.$error.required">Knee - Left is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-calf_right'" class="col-md-3 control-label">Calf - Right</label>
+      <div class="col-md-9">
+        <input name="calf_right" type="text" class="form-control" data-ng-model="calf_right" id="calf_right" placeholder="Calf - Right" required>
+        <div ng-show="submitted && assessmentForm.calf_right.$invalid" class="help-block">
+          <p ng-show="assessmentForm.calf_right.$error.required">Calf - Right is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label mean-token="'create-calf_left'" class="col-md-3 control-label">Calf - Left</label>
+      <div class="col-md-9">
+        <input name="calf_left" type="text" class="form-control" data-ng-model="calf_left" id="calf_left" placeholder="Calf - Left" required>
+        <div ng-show="submitted && assessmentForm.calf_left.$invalid" class="help-block">
+          <p ng-show="assessmentForm.calf_left.$error.required">Calf - Left is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <button mean-token="'create-submit'" type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </div>
+  </form>
+</section>

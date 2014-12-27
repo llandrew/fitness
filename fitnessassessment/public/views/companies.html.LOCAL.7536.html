@@ -1,0 +1,23 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findCompanies()">
+  <ul class="companies unstyled">
+    <li data-ng-repeat="company in companies">
+      <span>{{company.created | date:'medium'}}</span> /
+      <span>{{company.owner.name}}</span>
+      <h2>
+        <a data-ng-href="/#!/company/{{company._id}}">{{company.name}}</a>
+      </h2>
+      <span data-ng-if="hasAuthorization(company)">
+        <a class="btn" href="/#!/company/{{company._id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="removeCompany(company);">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </span>
+      <div>{{company.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!companies || companies.length">No companies yet. <br> Why don't you <a href="/#!/company/create">Create One</a>?</h1>
+</section>
+
+

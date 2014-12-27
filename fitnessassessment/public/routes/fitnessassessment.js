@@ -71,6 +71,10 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
+	    })
+	    .state('create assessment', {
+	      	url: '/fitnessassessment/assessment/create',
+	      	templateUrl: 'fitnessassessment/views/assessment-create.html',
 	    });
   }
 ]);

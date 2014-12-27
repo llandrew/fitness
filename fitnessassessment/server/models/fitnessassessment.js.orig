@@ -4,7 +4,35 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+<<<<<<< HEAD
 	Schema = mongoose.Schema;
+
+/**
+ * Company Schema
+ */
+var CompanySchema = new Schema({
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  content: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  owner: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
+});
+=======
+  Schema = mongoose.Schema;
+>>>>>>> 2014-12-26
 
 var JournalSchema = new Schema({
 	title: {
@@ -169,7 +197,7 @@ var CompanySchema = new Schema({
     required: true,
     trim: true
   },
-  owner: {
+  user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
