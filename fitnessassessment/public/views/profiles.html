@@ -1,0 +1,19 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findProfiles()">
+  <ul class="profiles unstyled">
+    <li data-ng-repeat="profile in profiles">
+      <h2>
+        <a data-ng-href="/#!/profile/{{profile._id}}">{{profile.name}}</a>
+      </h2>
+      <span data-ng-if="hasAuthorization(profile)">
+        <a class="btn" href="/#!/profile/{{profile._id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove(profile);">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </span>
+      <div>{{profile.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!profiles || profiles.length">No profiles yet. <br> Why don't you <a href="/#!/profile/create">Create One</a>?</h1>
+</section>

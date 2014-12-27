@@ -17,12 +17,38 @@ exports.findProfile = function(req, res, next, id) {
 	})
 	.populate('companies')
 	.populate('clients')
-	.exec(function(err, user) {
+	.exec(function(err, profile) {
 		if (err) return next(err);
-		if (!user) return next(new Error('Failed to load user ' + id));
-		req.user = user;
+		if (!profile) return next(new Error('Failed to load profile ' + id));
+		req.profile = profile;
 		next();
 	});
+};
+
+exports.showProfile = function(req, res) {
+	res.json(req.profile);
+};
+
+exports.listProfiles = function(req, res) {
+	User.find().sort('-created').exec(function(err, profiles) {
+		if (err) {
+			return res.status(500).json({
+				error: 'Cannot list the profiles'
+			});
+		}
+		res.json(profiles);
+	});
+};
+
+exports.updateProfile = function(req, res) {
+	var profile = req.profile;
+
+	console.log(req.body);
+	console.log(profile);
+	console.log(req.body.trainers);
+	_.extend(profile.trainers, req.body.trainers);
+	//profile = _.extend(profile, req.body);
+	console.log(profile);
 };
 
 /**
@@ -44,18 +70,21 @@ exports.findProfile = function(req, res, next, id) {
  */
 
 exports.findCompany = function(req, res, next, id) {
-	console.log('in company');
 	Company.load(id, function(err, company) {
 		if (err) return next(err);
 		if (!company) return next(new Error('Failed to load company ' + id));
+
 		req.company = company;
 		next();
 	});
 };
 
+exports.showCompany = function(req, res) {
+	res.json(req.company);
+};
 
 exports.listCompanies = function(req, res) {
-	Company.find().sort('-created').populate('user', 'name username').exec(function(err, companies) {
+	Company.find().sort('-created').populate('owner', 'name username').exec(function(err, companies) {
 		if (err) {
 			return res.status(500).json({
 				error: 'Cannot list the companies'
@@ -65,8 +94,7 @@ exports.listCompanies = function(req, res) {
 	});
 };
 
-exports.create = function(req, res) {
-	console.log('in create');
+exports.createCompany = function(req, res) {
 	var company = new Company(req.body);
 	company.owner = req.user;
 
@@ -76,33 +104,17 @@ exports.create = function(req, res) {
 				error: 'Cannot save the company'
 			});
 		}
-		console.log(company);
 		User.findByIdAndUpdate(req.user._id, { $push : { companies : company._id } }, function(err, user) {
-			console.log(user);
-			console.log(err);
 			res.json(company);
 		});
 	});
 };
 
-exports.show = function(req, res) {
-/*	User.findOne({username: 'hyuugurt'}, function(err, client) {
-		User.findByIdAndUpdate(req.user._id, { $push: {clients: client._id}}, function (err, doc) {
-			console.log(doc._doc);
-		});
-	});*/
-	res.json(req.company);
-};
-
-exports.showUser = function(req, res) {
-	res.json(req.user);
-};
 
 /**
  * Delete a company
  */
-exports.destroy = function(req, res) {
-	//console.log('destroying company');
+exports.destroyCompany = function(req, res) {
   var company = req.company;
 
   company.remove(function(err) {
@@ -119,7 +131,7 @@ exports.destroy = function(req, res) {
 /**
  * Update a company
  */
-exports.update = function(req, res) {
+exports.updateCompany = function(req, res) {
   var company = req.company;
 
   company = _.extend(company, req.body);

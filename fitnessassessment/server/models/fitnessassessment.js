@@ -194,7 +194,7 @@ CompanySchema.path('content').validate(function(content) {
 CompanySchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  }).populate('user', 'name username').exec(cb);
+  }).populate('owner', 'name username').exec(cb);
 };
 
 mongoose.model('Company', CompanySchema);

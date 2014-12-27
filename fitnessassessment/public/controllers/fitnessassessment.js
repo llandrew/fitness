@@ -7,12 +7,68 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       name: 'fitnessassessment'
     };
 
-    $scope.hasAuthorization = function(company) {
-    	if (!company || !company.owner) return false;
-    	return $scope.global.isAdmin || company.owner._id === $scope.global.owner._id;
+    /**
+     *
+     * PROFILE CONTROLLERS
+     * 
+     */
+
+    $scope.findProfile = function() {
+    	console.log('in find user');
+
+    	var profileId = ($stateParams.profileId) ? $stateParams.profileId : $scope.global.user._id;
+
+    	Profiles.get({
+    		profileId: profileId
+    	}, function(profile) {
+    		$scope.profile = profile;
+    	});
     };
 
-    $scope.create = function(isValid) {
+    $scope.findProfiles = function() {
+    	Profiles.query(function(profiles) {
+    		$scope.profiles = profiles;
+    	});
+    };
+
+    /**
+     *
+     * CLIENT CONTROLLERS
+     * 
+     */
+
+     $scope.isClient = function(profile) {
+     	if (profile.trainers.indexOf($scope.global.user._id) < 0) {
+     		return false;
+     	} else {
+     		return true;
+     	}
+     };
+
+     $scope.addClientToProfile = function(client) {
+     	console.log('in add client');
+     	if (!client) return false;
+     	console.log('after client check');
+     	var user = $scope.global.user;
+     	if (typeof client.trainers !== 'object') return false;
+     	if (client.trainers.indexOf(user._id) > -1) return false;
+
+     	client.trainers.push(user._id);
+     	client.$update();
+     };
+
+    /**
+     *
+     * COMPANY CONTROLLERS
+     * 
+     */
+    
+    $scope.hasAuthorization = function(company) {
+    	if (!company || !company.owner) return false;
+    	return $scope.global.isAdmin || company.owner._id === $scope.global.user._id;
+    };
+
+    $scope.createCompany = function(isValid) {
     	if (isValid) {
     		var company = new Companies({
     			name: this.name,
@@ -29,13 +85,13 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	}
     };
 
-    $scope.find = function() {
+    $scope.findCompanies = function() {
     	Companies.query(function(companies) {
     		$scope.companies = companies;
     	});
     };
 
-    $scope.findOne = function() {
+    $scope.findOneCompany = function() {
     	Companies.get({
     		companyId: $stateParams.companyId
     	}, function(company) {
@@ -44,19 +100,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	});
     };
 
-    $scope.findUser = function() {
-    	console.log('in find user');
-
-    	var profileId = ($stateParams.profileId) ? $stateParams.profileId : $scope.global.user._id;
-
-    	Profiles.get({
-    		profileId: profileId
-    	}, function(user) {
-    		$scope.user = user;
-    	});
-    };
-
-    $scope.update = function(isValid) {
+    $scope.updateCompany = function(isValid) {
       if (isValid) {
         var company = $scope.company;
       	$log.log(company);
@@ -76,7 +120,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     /**
      * Remove Company
      */
-    $scope.remove = function(company) {
+    $scope.removeCompany = function(company) {
 		if (company) {
 			company.$remove(function(response) {
 				for (var i in $scope.companies) {

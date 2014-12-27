@@ -22,7 +22,7 @@ angular.module('mean.fitnessassessment')
 .factory('Profiles', ['$resource',
 	function($resource) {
 		return $resource('profiles/:profileId', {
-			profileId: '@id'
+			profileId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'

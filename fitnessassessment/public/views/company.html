@@ -1,12 +1,12 @@
-<section data-ng-controller="FitnessassessmentController" data-ng-init="findOne()">
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findOneCompany()">
   <span>{{company.created | date:'medium'}}</span> /
-  <span>{{company.user.name}}</span>
+  <span>{{company.owner.name}}</span>
   <h2>{{company.name}}</h2>
   <div data-ng-if="hasAuthorization(company)">
-    <a class="btn" href="/#!/fitnessassessment/company/{{company._id}}/edit">
+    <a class="btn" href="/#!/company/{{company._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
-    <a class="btn" data-ng-click="remove(company);">
+    <a class="btn" data-ng-click="removeCompany(company);">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>

@@ -42,17 +42,26 @@ Fitnessassessment.register(function(app, auth, database) {
     link: 'fitnessassessment example page',
     roles: ['authenticated'],
     menu: 'main'
-  }).add({
+  })
+  .add({
   	title: 'List Companies',
   	link: 'list companies',
   	roles: ['authenticated'],
   	menu: 'main'
-  }).add({
+  })
+  .add({
   	title: 'Create Company',
   	link: 'create company',
   	roles: ['authenticated'],
   	menu: 'main'
-  }).add({
+  })
+  .add({
+    title: 'Profiles',
+    link: 'user profiles',
+    roles: ['authenticated'],
+    menu: 'main'
+  })
+  .add({
   	title: 'My Profile',
   	link: 'my profile',
   	roles: ['authenticated'],

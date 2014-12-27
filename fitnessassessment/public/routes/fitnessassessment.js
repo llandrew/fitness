@@ -30,6 +30,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+	    .state('user profiles', {
+	    	url: '/profile/all',
+	    	templateUrl: 'fitnessassessment/views/profiles.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 	    .state('user profile', {
 	    	url: '/profile/:profileId',
 	    	templateUrl: 'fitnessassessment/views/user-profile.html',
