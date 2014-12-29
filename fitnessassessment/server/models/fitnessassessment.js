@@ -37,11 +37,11 @@ var GoalSchema = new Schema({
 		type: String,
 		trim: true
 	},
-	trainer_assigned_flag: {
+	trainer_assigned: {
 		type: Boolean,
 		default: false
 	},
-	complete_flag: {
+	complete: {
 		type: Boolean,
 		default: false
 	}
@@ -216,6 +216,10 @@ CompanySchema.path('name').validate(function(name) {
 CompanySchema.path('content').validate(function(content) {
   return !!content;
 }, 'Content cannot be blank');
+
+GoalSchema.path('title').validate(function(title) {
+	return !!title;
+}, 'Title cannot be blank');
 
 /**
  * Statics

@@ -5,9 +5,9 @@
     <div class="form-group" ng-repeat="goal in profile.goals" ng-class="{ 'has-error' : submitted && profileGoalsForm.goals.$invalid }">
       <label mean-token="'edit-goal'" for="goal" class="col-md-3 control-label">Goal</label>
       <div class="col-md-9">
-        <input name="goal" type="text" class="form-control" data-ng-model="goal" id="goal" placeholder="Goal" required>
-        <div ng-show="submitted && profileGoalsForm.goal.$invalid" class="help-block">
-          <p ng-show="profileGoalsForm.goal.$error.required">Content is required</p>
+        <input name="goal.title" type="text" class="form-control" data-ng-model="goal.title" id="goal.title" placeholder="Goal" required>
+        <div ng-show="submitted && profileGoalsForm.goal.title.$invalid" class="help-block">
+          <p ng-show="profileGoalsForm.goal.title.$error.required">Goal is required</p>
         </div>
       </div>
     </div>

@@ -27,9 +27,7 @@ Fitnessassessment.register(function(app, auth, database) {
 			type: Schema.Types.ObjectId,
 			ref: 'User'
 		}],
-    goals: [{
-      type: 'String'
-    }],
+    goals: [database.connection.model('Goal').schema],
     imagesets: [database.connection.model('ImageSet').schema]
 /*    imagesets: [{
       front: {

@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
 	Company  = mongoose.model('Company'),
 	User 	 = mongoose.model('User'),
+	Goal 	 = mongoose.model('Goal'),
 	ImageSet = mongoose.model('ImageSet'),
 	_ 		 = require('lodash');
 
@@ -62,9 +63,22 @@ exports.updateProfile = function(req, res) {
 	}
 
 	if (req.body.action === 'update goals') {
-		console.log(req.body);
-		profile._doc.goals.push(req.body.newGoal);
-		profile.markModified('goals');
+		console.log(req.body.goals);
+		profile._doc.goals = req.body.goals;
+		console.log(profile._doc);
+		if (req.body.newGoal !== undefined) {
+			console.log(req.body.newGoal);
+			var newGoal = new Goal({
+				title: req.body.newGoal,
+				description: req.body.newGoal,
+				trainer_assigned: (req.body.TrainerAssigned) ? true : false,
+				completed: false
+			});
+			console.log(newGoal);
+			profile._doc.goals.push(newGoal);
+			profile.markModified('goals');
+			//console.log(profile._doc);
+		}
 	}
 
 	if (req.body.action === 'add new images') {
@@ -74,7 +88,7 @@ exports.updateProfile = function(req, res) {
 			console.log(image);
 			var imageSet = new ImageSet({front: {name: req.body.newImages[image].name, src: req.body.newImages[image].src}, back: {name: '', src: ''}, side: {name: '', src: ''}});
 			console.log(imageSet);
-			profile._doc.imagesets = [];
+			//profile._doc.imagesets = [];
 			profile._doc.imagesets.push(imageSet);
 			profile.markModified('imagesets');
 			console.log(profile._doc);
@@ -83,6 +97,7 @@ exports.updateProfile = function(req, res) {
 
 
 	profile.save(function(err, doc) {
+		console.log('saved profile');
 		res.json(doc);
 	});
 };
