@@ -1,0 +1,45 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
+  <h2>{{profile.name}}</h2>
+  <h3>{{profile.email}}</h3>
+  <span>Username: {{profile.username}}</span>
+  <div>
+    <a data-ng-if="isClient(profile) === false" class="btn" data-ng-click="addClientToProfile(profile);">
+      <i class="glyphicon glyphicon-plus"></i> Add as Client
+    </a>
+    <span data-ng-if="isClient(profile)">
+      Already client
+    </span>
+    <a data-ng-if="hasAuthorization(profile)" class="btn" href="/#!/my-profile/{{profile._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a data-ng-if="hasAuthorization(profile)" class="btn" data-ng-click="remove(profile);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>
+  	<h3>Companies</h3>
+    <ul>
+  	  <li data-ng-repeat="company in profile.companies">
+        <a class="btn" data-ng-href="/#!/company/{{company._id}}">
+          {{company.name}}
+        </a>
+      </li>
+  	</ul>
+    <h3>Trainers</h3>
+    <ul data-ng-if="profile.trainers">
+      <li data-ng-repeat="trainer in profile.trainers">
+        <a class="btn" data-ng-href="/#!/profile/{{trainer._id}}">
+          {{trainer.name}}
+        </a>
+      </li>
+    </ul>
+  	<h3>Clients</h3>
+    <ul>
+  	  <li data-ng-repeat="client in profile.clients">
+        <a class="btn" data-ng-href="/#!/profile/{{client._id}}">
+          {{client.name}}
+        </a>
+      </li>
+  	</ul>
+  </div>
+</section>

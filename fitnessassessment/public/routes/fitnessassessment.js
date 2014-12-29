@@ -20,40 +20,71 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 
     $stateProvider
 	    .state('fitnessassessment example page', {
-	      url: '/fitnessassessment/example',
+	      url: '/example',
 	      templateUrl: 'fitnessassessment/views/index.html'
 	    })
+	    .state('my profile', {
+	    	url: '/my-profile',
+	    	templateUrl: 'fitnessassessment/views/my-profile.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+	    .state('user profiles', {
+	    	url: '/profile/all',
+	    	templateUrl: 'fitnessassessment/views/profiles.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+	    .state('user profile', {
+	    	url: '/profile/:profileId',
+	    	templateUrl: 'fitnessassessment/views/user-profile.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 	    .state('list companies', {
-	    	url: '/fitnessassessment/company',
+	    	url: '/company',
 	    	templateUrl: 'fitnessassessment/views/companies.html',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
 	    })
-	    .state('company by id', {
-	    	url: '/fitnessassessment/company/:companyId',
-	    	templateUrl: 'fitnessassessment/views/company.html',
-	    	resolve: {
-	    		loggedin: checkLoggedin
-	    	}
-	    })
 	    .state('create company', {
-	    	url: '/fitnessassessment/company/create',
+	    	url: '/company/create',
 	    	templateUrl: 'fitnessassessment/views/company-create.html',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+	    .state('company by id', {
+	    	url: '/company/:companyId',
+	    	templateUrl: 'fitnessassessment/views/company.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 	    .state('edit company', {
-	    	url: '/fitnessassessment/company/:companyId/edit',
+	    	url: '/company/:companyId/edit',
 	    	templateUrl: 'fitnessassessment/views/company-edit.html',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
 	    })
 	    .state('create assessment', {
-	      	url: '/fitnessassessment/assessment/create',
+	      	url: '/assessment/create',
 	      	templateUrl: 'fitnessassessment/views/assessment-create.html',
+	      	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+	    .state('assessment by id', {
+	    	url: '/assessment/:assessmentId',
+	    	templateUrl: 'fitnessassessment/views/assessment.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
 	    });
   }
 ]);

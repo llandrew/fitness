@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+	Schema = mongoose.Schema;
 
 var JournalSchema = new Schema({
 	title: {
@@ -47,7 +47,7 @@ var GoalSchema = new Schema({
 	}
 });
 
-var MeasurementSchema = new Schema({
+var AssessmentSchema = new Schema({
 	entry_date: {
 		type: Date,
 		default: Date.now
@@ -123,6 +123,14 @@ var MeasurementSchema = new Schema({
 	photo_back: {
 		type: String,
 		trim: true
+	},
+	trainer: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	owner: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
 });
 
@@ -169,7 +177,7 @@ var CompanySchema = new Schema({
     required: true,
     trim: true
   },
-  user: {
+  owner: {
     type: Schema.ObjectId,
     ref: 'User'
   },
@@ -193,7 +201,7 @@ CompanySchema.path('content').validate(function(content) {
 CompanySchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  }).populate('user', 'name username').exec(cb);
+  }).populate('owner', 'name username').exec(cb);
 };
 
 /**
@@ -204,5 +212,5 @@ mongoose.model('Company', CompanySchema);
 mongoose.model('Client', ClientSchema);
 mongoose.model('Journal', JournalSchema);
 mongoose.model('Goal', GoalSchema);
-mongoose.model('Measurement', MeasurementSchema);
+mongoose.model('Assessment', AssessmentSchema);
 mongoose.model('Team', TeamSchema);

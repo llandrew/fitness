@@ -10,8 +10,30 @@ angular.module('mean.fitnessassessment')
 ])
 .factory('Companies', ['$resource',
 	function($resource) {
-		return $resource('fitnessassessment/companies/:companyId', {
+		return $resource('companies/:companyId', {
 			companyId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+])
+.factory('Profiles', ['$resource',
+	function($resource) {
+		return $resource('profiles/:profileId', {
+			profileId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+])
+.factory('Assessments', ['$resource',
+	function($resource) {
+		return $resource('assessments/:assessmentId', {
+			assessmentId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'

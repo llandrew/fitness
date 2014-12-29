@@ -1,37 +1,71 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies',
-  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies) {
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments',
+  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments) {
     $scope.global = Global;
     $scope.package = {
       name: 'fitnessassessment'
     };
 
-    $scope.hasAuthorization = function(company) {
-    	if (!company || !company.user) return false;
-    	return $scope.global.isAdmin || company.user._id === $scope.global.user._id;
+    /**
+     *
+     * PROFILE CONTROLLERS
+     * 
+     */
+
+    $scope.findProfile = function() {
+    	console.log('in find user');
+
+    	var profileId = ($stateParams.profileId) ? $stateParams.profileId : $scope.global.user._id;
+
+    	Profiles.get({
+    		profileId: profileId
+    	}, function(profile) {
+    		$scope.profile = profile;
+    	});
     };
 
-    $scope.create = function(isValid) {
-    	if (isValid) {
-    		var company = new Companies({
-    			name: this.name,
-    			content: this.content
-    		});
-    		company.$save(function(response) {
-    			$location.path('fitnessassessment/company/' + response._id);
-    		});
-
-    		this.name = '';
-    		this.content = '';
-    	} else {
-    		$scope.submitted = true;
-    	}
+    $scope.findProfiles = function() {
+    	Profiles.query(function(profiles) {
+    		$scope.profiles = profiles;
+    	});
     };
 
-    $scope.create_assessment = function(isValid) {
+    /**
+     *
+     * CLIENT CONTROLLERS
+     * 
+     */
+
+     $scope.isClient = function(profile) {
+     	if (profile.trainers.indexOf($scope.global.user._id) < 0) {
+     		return false;
+     	} else {
+     		return true;
+     	}
+     };
+
+     $scope.addClientToProfile = function(client) {
+     	console.log('in add client');
+     	if (!client) return false;
+     	console.log('after client check');
+     	var user = $scope.global.user;
+     	if (typeof client.trainers !== 'object') return false;
+     	if (client.trainers.indexOf(user._id) > -1) return false;
+
+     	client.trainers.push(user._id);
+     	client.$update();
+     };
+
+    /**
+     *
+     * ASSESSMENT CONTROLLERS
+     * 
+     */
+    
+    $scope.createAssessment = function(isValid) {
     	if (isValid) {
-    		var assessment = new Companies({
+    		var assessment = new Assessments({
     			weight: this.weight,
     			height: this.height,
     			triceps: this.triceps,
@@ -54,7 +88,65 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     			calf_left: this.calf_left
     		});
     		assessment.$save(function(response) {
-    			$location.path('fitnessassessment/company/' + response._id);
+    			$location.path('assessment/' + response._id);
+    		});
+
+    		this.weight = '';
+    		this.height = '';
+    		this.triceps = '';
+    		this.pectoral = '';
+    		this.midaxilla = '';
+    		this.subscapular = '';
+    		this.abdomen = '';
+    		this.suprailiac = '';
+    		this.quadraceps = '';
+    		this.chest_bust = '';
+    		this.arm_right = '';
+    		this.arm_left = '';
+    		this.waist = '';
+    		this.hips = '';
+    		this.thigh_right = '';
+    		this.thigh_left = '';
+    		this.knee_right = '';
+    		this.knee_left = '';
+    		this.calf_right = '';
+    		this.calf_left = '';
+
+    	} else {
+    		$scope.submitted = true;
+    	}
+    };
+
+    $scope.findOneAssessment = function() {
+    	console.log('finding a single assessment');
+    	console.log('assessmentId: ' + $stateParams.assessmentId);
+
+    	Assessments.get({
+    		assessmentId: $stateParams.assessmentId
+    	}, function(assessment) {
+    		$scope.assessment = assessment;
+    	});
+    };
+
+    /**
+     *
+     * COMPANY CONTROLLERS
+     * 
+     */
+    
+    $scope.hasAuthorization = function(company) {
+    	if (!company || !company.owner) return false;
+    	return $scope.global.isAdmin || company.owner._id === $scope.global.user._id;
+    };
+
+    $scope.createCompany = function(isValid) {
+    	if (isValid) {
+    		var company = new Companies({
+    			name: this.name,
+    			content: this.content
+    		});
+    		company.$save(function(response) {
+    			$location.path('company/' + response._id);
     		});
 
     		this.name = '';
@@ -64,22 +156,21 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	}
     };
 
-    $scope.find = function() {
+    $scope.findCompanies = function() {
     	Companies.query(function(companies) {
     		$scope.companies = companies;
     	});
     };
 
-    $scope.findOne = function() {
+    $scope.findOneCompany = function() {
     	Companies.get({
     		companyId: $stateParams.companyId
     	}, function(company) {
     		$scope.company = company;
-    		console.log(company);
     	});
     };
 
-    $scope.update = function(isValid) {
+    $scope.updateCompany = function(isValid) {
       if (isValid) {
         var company = $scope.company;
       	$log.log(company);
@@ -89,7 +180,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         company.updated.push(new Date().getTime());
 
         company.$update(function() {
-          $location.path('fitnessassessment/company/' + company._id);
+          $location.path('company/' + company._id);
         });
       } else {
         $scope.submitted = true;
@@ -99,7 +190,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     /**
      * Remove Company
      */
-    $scope.remove = function(company) {
+    $scope.removeCompany = function(company) {
 		if (company) {
 			company.$remove(function(response) {
 				for (var i in $scope.companies) {
@@ -107,11 +198,11 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 						$scope.companies.splice(i, 1);
 					}
 				}
-				$location.path('fitnessassessment/company/');
+				$location.path('company/');
         	});
       	} else {
         	$scope.article.$remove(function(response) {
-          		$location.path('fitnessassessment/company/');
+          		$location.path('company/');
         	});
       	}
     };

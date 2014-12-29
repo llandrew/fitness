@@ -1,0 +1,98 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findOneAssessment()">
+  <span>{{assessment.entry_date | date:'medium'}}</span> /
+  <span>{{assessment.trainer.name}}</span>
+  <h2>{{assessment.name}}</h2>
+  <div data-ng-if="hasAuthorization(assessment)">
+    <a class="btn" href="/#!/assessment/{{assessment._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="removeAssessment(assessment);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+
+  <h2>Assessment Measurements</h2>
+  <table>
+  	<tr>
+  		<th>Weight</th>
+  		<td>{{assessment.weight}}</td>
+  	</tr>
+  	<tr>
+  		<th>Height</th>
+  		<td>{{assessment.height}}</td>
+  	</tr>
+  	<tr>
+  		<th>Triceps</th>
+  		<td>{{assessment.triceps}}</td>
+  	</tr>
+  	<tr>
+  		<th>Pectoral</th>
+  		<td>{{assessment.pectoral}}</td>
+  	</tr>
+  	<tr>
+  		<th>Midaxilla</th>
+  		<td>{{assessment.midaxilla}}</td>
+  	</tr>
+  	<tr>
+  		<th>Subscapular</th>
+  		<td>{{assessment.subscapular}}</td>
+  	</tr>
+  	<tr>
+  		<th>Abdomen</th>
+  		<td>{{assessment.abdomen}}</td>
+  	</tr>
+  	<tr>
+  		<th>Suprailiac</th>
+  		<td>{{assessment.suprailiac}}</td>
+  	</tr>
+  	<tr>
+  		<th>Quadraceps</th>
+  		<td>{{assessment.quadraceps}}</td>
+  	</tr>
+  	<tr>
+  		<th>Chest/Bust</th>
+  		<td>{{assessment.chest_bust}}</td>
+  	</tr>
+  	<tr>
+  		<th>Arm - Right</th>
+  		<td>{{assessment.arm_right}}</td>
+  	</tr>
+  	<tr>
+  		<th>Arm - Left</th>
+  		<td>{{assessment.arm_left}}</td>
+  	</tr>
+  	<tr>
+  		<th>Waist</th>
+  		<td>{{assessment.waist}}</td>
+  	</tr>
+  	<tr>
+  		<th>Hips</th>
+  		<td>{{assessment.hips}}</td>
+  	</tr>
+  	<tr>
+  		<th>Thigh - Right</th>
+  		<td>{{assessment.thigh_right}}</td>
+  	</tr>
+  	<tr>
+  		<th>Thigh - Left</th>
+  		<td>{{assessment.thigh_left}}</td>
+  	</tr>
+  	<tr>
+  		<th>Knee - Right</th>
+  		<td>{{assessment.knee_right}}</td>
+  	</tr>
+  	<tr>
+  		<th>Knee - Left</th>
+  		<td>{{assessment.knee_left}}</td>
+  	</tr>
+  	<tr>
+  		<th>Calf - Right</th>
+  		<td>{{assessment.calf_right}}</td>
+  	</tr>
+  	<tr>
+  		<th>Calf - Left</th>
+  		<td>{{assessment.calf_left}}</td>
+  	</tr>
+  </table>
+  
+</section>

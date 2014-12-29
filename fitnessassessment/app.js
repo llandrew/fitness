@@ -7,29 +7,66 @@ var Module = require('meanio').Module;
 
 var Fitnessassessment = new Module('fitnessassessment');
 
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
+
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
 Fitnessassessment.register(function(app, auth, database) {
 
+	var userModel = database.connection.model('User');
+	userModel.schema.add({
+		test: 'String',
+		companies: [{
+			type: Schema.Types.ObjectId,
+			ref: 'Company'
+		}],
+		trainers: [{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}]
+	});
+
   //We enable routing. By default the Package Object is passed to the routes
   Fitnessassessment.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  Fitnessassessment.menus.add({
+  Fitnessassessment.menus
+  /*.add({
     title: 'fitnessassessment example page',
     link: 'fitnessassessment example page',
     roles: ['authenticated'],
     menu: 'main'
-  }).add({
+  })*/
+  .add({
   	title: 'List Companies',
   	link: 'list companies',
   	roles: ['authenticated'],
   	menu: 'main'
-  }).add({
+  })
+  .add({
   	title: 'Create Company',
   	link: 'create company',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  })
+  .add({
+    title: 'Profiles',
+    link: 'user profiles',
+    roles: ['authenticated'],
+    menu: 'main'
+  })
+  .add({
+  	title: 'My Profile',
+  	link: 'my profile',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  })
+  .add({
+  	title: 'Create Assessment',
+  	link: 'create assessment',
   	roles: ['authenticated'],
   	menu: 'main'
   });

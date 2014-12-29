@@ -1,21 +1,104 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-	Company = mongoose.model('Company'),
-	_ = require('lodash');
+var mongoose 	= require('mongoose'),
+	Company  	= mongoose.model('Company'),
+	User 	 	= mongoose.model('User'),
+	Assessment 	= mongoose.model('Assessment'),
+	_ 		 	= require('lodash');
 
-exports.company = function(req, res, next, id) {
-	console.log('in company');
+/**
+ * 
+ * PROFILE CONTROLLERS
+ * 
+ */
+
+exports.findProfile = function(req, res, next, id) {
+	User.findOne({
+		_id: id
+	})
+	//.populate('companies')
+	.populate('trainers')
+	//.populate('clients')
+	.exec(function(err, profile) {
+		if (err) return next(err);
+		if (!profile) return next(new Error('Failed to load profile ' + id));
+
+		req.profile = profile;
+
+		Company.find().where('owner').equals(profile._id).exec(function(err, companies) {
+			req.profile._doc.companies = companies;
+		});
+
+		User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
+			req.profile._doc.clients = clients;
+			next();
+		});
+	});
+};
+
+exports.showProfile = function(req, res) {
+	res.json(req.profile);
+};
+
+exports.listProfiles = function(req, res) {
+	User.find().sort('-created').exec(function(err, profiles) {
+		if (err) {
+			return res.status(500).json({
+				error: 'Cannot list the profiles'
+			});
+		}
+		res.json(profiles);
+	});
+};
+
+exports.updateProfile = function(req, res) {
+	var profile = req.profile;
+
+	if (req.body.action === 'add trainer') {
+		profile._doc.trainers.push(req.body.newTrainer);
+		profile.markModified('trainers');
+	}
+
+
+	profile.save(function(err, doc) {
+
+	});
+};
+
+/**
+ *
+ * CLIENT CONTROLLERS
+ * 
+ */
+
+/**
+ *
+ * TRAINER CONTROLLERS
+ * 
+ */
+
+/**
+ *
+ * COMPANY CONTROLLERS
+ * 
+ */
+
+exports.findCompany = function(req, res, next, id) {
 	Company.load(id, function(err, company) {
 		if (err) return next(err);
 		if (!company) return next(new Error('Failed to load company ' + id));
+
 		req.company = company;
 		next();
 	});
 };
 
-exports.all = function(req, res) {
-	Company.find().sort('-created').populate('user', 'name username').exec(function(err, companies) {
+exports.showCompany = function(req, res) {
+	res.json(req.company);
+};
+
+exports.listCompanies = function(req, res) {
+	Company.find().sort('-created').populate('owner', 'name username').exec(function(err, companies) {
 		if (err) {
 			return res.status(500).json({
 				error: 'Cannot list the companies'
@@ -25,10 +108,9 @@ exports.all = function(req, res) {
 	});
 };
 
-exports.create = function(req, res) {
-	console.log('in create');
+exports.createCompany = function(req, res) {
 	var company = new Company(req.body);
-	company.user = req.user;
+	company.owner = req.user;
 
 	company.save(function(err) {
 		if (err) {
@@ -36,22 +118,16 @@ exports.create = function(req, res) {
 				error: 'Cannot save the company'
 			});
 		}
-		res.json(company);
+		User.findByIdAndUpdate(req.user._id, { $push : { companies : company._id } }, function(err, user) {
+			res.json(company);
+		});
 	});
-};
-
-exports.show = function(req, res) {
-	console.log('in show');
-	console.log('after show');
-	console.log(req.company);
-	res.json(req.company);
 };
 
 /**
  * Delete a company
  */
-exports.destroy = function(req, res) {
-	//console.log('destroying company');
+exports.destroyCompany = function(req, res) {
   var company = req.company;
 
   company.remove(function(err) {
@@ -68,7 +144,7 @@ exports.destroy = function(req, res) {
 /**
  * Update a company
  */
-exports.update = function(req, res) {
+exports.updateCompany = function(req, res) {
   var company = req.company;
 
   company = _.extend(company, req.body);
@@ -82,4 +158,62 @@ exports.update = function(req, res) {
     res.json(company);
 
   });
+};
+
+/**
+ *
+ * ASSESSMENT CONTROLLERS
+ * 
+ */
+
+/**
+ * Create an assessment
+ */
+exports.createAssessment = function(req, res) {
+	var assessment = new Assessment(req.body);
+	assessment.owner = req.user;
+
+	assessment.save(function(err) {
+		if(err) {
+			return res.status(500).json({
+				error: 'Cannot save the assessment'
+			});
+		}
+		User.findByIdAndUpdate(req.user._id, { $push: { assessments : assessment._id } }, function(err, user) {
+			res.json(assessment);
+		});
+	});
+};
+
+/**
+ * Find an assessment
+ */
+exports.findAssessment = function(req, res, next, id) {
+	Assessment.findOne({
+		_id: id
+	})
+	.exec(function(err, assessment) {
+		if (err) return next(err);
+		if (!assessment) return next(new Error('Failed to load assessment ' + id));
+
+		req.assessment = assessment;
+		console.log(assessment);
+	});
+};
+
+exports.showAssessment = function(req, res) {
+	console.log('showAssessment');
+	console.log(req.assessment);
+	res.json(req.assessment);
+};
+
+exports.listAssessments = function(req, res) {
+	Assessment.find().exec(function(err, assessments) {
+		if (err) {
+			return res.status(500).json({
+				error: 'Cannot list the assessments'
+			});
+		}
+		res.json(assessments);
+	});
 };
