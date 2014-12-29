@@ -1,0 +1,22 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findAssessments()">
+
+  <h2>Your Assessments</h2>
+
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        <a data-ng-href="/#!/assessment/{{assessment._id}}">{{assessment.entry_date | date:"yyyy-MM-dd"}}</a>
+      </h2>
+      <!--<span data-ng-if="hasAssessmentAuthorization(assessment)">-->
+        <a class="btn" href="/#!/assessment/{{assessment._id}}/edit" title="Edit Assessment">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="removeAssessment(assessment);" title="Delete Assessment">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      <!--</span>-->
+    </li>
+  </ul>
+
+  
+</section>

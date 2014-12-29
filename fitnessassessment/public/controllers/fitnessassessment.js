@@ -125,6 +125,50 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	});
     };
 
+    $scope.findAssessments = function() {
+    	Assessments.query(function(assessments) {
+    		$scope.assessments = assessments;
+    	});
+    };
+
+    $scope.hasAssessmentAuthorization = function(assessment) {
+    	if (!assessment || !assessment.owner) return false;
+    	return $scope.global.isAdmin || assessment.owner._id === $scope.global.user._id;
+    };
+
+    $scope.removeAssessment = function(assessment) {
+		if (assessment) {
+			assessment.$remove(function(response) {
+				for (var i in $scope.assessments) {
+					if ($scope.assessments[i] === assessment) {
+						$scope.assessments.splice(i, 1);
+					}
+				}
+				$location.path('assessment/');
+        	});
+      	} else {
+        	$scope.assessment.$remove(function(response) {
+          		$location.path('assessment/');
+        	});
+      	}
+    };
+
+    $scope.updateAssessment = function(isValid) {
+		if (isValid) {
+        	var assessment = $scope.assessment;
+        	if (!assessment.updated) {
+         		assessment.updated = [];
+        	}
+        	assessment.updated.push(new Date().getTime());
+
+        	assessment.$update(function() {
+          		$location.path('assessment/' + assessment._id);
+        	});
+      	} else {
+        	$scope.submitted = true;
+      	}
+    };
+
     /**
      *
      * COMPANY CONTROLLERS

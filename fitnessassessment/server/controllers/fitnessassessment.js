@@ -128,9 +128,6 @@ exports.createCompany = function(req, res) {
 	});
 };
 
-/**
- * Delete a company
- */
 exports.destroyCompany = function(req, res) {
   var company = req.company;
 
@@ -205,10 +202,16 @@ exports.findAssessment = function(req, res, next, id) {
 	});
 };
 
+/**
+ * Show Assessment
+ */
 exports.showAssessment = function(req, res) {
 	res.json(req.assessment);
 };
 
+/**
+ * List Assessments
+ */
 exports.listAssessments = function(req, res) {
 	Assessment.find().exec(function(err, assessments) {
 		if (err) {
@@ -218,4 +221,40 @@ exports.listAssessments = function(req, res) {
 		}
 		res.json(assessments);
 	});
+};
+
+/**
+ * Delete an assessment
+ */
+exports.destroyAssessment = function(req, res) {
+  var assessment = req.assessment;
+
+  assessment.remove(function(err) {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot delete the assessment'
+      });
+    }
+    res.json(assessment);
+
+  });
+};
+
+/**
+ * Update an assessment
+ */
+exports.updateAssessment = function(req, res) {
+  var assessment = req.assessment;
+
+  assessment = _.extend(assessment, req.body);
+
+  assessment.save(function(err) {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot update the assessment'
+      });
+    }
+    res.json(assessment);
+
+  });
 };

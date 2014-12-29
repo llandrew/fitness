@@ -69,6 +69,12 @@ Fitnessassessment.register(function(app, auth, database) {
   	link: 'create assessment',
   	roles: ['authenticated'],
   	menu: 'main'
+  })
+  .add({
+  	title: 'List Assessments',
+  	link: 'list assessments',
+  	roles: ['authenticated'],
+  	menu: 'main'
   });
   
   Fitnessassessment.aggregateAsset('css', 'fitnessassessment.css');

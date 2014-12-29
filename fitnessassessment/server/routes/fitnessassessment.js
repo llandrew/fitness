@@ -68,6 +68,14 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   	assessmentController.showAssessment(req, res);
   });
 
+  app.put('/assessments/:assessmentId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.updateAssessment(req, res);
+  });
+
+  app.delete('/assessments/:assessmentId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.destroyAssessment(req, res);
+  });
+
   /**
    * EXAMPLE
    */
