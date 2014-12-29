@@ -15,13 +15,24 @@ exports.findProfile = function(req, res, next, id) {
 	User.findOne({
 		_id: id
 	})
-	.populate('companies')
-	.populate('clients')
+	//.populate('companies')
+	.populate('trainers')
+	//.populate('clients')
 	.exec(function(err, profile) {
 		if (err) return next(err);
 		if (!profile) return next(new Error('Failed to load profile ' + id));
+
 		req.profile = profile;
-		next();
+
+		Company.find().where('owner').equals(profile._id).exec(function(err, companies) {
+			req.profile._doc.companies = companies;
+		});
+
+		User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
+			req.profile._doc.clients = clients;
+			next();
+		});
+
 	});
 };
 
@@ -43,12 +54,15 @@ exports.listProfiles = function(req, res) {
 exports.updateProfile = function(req, res) {
 	var profile = req.profile;
 
-	console.log(req.body);
-	console.log(profile);
-	console.log(req.body.trainers);
-	_.extend(profile.trainers, req.body.trainers);
-	//profile = _.extend(profile, req.body);
-	console.log(profile);
+	if (req.body.action === 'add trainer') {
+		profile._doc.trainers.push(req.body.newTrainer);
+		profile.markModified('trainers');
+	}
+
+
+	profile.save(function(err, doc) {
+
+	});
 };
 
 /**

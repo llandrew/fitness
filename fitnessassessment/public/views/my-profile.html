@@ -1,6 +1,13 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
   <span>{{profile.name}}</span>
   <h2>{{profile.test}}</h2>
+  <mean-upload file-dest="'/packages/files/'"
+upload-callback="uploadFinished(files)"
+upload-file-callback="uploadFileCallback(file)">
+</mean-upload>
+<div data-ng-repeat="img in images">
+    <img data-ng-src="{{img.src}}" alt="">
+</div>
   <div data-ng-if="hasAuthorization(profile)">
     <a class="btn" href="/#!/my-profile/{{profile._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
@@ -21,6 +28,14 @@
       <i class="glyphicon glyphicon-plus"></i>
      </a>
   	</span>
+    <h3>Trainers</h3>
+    <ul data-ng-if="profile.trainers">
+      <li data-ng-repeat="trainer in profile.trainers">
+        <a class="btn" data-ng-href="/#!/profile/{{trainer._id}}">
+          {{trainer.name}}
+        </a>
+      </li>
+    </ul>
   	<h3>Clients</h3>
     <ul>
   	  <li data-ng-repeat="client in profile.clients">

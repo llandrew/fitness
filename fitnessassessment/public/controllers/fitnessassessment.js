@@ -38,11 +38,14 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      */
 
      $scope.isClient = function(profile) {
-     	if (profile.trainers.indexOf($scope.global.user._id) < 0) {
-     		return false;
-     	} else {
-     		return true;
-     	}
+        var isClient = false;
+
+        for (var trainer in profile.trainers) {
+            if (profile.trainers[trainer].name === $scope.global.user.name) {
+                isClient = true;
+            }
+        }
+        return isClient;
      };
 
      $scope.addClientToProfile = function(client) {
@@ -53,8 +56,18 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      	if (typeof client.trainers !== 'object') return false;
      	if (client.trainers.indexOf(user._id) > -1) return false;
 
-     	client.trainers.push(user._id);
+     	client.newTrainer = user._id;
+        client.action = 'add trainer';
      	client.$update();
+     };
+
+     /**
+      *
+      * TRAINER CONTROLLERS
+      * 
+      */
+     
+     $scope.findTrainers = function() {
      };
 
     /**

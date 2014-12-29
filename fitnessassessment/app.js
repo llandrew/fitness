@@ -26,10 +26,6 @@ Fitnessassessment.register(function(app, auth, database) {
 		trainers: [{
 			type: Schema.Types.ObjectId,
 			ref: 'User'
-		}],
-		clients: [{
-			type: Schema.Types.ObjectId,
-			ref: 'User'
 		}]
 	});
 
@@ -37,12 +33,13 @@ Fitnessassessment.register(function(app, auth, database) {
   Fitnessassessment.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  Fitnessassessment.menus.add({
+  Fitnessassessment.menus
+  /*.add({
     title: 'fitnessassessment example page',
     link: 'fitnessassessment example page',
     roles: ['authenticated'],
     menu: 'main'
-  })
+  })*/
   .add({
   	title: 'List Companies',
   	link: 'list companies',
