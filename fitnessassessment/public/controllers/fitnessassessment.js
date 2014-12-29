@@ -118,9 +118,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     };
 
     $scope.findOneAssessment = function() {
-    	console.log('finding a single assessment');
-    	console.log('assessmentId: ' + $stateParams.assessmentId);
-
     	Assessments.get({
     		assessmentId: $stateParams.assessmentId
     	}, function(assessment) {

@@ -45,7 +45,7 @@ upload-file-callback="uploadFileCallback(file)">
   	<h3>Assessments</h3>
     <ul>
   	  <li data-ng-repeat="assessment in profile.assessments">
-  	  <a data-ng-href="#!/assessment/{{assessment._id}}">{{assessment.entry_date}}</a>
+  	  <a data-ng-href="#!/assessment/{{assessment._id}}">{{assessment.entry_date | date:"yyyy-MM-dd"}}</a>
   	  </li>
   	</ul>
   </div>

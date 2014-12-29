@@ -31,6 +31,10 @@ exports.findProfile = function(req, res, next, id) {
 
 		User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
 			req.profile._doc.clients = clients;
+		});
+
+		Assessment.find().where('owner').equals(profile._id).exec(function(err, assessments) {
+			req.profile._doc.assessments = assessments;
 			next();
 		});
 	});
@@ -197,13 +201,11 @@ exports.findAssessment = function(req, res, next, id) {
 		if (!assessment) return next(new Error('Failed to load assessment ' + id));
 
 		req.assessment = assessment;
-		console.log(assessment);
+		next();
 	});
 };
 
 exports.showAssessment = function(req, res) {
-	console.log('showAssessment');
-	console.log(req.assessment);
 	res.json(req.assessment);
 };
 
