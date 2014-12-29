@@ -1,7 +1,7 @@
 <section data-ng-controller="FitnessassessmentController">
-  <form name="assessmentForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(assessmentForm.$valid)" novalidate>
+  <form name="assessmentForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create_assessment(assessmentForm.$valid)" novalidate>
     <div class="form-group">
-      <label mean-token="'create-weight'" class="col-md-3 control-label">Weight</label>
+      <label mean-token="'create-weight'" class="col-md-3 control-label" for="weight">Weight</label>
       <div class="col-md-9">
         <input name="weight" type="text" class="form-control" data-ng-model="weight" id="weight" placeholder="Weight" required>
         <div ng-show="submitted && assessmentForm.weight.$invalid" class="help-block">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-height'" class="col-md-3 control-label">Height</label>
+      <label mean-token="'create-height'" class="col-md-3 control-label" for="height">Height</label>
       <div class="col-md-9">
         <input name="height" type="text" class="form-control" data-ng-model="height" id="height" placeholder="Height" required>
         <div ng-show="submitted && assessmentForm.height.$invalid" class="help-block">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-triceps'" class="col-md-3 control-label">Triceps</label>
+      <label mean-token="'create-triceps'" class="col-md-3 control-label" for="triceps">Triceps</label>
       <div class="col-md-9">
         <input name="triceps" type="text" class="form-control" data-ng-model="triceps" id="triceps" placeholder="Triceps" required>
         <div ng-show="submitted && assessmentForm.triceps.$invalid" class="help-block">
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-pectoral'" class="col-md-3 control-label">Pectoral</label>
+      <label mean-token="'create-pectoral'" class="col-md-3 control-label" for="pectoral">Pectoral</label>
       <div class="col-md-9">
         <input name="pectoral" type="text" class="form-control" data-ng-model="pectoral" id="pectoral" placeholder="Pectoral" required>
         <div ng-show="submitted && assessmentForm.pectoral.$invalid" class="help-block">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-midaxilla'" class="col-md-3 control-label">Midaxilla</label>
+      <label mean-token="'create-midaxilla'" class="col-md-3 control-label" for="midaxilla">Midaxilla</label>
       <div class="col-md-9">
         <input name="midaxilla" type="text" class="form-control" data-ng-model="midaxilla" id="midaxilla" placeholder="Midaxilla" required>
         <div ng-show="submitted && assessmentForm.midaxilla.$invalid" class="help-block">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-subscapular'" class="col-md-3 control-label">Subscapular</label>
+      <label mean-token="'create-subscapular'" class="col-md-3 control-label" for="subscapular">Subscapular</label>
       <div class="col-md-9">
         <input name="subscapular" type="text" class="form-control" data-ng-model="subscapular" id="subscapular" placeholder="Subscapular" required>
         <div ng-show="submitted && assessmentForm.subscapular.$invalid" class="help-block">
@@ -61,7 +61,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-abdomen'" class="col-md-3 control-label">Abdomen</label>
+      <label mean-token="'create-abdomen'" class="col-md-3 control-label" for="abdomen">Abdomen</label>
       <div class="col-md-9">
         <input name="abdomen" type="text" class="form-control" data-ng-model="abdomen" id="abdomen" placeholder="Abdomen" required>
         <div ng-show="submitted && assessmentForm.abdomen.$invalid" class="help-block">
@@ -71,7 +71,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-suprailiac'" class="col-md-3 control-label">Suprailiac</label>
+      <label mean-token="'create-suprailiac'" class="col-md-3 control-label" for="suprailiac">Suprailiac</label>
       <div class="col-md-9">
         <input name="suprailiac" type="text" class="form-control" data-ng-model="suprailiac" id="suprailiac" placeholder="Suprailiac" required>
         <div ng-show="submitted && assessmentForm.suprailiac.$invalid" class="help-block">
@@ -81,7 +81,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-quadraceps'" class="col-md-3 control-label">Quadraceps</label>
+      <label mean-token="'create-quadraceps'" class="col-md-3 control-label" for="quadraceps">Quadraceps</label>
       <div class="col-md-9">
         <input name="quadraceps" type="text" class="form-control" data-ng-model="quadraceps" id="quadraceps" placeholder="Quadraceps" required>
         <div ng-show="submitted && assessmentForm.quadraceps.$invalid" class="help-block">
@@ -91,7 +91,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-chest_bust'" class="col-md-3 control-label">Chest/Bust</label>
+      <label mean-token="'create-chest_bust'" class="col-md-3 control-label" for="chest_bust">Chest/Bust</label>
       <div class="col-md-9">
         <input name="chest_bust" type="text" class="form-control" data-ng-model="chest_bust" id="chest_bust" placeholder="Chest/Bust" required>
         <div ng-show="submitted && assessmentForm.chest_bust.$invalid" class="help-block">
@@ -101,7 +101,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-arm_right'" class="col-md-3 control-label">Arm - Right</label>
+      <label mean-token="'create-arm_right'" class="col-md-3 control-label" for="arm_right">Arm - Right</label>
       <div class="col-md-9">
         <input name="arm_right" type="text" class="form-control" data-ng-model="arm_right" id="arm_right" placeholder="Arm - Right" required>
         <div ng-show="submitted && assessmentForm.arm_right.$invalid" class="help-block">
@@ -111,7 +111,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-arm_left'" class="col-md-3 control-label">Arm - Left</label>
+      <label mean-token="'create-arm_left'" class="col-md-3 control-label" for="arm_left">Arm - Left</label>
       <div class="col-md-9">
         <input name="arm_left" type="text" class="form-control" data-ng-model="arm_left" id="arm_left" placeholder="Arm - Left" required>
         <div ng-show="submitted && assessmentForm.arm_left.$invalid" class="help-block">
@@ -121,7 +121,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-waist'" class="col-md-3 control-label">Waist</label>
+      <label mean-token="'create-waist'" class="col-md-3 control-label" for="waist">Waist</label>
       <div class="col-md-9">
         <input name="waist" type="text" class="form-control" data-ng-model="waist" id="waist" placeholder="Waist" required>
         <div ng-show="submitted && assessmentForm.waist.$invalid" class="help-block">
@@ -131,7 +131,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-hips'" class="col-md-3 control-label">Hips</label>
+      <label mean-token="'create-hips'" class="col-md-3 control-label" for="hips">Hips</label>
       <div class="col-md-9">
         <input name="hips" type="text" class="form-control" data-ng-model="hips" id="hips" placeholder="Hips" required>
         <div ng-show="submitted && assessmentForm.hips.$invalid" class="help-block">
@@ -141,7 +141,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-thigh_right'" class="col-md-3 control-label">Thigh - Right</label>
+      <label mean-token="'create-thigh_right'" class="col-md-3 control-label" for="thigh_right">Thigh - Right</label>
       <div class="col-md-9">
         <input name="thigh_right" type="text" class="form-control" data-ng-model="thigh_right" id="thigh_right" placeholder="Thigh - Right" required>
         <div ng-show="submitted && assessmentForm.thigh_right.$invalid" class="help-block">
@@ -151,7 +151,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-thigh_left'" class="col-md-3 control-label">Thigh - Left</label>
+      <label mean-token="'create-thigh_left'" class="col-md-3 control-label" for="thigh_left">Thigh - Left</label>
       <div class="col-md-9">
         <input name="thigh_left" type="text" class="form-control" data-ng-model="thigh_left" id="thigh_left" placeholder="Thigh - Left" required>
         <div ng-show="submitted && assessmentForm.thigh_left.$invalid" class="help-block">
@@ -161,7 +161,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-knee_right'" class="col-md-3 control-label">Knee - Right</label>
+      <label mean-token="'create-knee_right'" class="col-md-3 control-label" for="knee_right">Knee - Right</label>
       <div class="col-md-9">
         <input name="knee_right" type="text" class="form-control" data-ng-model="knee_right" id="knee_right" placeholder="Knee - Right" required>
         <div ng-show="submitted && assessmentForm.knee_right.$invalid" class="help-block">
@@ -171,7 +171,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-knee_left'" class="col-md-3 control-label">Knee - Left</label>
+      <label mean-token="'create-knee_left'" class="col-md-3 control-label" for="knee_left">Knee - Left</label>
       <div class="col-md-9">
         <input name="knee_left" type="text" class="form-control" data-ng-model="knee_left" id="knee_left" placeholder="Knee - Left" required>
         <div ng-show="submitted && assessmentForm.knee_left.$invalid" class="help-block">
@@ -181,7 +181,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-calf_right'" class="col-md-3 control-label">Calf - Right</label>
+      <label mean-token="'create-calf_right'" class="col-md-3 control-label" for="calf_right">Calf - Right</label>
       <div class="col-md-9">
         <input name="calf_right" type="text" class="form-control" data-ng-model="calf_right" id="calf_right" placeholder="Calf - Right" required>
         <div ng-show="submitted && assessmentForm.calf_right.$invalid" class="help-block">
@@ -191,7 +191,7 @@
     </div>
 
     <div class="form-group">
-      <label mean-token="'create-calf_left'" class="col-md-3 control-label">Calf - Left</label>
+      <label mean-token="'create-calf_left'" class="col-md-3 control-label" for="calf_left">Calf - Left</label>
       <div class="col-md-9">
         <input name="calf_left" type="text" class="form-control" data-ng-model="calf_left" id="calf_left" placeholder="Calf - Left" required>
         <div ng-show="submitted && assessmentForm.calf_left.$invalid" class="help-block">

@@ -29,6 +29,41 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	}
     };
 
+    $scope.create_assessment = function(isValid) {
+    	if (isValid) {
+    		var assessment = new Companies({
+    			weight: this.weight,
+    			height: this.height,
+    			triceps: this.triceps,
+    			pectoral: this.pectoral,
+    			midaxilla: this.midaxilla,
+    			subscapular: this.subscapular,
+    			abdomen: this.abdomen,
+    			suprailiac: this.suprailiac,
+    			quadraceps: this.quadraceps,
+    			chest_bust: this.chest_bust,
+    			arm_right: this.arm_right,
+    			arm_left: this.arm_left,
+    			waist: this.waist,
+    			hips: this.hips,
+    			thigh_right: this.thigh_right,
+    			thigh_left: this.thigh_left,
+    			knee_right: this.knee_right,
+    			knee_left: this.knee_left,
+    			calf_right: this.calf_right,
+    			calf_left: this.calf_left
+    		});
+    		assessment.$save(function(response) {
+    			$location.path('fitnessassessment/company/' + response._id);
+    		});
+
+    		this.name = '';
+    		this.content = '';
+    	} else {
+    		$scope.submitted = true;
+    	}
+    };
+
     $scope.find = function() {
     	Companies.query(function(companies) {
     		$scope.companies = companies;
