@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
 	Company  = mongoose.model('Company'),
 	User 	 = mongoose.model('User'),
+	ImageSet = mongoose.model('ImageSet'),
 	_ 		 = require('lodash');
 
 /**
@@ -17,6 +18,7 @@ exports.findProfile = function(req, res, next, id) {
 	})
 	//.populate('companies')
 	.populate('trainers')
+	.populate('imagesets')
 	//.populate('clients')
 	.exec(function(err, profile) {
 		if (err) return next(err);
@@ -59,9 +61,29 @@ exports.updateProfile = function(req, res) {
 		profile.markModified('trainers');
 	}
 
+	if (req.body.action === 'update goals') {
+		console.log(req.body);
+		profile._doc.goals.push(req.body.newGoal);
+		profile.markModified('goals');
+	}
+
+	if (req.body.action === 'add new images') {
+		console.log('in add new images');
+
+		for (var image in req.body.newImages) {
+			console.log(image);
+			var imageSet = new ImageSet({front: {name: req.body.newImages[image].name, src: req.body.newImages[image].src}, back: {name: '', src: ''}, side: {name: '', src: ''}});
+			console.log(imageSet);
+			profile._doc.imagesets = [];
+			profile._doc.imagesets.push(imageSet);
+			profile.markModified('imagesets');
+			console.log(profile._doc);
+		}
+	}
+
 
 	profile.save(function(err, doc) {
-
+		res.json(doc);
 	});
 };
 
@@ -159,4 +181,13 @@ exports.updateCompany = function(req, res) {
     res.json(company);
 
   });
+};
+
+/**
+ *
+ * FILE CONTROLLERS
+ * 
+ */
+
+exports.uploadFinished = function(files) {
 };

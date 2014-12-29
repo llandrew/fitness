@@ -17,6 +17,15 @@
     </a>
   </div>
   <div>
+    <h3>Goals</h3>
+    <ul>
+      <li data-ng-repeat="goal in profile.goals">
+        {{goal}}
+      </li>
+    </ul>
+    <a class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
+  </div>
+  <div>
   	<h3>Companies</h3>
     <ul>
   	  <li data-ng-repeat="company in profile.companies">

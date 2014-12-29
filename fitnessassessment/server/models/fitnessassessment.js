@@ -176,6 +176,36 @@ var CompanySchema = new Schema({
   teams: [TeamSchema]
 });
 
+var ImageSetSchema = new Schema({
+	date: {
+		type: Date,
+		required: true,
+		default: Date.now
+	},
+	front: {
+		name: {
+			type: String
+		},
+		src: {
+			type: String
+		}
+	},
+	back: {
+		name: {
+			type: String
+		},
+		src: String
+	},
+	side: {
+		name: {
+			type: String
+		},
+		src: {
+			type: String
+		}
+	}
+});
+
 /**
  * Validations
  */
@@ -206,3 +236,4 @@ mongoose.model('Journal', JournalSchema);
 mongoose.model('Goal', GoalSchema);
 mongoose.model('Measurement', MeasurementSchema);
 mongoose.model('Team', TeamSchema);
+mongoose.model('ImageSet', ImageSetSchema);

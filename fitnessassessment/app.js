@@ -26,7 +26,25 @@ Fitnessassessment.register(function(app, auth, database) {
 		trainers: [{
 			type: Schema.Types.ObjectId,
 			ref: 'User'
-		}]
+		}],
+    goals: [{
+      type: 'String'
+    }],
+    imagesets: [database.connection.model('ImageSet').schema]
+/*    imagesets: [{
+      front: {
+        name: 'String',
+        src: 'String'
+      },
+      back: {
+        name: 'String',
+        src: 'String'
+      },
+      side: {
+        name: 'String',
+        src: 'String'
+      }
+    }]*/
 	});
 
   //We enable routing. By default the Package Object is passed to the routes

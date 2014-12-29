@@ -2,12 +2,17 @@
   <span>{{profile.name}}</span>
   <h2>{{profile.test}}</h2>
   <mean-upload file-dest="'/packages/files/'"
-upload-callback="uploadFinished(files)"
-upload-file-callback="uploadFileCallback(file)">
+upload-callback="profileFilesUploadsComplete(files)"
+upload-file-callback="profileFilesUploadCallback(file)">
 </mean-upload>
 <div data-ng-repeat="img in images">
     <img data-ng-src="{{img.src}}" alt="">
 </div>
+  <div>
+    <ul>
+      <li data-ng-repeat="imageset in profile.imagesets">{{imageset.front.name}}<img data-ng-src="{{imageset.front.src}}" /></li>
+    </ul>
+  </div>
   <div data-ng-if="hasAuthorization(profile)">
     <a class="btn" href="/#!/my-profile/{{profile._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
@@ -16,6 +21,16 @@ upload-file-callback="uploadFileCallback(file)">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
+  <div>
+    <h3>Goals</h3>
+    <ul>
+      <li data-ng-repeat="goal in profile.goals">
+        {{goal}}
+      </li>
+    </ul>
+    <a class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
+  </div>
+  <div>
   <div>
   	<h3>Companies</h3>
     <ul>

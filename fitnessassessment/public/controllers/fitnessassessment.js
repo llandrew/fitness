@@ -61,6 +61,14 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      	client.$update();
      };
 
+     $scope.updateGoals = function(isValid) {
+        var profile = $scope.profile;
+        profile.action = 'update goals';
+        profile.newGoal = $scope.newGoal;
+        $scope.newGoal = '';
+        profile.$update();
+     };
+
      /**
       *
       * TRAINER CONTROLLERS
@@ -149,5 +157,19 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         	});
       	}
     };
+
+    $scope.profileFilesUploadsComplete = function(files) {
+        console.log('in upload finished');
+        console.log(files);
+        var profile = $scope.profile;
+        profile.action = 'add new images';
+        profile.newImages = files;
+        profile.$update();
+    };
+    $scope.profileFilesUploadCallback = function(file) {
+        console.log('in upload finished');
+        console.log(file);
+    };
   }
 ]);
+
