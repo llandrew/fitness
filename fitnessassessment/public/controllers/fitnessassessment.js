@@ -144,11 +144,11 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 						$scope.assessments.splice(i, 1);
 					}
 				}
-				$location.path('assessment/');
+				
         	});
       	} else {
         	$scope.assessment.$remove(function(response) {
-          		$location.path('assessment/');
+          		
         	});
       	}
     };
@@ -239,11 +239,10 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 						$scope.companies.splice(i, 1);
 					}
 				}
-				$location.path('company/');
         	});
       	} else {
         	$scope.article.$remove(function(response) {
-          		$location.path('company/');
+          		
         	});
       	}
     };
