@@ -27,8 +27,9 @@ Fitnessassessment.register(function(app, auth, database) {
 			type: Schema.Types.ObjectId,
 			ref: 'User'
 		}],
-    goals: [database.connection.model('Goal').schema],
-    imagesets: [database.connection.model('ImageSet').schema]
+    clients: [Schema.Types.Mixed],
+    goals: [Schema.Types.Mixed],
+    imagesets: [Schema.Types.Mixed]
 /*    imagesets: [{
       front: {
         name: 'String',
@@ -79,6 +80,12 @@ Fitnessassessment.register(function(app, auth, database) {
   	link: 'my profile',
   	roles: ['authenticated'],
   	menu: 'main'
+  })
+  .add({
+    title: 'Trainers',
+    link: 'list trainers',
+    roles: ['authenticated'],
+    menu: 'main'
   });
   
   Fitnessassessment.aggregateAsset('css', 'fitnessassessment.css');

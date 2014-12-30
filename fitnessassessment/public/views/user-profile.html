@@ -3,11 +3,16 @@
   <h3>{{profile.email}}</h3>
   <span>Username: {{profile.username}}</span>
   <div>
-    <a data-ng-if="isClient(profile) === false" class="btn" data-ng-click="addClientToProfile(profile);">
-      <i class="glyphicon glyphicon-plus"></i> Add as Client
-    </a>
+    <div data-ng-if="isClient(profile) === false">
+      <a class="btn" data-ng-click="addClientToProfile(profile);">
+        <i class="glyphicon glyphicon-plus"></i> Add as Client
+      </a>
+      <a class="btn" ng-click="openTrainerModal()">
+        <i class="glyphicon glyphicon-plus"></i> Assign Trainer
+      </a>
+    </div>
     <span data-ng-if="isClient(profile)">
-      Already client
+      Already Assigned
     </span>
     <a data-ng-if="hasAuthorization(profile)" class="btn" href="/#!/my-profile/{{profile._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
@@ -20,10 +25,10 @@
     <h3>Goals</h3>
     <ul>
       <li data-ng-repeat="goal in profile.goals">
-        {{goal}}
+        {{goal.title}}
       </li>
     </ul>
-    <a class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
+    <a data-ng-if="canEditGoals(profile)" class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
   </div>
   <div>
   	<h3>Companies</h3>

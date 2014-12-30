@@ -23,6 +23,9 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	      url: '/example',
 	      templateUrl: 'fitnessassessment/views/index.html'
 	    })
+
+	    // Profile Routes
+	    
 	    .state('my profile', {
 	    	url: '/my-profile',
 	    	templateUrl: 'fitnessassessment/views/my-profile.html',
@@ -51,6 +54,19 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+
+	    // Trainer Routes
+	    
+	    .state('list trainers', {
+	    	url: '/trainers',
+	    	templateUrl: 'fitnessassessment/views/trainers.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+
+	    // Company Routes
+
 	    .state('list companies', {
 	    	url: '/company',
 	    	templateUrl: 'fitnessassessment/views/companies.html',

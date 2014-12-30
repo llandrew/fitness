@@ -10,7 +10,7 @@ upload-file-callback="profileFilesUploadCallback(file)">
 </div>
   <div>
     <ul>
-      <li data-ng-repeat="imageset in profile.imagesets">{{imageset.front.name}}<img data-ng-src="{{imageset.front.src}}" /></li>
+      <li data-ng-repeat="imageset in profile.imagesets">{{imageset.front.name}}<img data-ng-src="{{imageset.front.src}}" /> <a class="btn" data-ng-click="removeUserImageset(imageset)"><i class="glyphicon glyphicon-trash"></i></a></li>
     </ul>
   </div>
   <div data-ng-if="hasAuthorization(profile)">
@@ -25,7 +25,7 @@ upload-file-callback="profileFilesUploadCallback(file)">
     <h3>Goals</h3>
     <ul>
       <li data-ng-repeat="goal in profile.goals">
-        {{goal}}
+        {{goal.title}}
       </li>
     </ul>
     <a class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
