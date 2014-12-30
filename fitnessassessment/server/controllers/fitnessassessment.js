@@ -224,6 +224,24 @@ exports.listAssessments = function(req, res) {
 };
 
 /**
+ * Get User Assessments
+ */
+
+exports.getUserAssessments = function(req, res) {
+	var profileId = req.params.profileId;
+
+	Assessment.find().where('owner').equals(profileId).exec(function(err, assessments) {
+		if (err) {
+			return res.status(500).json({
+				error: 'Cannot list the assessments'
+			});
+		}
+		console.log(assessments);
+		res.json(assessments);
+	});
+};
+
+/**
  * Delete an assessment
  */
 exports.destroyAssessment = function(req, res) {

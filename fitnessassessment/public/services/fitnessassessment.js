@@ -31,13 +31,22 @@ angular.module('mean.fitnessassessment')
 	}
 ])
 .factory('Assessments', ['$resource',
-	function($resource) {
-		return $resource('assessments/:assessmentId', {
-			assessmentId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
-			}
-		});
-	}
+    function($resource) {
+        return {
+            by_id: $resource('assessments/:assessmentId', {
+                assessmentId: '@_id'
+            }, {
+                update: {
+                    method: 'PUT'
+                }
+            }),
+            by_user: $resource('assessments/user/:profileId', {
+                profileId: '@_id'
+            }, {
+                update: {
+                    method: 'PUT'
+                }
+            })
+        };
+    }
 ]);

@@ -64,6 +64,10 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   	assessmentController.createAssessment(req, res);
   });
 
+  app.get('/assessments/user/:profileId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.getUserAssessments(req, res);
+  });
+
   app.get('/assessments/:assessmentId', auth.isMongoId, function(req, res, next) {
   	assessmentController.showAssessment(req, res);
   });
@@ -74,6 +78,14 @@ module.exports = function(Fitnessassessment, app, auth, database) {
 
   app.delete('/assessments/:assessmentId', auth.isMongoId, function(req, res, next) {
   	assessmentController.destroyAssessment(req, res);
+  });
+
+  /**
+   * PROGRESS CHARTS
+   */
+
+  app.get('/progress-charts/:profileId', auth.isMongoId, function(req, res, next) {
+  	assessmentController.getUserAssessments(req, res);
   });
 
   /**

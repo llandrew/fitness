@@ -1,0 +1,25 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="getAssessments()">
+
+  <h2>Progress Charts</h2>
+
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        <a data-ng-href="/#!/assessment/{{assessment._id}}">{{assessment.entry_date | date:"yyyy-MM-dd"}}</a>
+      </h2>
+    </li>
+  </ul>
+
+  <h3>Weight</h3>
+
+  <h3>BMI</h3>
+
+  <h3>Lean Body Fat</h3>
+
+  <h3>Fat Weight</h3>
+
+  <h3>Body Fat Percentage</h3>
+
+  <h3>Waist/Hip Ratio</h3>
+  
+</section>

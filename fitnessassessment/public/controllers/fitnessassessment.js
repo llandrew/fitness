@@ -118,7 +118,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     };
 
     $scope.findOneAssessment = function() {
-    	Assessments.get({
+    	Assessments.by_id.get({
     		assessmentId: $stateParams.assessmentId
     	}, function(assessment) {
     		$scope.assessment = assessment;
@@ -127,6 +127,17 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 
     $scope.findAssessments = function() {
     	Assessments.query(function(assessments) {
+    		$scope.assessments = assessments;
+    	});
+    };
+
+    $scope.getAssessments = function() {
+		var profileId = ($stateParams.profileId) ? $stateParams.profileId : $scope.global.user._id;
+
+    	Assessments.by_user.query({
+    		profileId: profileId
+    	},
+    	function(assessments) {
     		$scope.assessments = assessments;
     	});
     };

@@ -23,6 +23,10 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	      url: '/example',
 	      templateUrl: 'fitnessassessment/views/index.html'
 	    })
+	    .state('support', {
+	    	url: '/support',
+	    	templateUrl: 'fitnessassessment/views/support.html'
+	    })
 	    .state('my profile', {
 	    	url: '/my-profile',
 	    	templateUrl: 'fitnessassessment/views/my-profile.html',
@@ -99,6 +103,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
+	    })
+	    .state('progress charts', {
+	    	url: '/progress-charts/:profileId',
+	    	templateUrl: 'fitnessassessment/views/progress-charts.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
 	    });
-  }
+  	}
 ]);
