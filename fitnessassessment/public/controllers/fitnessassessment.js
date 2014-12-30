@@ -139,6 +139,12 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     	},
     	function(assessments) {
     		$scope.assessments = assessments;
+
+    		if(assessments.length > 0) {
+    			$scope.base_assessment = assessments[0];
+    		} else {
+    			$scope.base_assessment = false;
+    		}
     	});
     };
 

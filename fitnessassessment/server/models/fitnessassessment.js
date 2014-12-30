@@ -76,7 +76,7 @@ var AssessmentSchema = new Schema({
 	suprailiac: {
 		type: Number
 	},
-	quadraceps: {
+	quadriceps: {
 		type: Number
 	},
 	chest_bust: {

@@ -110,6 +110,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
+	    })
+	    .state('measurements', {
+	    	url: '/measurements/:profileId',
+	    	templateUrl: 'fitnessassessment/views/measurements.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
 	    });
   	}
 ]);

@@ -1,0 +1,116 @@
+<section data-ng-controller="FitnessassessmentController" data-ng-init="getAssessments()">
+
+	<h1 class="content-heading">Measurements</h1>
+	<div class="table-scroll-container">
+		<table class="measurements-table">
+			<tr class="heading-row">
+				<th class="important head-col">Skin Fold</th>
+				<th class="active">Base</th>
+				<th data-ng-repeat="assessment in assessments">{{assessment.entry_date | date:"MM/dd"}}</th>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Triceps</th>
+				<td class="active">{{base_assessment.triceps}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.triceps}}</td>
+			</tr>	
+			<tr class="normal-row">
+				<th class="head-col">Pectoral</th>
+				<td class="active">{{base_assessment.pectoral}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.pectoral}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Midaxilla</th>
+				<td class="active">{{base_assessment.midaxilla}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.midaxilla}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Subscapular</th>
+				<td class="active">{{base_assessment.subscapular}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.subscapular}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Abdomen</th>
+				<td class="active">{{base_assessment.abdomen}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.abdomen}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Suprailiac</th>
+				<td class="active">{{base_assessment.suprailiac}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.suprailiac}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Quadriceps</th>
+				<td class="active">{{base_assessment.quadriceps}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.quadriceps}}</td>
+			</tr>
+
+		</table>
+	</div><!--table-scroll-container-->
+
+	<div class="table-scroll-container">
+		<table class="measurements-table">
+			<tr class="heading-row">
+				<th class="important head-col">Girth</th>
+				<th class="active">Base</th>
+				<th data-ng-repeat="assessment in assessments">{{assessment.entry_date | date:"MM/dd"}}</th>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Chest/Bust</th>
+				<td class="active">{{base_assessment.chest_bust}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.chest_bust}}</td>
+			</tr>	
+			<tr class="normal-row">
+				<th class="head-col">Arm - Left</th>
+				<td class="active">{{base_assessment.arm_left}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.arm_left}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Arm - Right</th>
+				<td class="active">{{base_assessment.arm_right}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.arm_right}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Waist</th>
+				<td class="active">{{base_assessment.waist}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.waist}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Hips</th>
+				<td class="active">{{base_assessment.hips}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.hips}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Thigh - Left</th>
+				<td class="active">{{base_assessment.thigh_left}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.thigh_left}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Thigh - Right</th>
+				<td class="active">{{base_assessment.thigh_right}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.thigh_right}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Knee - Left</th>
+				<td class="active">{{base_assessment.knee_left}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.knee_left}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Knee - Right</th>
+				<td class="active">{{base_assessment.knee_right}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.knee_right}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Calf - Left</th>
+				<td class="active">{{base_assessment.calf_left}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.calf_left}}</td>
+			</tr>
+			<tr class="normal-row">
+				<th class="head-col">Calf - Right</th>
+				<td class="active">{{base_assessment.calf_right}}</td>
+				<td data-ng-repeat="assessment in assessments">{{assessment.calf_right}}</td>
+			</tr>
+			
+		</table>
+	</div><!--table-scroll-container-->
+
+</section>
