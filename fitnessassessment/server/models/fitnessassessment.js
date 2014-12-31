@@ -112,18 +112,6 @@ var AssessmentSchema = new Schema({
 	calf_left: {
 		type: Number
 	},
-	photo_front: {
-		type: String,
-		trim: true
-	},
-	photo_side: {
-		type: String,
-		trim: true
-	},
-	photo_back: {
-		type: String,
-		trim: true
-	},
 	trainer: {
 		type: Schema.ObjectId,
 		ref: 'User'

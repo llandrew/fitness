@@ -97,13 +97,6 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
-	    .state('list assessments', {
-	    	url: '/assessments',
-	    	templateUrl: 'fitnessassessment/views/assessments.html',
-	    	resolve: {
-	    		loggedin: checkLoggedin
-	    	}
-	    })
 	    .state('progress charts', {
 	    	url: '/progress-charts/:profileId',
 	    	templateUrl: 'fitnessassessment/views/progress-charts.html',
@@ -117,6 +110,10 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	resolve: {
 	    		loggedin: checkLoggedin
 	    	}
+	    })
+	    .state('print', {
+	    	url: '/print',
+	    	templateUrl: 'fitnessassessment/views/print.html',
 	    });
   	}
 ]);

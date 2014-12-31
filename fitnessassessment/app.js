@@ -71,14 +71,26 @@ Fitnessassessment.register(function(app, auth, database) {
   	menu: 'main'
   })
   .add({
-  	title: 'List Assessments',
-  	link: 'list assessments',
+  	title: 'Measurements',
+  	link: 'measurements',
   	roles: ['authenticated'],
   	menu: 'main'
   })
   .add({
   	title: 'Support',
   	link: 'support',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  })
+  .add({
+  	title: 'Print',
+  	link: 'print',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  })
+  .add({
+  	title: 'Progress Charts',
+  	link: 'progress charts',
   	roles: ['authenticated'],
   	menu: 'main'
   });

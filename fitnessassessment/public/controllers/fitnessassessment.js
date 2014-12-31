@@ -14,8 +14,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      */
 
     $scope.findProfile = function() {
-    	console.log('in find user');
-
     	var profileId = ($stateParams.profileId) ? $stateParams.profileId : $scope.global.user._id;
 
     	Profiles.get({
@@ -46,10 +44,10 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      };
 
      $scope.addClientToProfile = function(client) {
-     	console.log('in add client');
      	if (!client) return false;
-     	console.log('after client check');
+
      	var user = $scope.global.user;
+
      	if (typeof client.trainers !== 'object') return false;
      	if (client.trainers.indexOf(user._id) > -1) return false;
 
@@ -122,12 +120,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		assessmentId: $stateParams.assessmentId
     	}, function(assessment) {
     		$scope.assessment = assessment;
-    	});
-    };
-
-    $scope.findAssessments = function() {
-    	Assessments.query(function(assessments) {
-    		$scope.assessments = assessments;
     	});
     };
 
@@ -245,9 +237,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       }
     };
 
-    /**
-     * Remove Company
-     */
     $scope.removeCompany = function(company) {
 		if (company) {
 			company.$remove(function(response) {
@@ -269,7 +258,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      */
     $scope.bmiCalculation = function(assessment) {
     	if(assessment) {
-    		return (assessment.weight / (assessment.height * assessment.height)) * 703;
+    		var bmi = (assessment.weight / Math.pow(assessment.height,2)) * 703;
+    		return bmi.toFixed(2);
     	} else {
     		return false;
     	}    	
@@ -277,7 +267,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 
     $scope.waistHipRatioCalculation = function(assessment) {
     	if(assessment) {
-    		return assessment.waist / assessment.hips;
+    		var waistHipRatio = assessment.waist / assessment.hips;
+    		return waistHipRatio.toFixed(2);
     	} else {
     		return false;
     	}    	
@@ -300,7 +291,9 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 	    	}
 	    	
 	    	// Body Fat Percentage
-	    	return (4.95/density - 4.5) * 100;
+	    	var bodyFatPercentage = (4.95/density - 4.5) * 100;
+
+	    	return bodyFatPercentage.toFixed(2);
     	} else {
     		return false;
     	}	    	
@@ -311,7 +304,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 	    	var percentFat = $scope.bodyFatPercentageCalculator(assessment);
 	    	var fatWeight = assessment.weight * percentFat / 100;
 
-	    	return fatWeight;
+	    	return fatWeight.toFixed(2);
     	} else {
     		return false;
     	}
@@ -322,7 +315,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		var fatWeight = $scope.fatWeightCalculator(assessment);
     		var leanBodyMass = assessment.weight - fatWeight;
 
-    		return leanBodyMass;
+    		return leanBodyMass.toFixed(2);
     	} else {
     		return false;
     	}

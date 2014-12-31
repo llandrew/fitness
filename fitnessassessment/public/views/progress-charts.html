@@ -42,7 +42,7 @@
   <ul class="assessments unstyled">
     <li data-ng-repeat="assessment in assessments">
       <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bodyFatPercentageCalculator(assessment)}}</span>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bodyFatPercentageCalculator(assessment)}}%</span>
       </h2>
     </li>
   </ul>
