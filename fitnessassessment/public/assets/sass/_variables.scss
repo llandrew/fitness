@@ -1,0 +1,55 @@
+/**
+ * Variables
+ * 1. Custom variables
+ * 2. Bootstrap overrides
+ * _________________________________*/
+
+/**
+ * 1. Custom variables
+ * _________________________________*/
+
+ // Base colors
+$selection: #000;
+$selection-bg: #ccc;
+
+// Theme colors
+$text-dark: #424242;
+
+// Official social colors
+$facebook: #3461a1;
+$twitter: #28aae1;
+$google: #d44a2c;
+$primary-color: #6a2e92;
+$secondary-color: #87ba55;
+$neutral-dark: #38434d;
+$neutral-mid: #838b8a;
+$neutral-light: #ecf1f5;
+
+// Media queries
+$screen-xl: 		1600px;
+$screen-lg: 		1200px;
+$screen-md: 		992px;
+$screen-sm: 		768px;
+$screen-xs: 		480px;
+$screen-nav-var:	$screen-md; 			// The point at which the navbar becomes uncollapsed
+$screen-nav-mobile: $screen-nav-var - 1; 	// (do not modify)
+
+/**
+ * 2. Bootstrap overrides
+ * _________________________________*/
+
+// Paths
+$icon-font-path: "../vendor/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+// The point at which the navbar becomes uncollapsed (do not modify)
+$grid-float-breakpoint: $screen-nav-mobile + 1;
+
+// Grid
+$grid-columns:          12;
+$grid-gutter-width:     30px;
+
+// Container widths
+$container-sm:		($screen-sm - $grid-gutter-width);
+$container-md:		($screen-md - $grid-gutter-width);
+$container-lg:		($screen-lg - $grid-gutter-width);
+$container-lg:		($screen-lg - $grid-gutter-width);

@@ -1,0 +1,18 @@
+.sidebar__tabs__tab {
+	width: 50%;
+	float: left;
+	text-align: center;
+	display: inline-block;
+	color: $neutral-dark;
+	line-height: 2.4;
+	background: $neutral-light;
+
+	&.active {
+		color: $neutral-light;
+		background: $neutral-dark;
+	}
+}
+
+.sidebar__tabs {
+	@extend .clearfix;
+}

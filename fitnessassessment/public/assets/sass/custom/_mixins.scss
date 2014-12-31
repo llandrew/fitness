@@ -1,0 +1,106 @@
+/**
+ * Mixins
+ */
+
+// Font size
+@mixin font-size($sizeValue: 1.6) {
+	font-size: ($sizeValue) + px;
+	font-size: ($sizeValue / 10) + rem;
+}
+
+%flex {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+@mixin flexgrow($number) {
+	-ms-flex-grow: $number;
+	-webkit-flex-grow: $number;
+	flex-grow: $number
+}
+
+// Border radius
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;  // stops bg color from leaking outside the border
+}
+
+// Opacity
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Background opacity
+@mixin bg-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+
+// Transitions
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-ms-transition: $args;
+	-o-transition: $args;
+	transition: $args;
+}
+
+@mixin transform($transform) {
+	-ms-transform: $transform;
+    -webkit-transform: $transform; 
+    transform: $transform;
+}
+
+// Placeholders
+@mixin placeholdertext {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+		@content;
+	}
+	&::-moz-placeholder {  /* Firefox 19+ */
+		@content;
+	}
+	&:-ms-input-placeholder {  
+		@content;
+	}
+}
+
+// Breakpoints
+@mixin screen-xl {
+	@media (max-width: $screen-xl) {
+    	@content;
+	}
+}
+@mixin screen-lg {
+	@media (max-width: $screen-lg) {
+    	@content;
+	}
+}
+@mixin screen-md {
+	@media (max-width: $screen-md) {
+    	@content;
+	}
+}
+@mixin screen-sm {
+	@media (max-width: $screen-sm) {
+    	@content;
+	}
+}
+@mixin screen-xs {
+	@media (max-width: $screen-xs) {
+    	@content;
+	}
+}
+@mixin screen-nav-mobile {
+	@media (max-width: $screen-nav-mobile) {
+    	@content;
+	}
+}

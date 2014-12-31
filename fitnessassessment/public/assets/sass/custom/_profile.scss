@@ -1,0 +1,145 @@
+.user-list {
+	margin: 0;
+	padding: 0;
+
+	&__user {
+		clear: both;
+		border-top: 1px solid $text-dark;
+		display: block;
+
+		&:last-child {
+			border-bottom: 1px solid  $text-dark;
+		}
+
+		.switch {
+			float: right;
+			margin: 28px 10px;
+		}
+	}
+}
+
+.profile__user {
+	padding: 6px;
+	line-height: 1.5;
+
+	&__name, &__team {
+		display: block;
+	}
+
+	&__name {
+		font-size: 20px;
+	}
+
+	&__team {
+		text-transform: uppercase;
+		font-size: 14px;
+	}
+}
+
+.user-list__user.active {
+	background: $primary-color;
+	color: white;
+}
+
+.user-clients {
+	background: $neutral-light;
+	margin: 0;
+	@extend .clearfix;
+	padding: 0;
+
+	&__client {
+		display: block;
+		color: $text-dark;
+		@extend .clearfix;
+		clear: both;
+
+		&:nth-child(even){
+			background: white;
+		}
+	}
+}
+
+.profile {
+	padding: 15px;
+}
+
+.profile__icon {
+	width: 100px;
+	height: 100px;
+	background-size:cover;
+	float: left;
+	margin-right: 15px;
+	border-radius: 50%;
+}
+
+.profile__name {
+	padding: 15px 15px 15px;
+	font-size: 20px;
+	font-weight: lighter;
+	line-height: 1.6;
+}
+
+.profile__name__first, .profile__name__last {
+	display: block;
+}
+
+.profile--small {
+	padding: 10px;
+	
+	.profile__icon {
+		width: 65px;
+		height: 65px;
+	}
+}
+
+.profile--xs {
+	padding: 5px 5px 5px 50px;
+	float: left;
+	min-width: 300px;
+	.profile__icon {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+.profile__full-name {
+	font-weight: normal;
+	line-height: 2.5;
+}
+
+.profile__link {
+	text-decoration: underline;
+	color: black;
+	font-weight: normal;
+	float: right;
+	margin: 12px 20px;
+}
+
+.sidebar__client-list {
+	padding: 0;
+	margin: 0;
+
+	.profile {
+		padding: 8px 10px;
+		@extend .clearfix;
+	}
+
+	&__client {
+		display: block;
+		border-top: 1px solid $neutral-light;
+
+		&:last-child {
+			border-bottom: 1px solid $neutral-light;
+		}
+	}
+
+	.profile--small .profile__icon {
+		width: 50px;
+		height: 50px;
+	}
+
+	.profile__full-name {
+		line-height: 50px;
+		font-weight: lighter;
+	}
+}

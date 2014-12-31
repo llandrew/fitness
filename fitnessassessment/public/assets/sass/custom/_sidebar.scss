@@ -1,0 +1,155 @@
+.exit-bar-col {
+	width: 65px;
+	display: table-column;
+}
+
+.side-bar-col {
+	@include transition(0.5s all ease-in-out);
+	width: 290px;
+	display: table-column;
+
+	@media (max-width: $screen-lg){
+		width: 0;
+	}
+
+}
+
+.side-bar-col.hidden {
+	width: 0;
+}
+
+
+
+.exit-bar {
+	background: $primary-color;
+	color: white;
+	display: table-cell;
+	height: 100%;
+	font-size: 50px;
+	padding: 20px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.exit-icon {
+	width: 22px;
+	height: 22px;
+	background: url(../img/exit.png);
+	background-size: cover;	
+	display: block;
+}
+
+.sidebar {
+	@include transition(0.5s all ease-in-out);
+	height: 100%;
+	vertical-align: top;
+	position: relative;
+	display: table-cell;
+	overflow: hidden;
+	z-index: 100;
+	color: white;
+
+	@media(max-width: $screen-lg){
+		position: absolute;
+		width: 285px;
+	}
+
+}
+
+.sidebar.hidden {
+	width: 0;
+
+	.sidebar-container {
+		left: -290px;
+	}
+}
+
+//Links on client sidebar
+
+.sidebar-container {
+	width: 270px;
+	background: $neutral-dark;
+	position: relative;
+	@include transition(0.5s all ease-in-out);
+	left: 0;
+	min-height: calc(100vh - 275px);
+	padding-bottom: 275px;
+}
+
+.sidebar-nav__list {
+	padding: 0;
+	margin: 10px 0 0 0;
+}
+
+.sidebar-nav__link {
+	color: white;
+	text-decoration: none;
+	display: block;
+	padding: 14px 20px;
+	font-weight: lighter;
+	font-size: 20px;
+	border-top: 1px solid white;
+
+	&:hover, &:focus {
+		color: $primary-color;
+	}
+}
+
+.sidebar-nav__item:last-child .sidebar-nav__link {
+	border-bottom: 1px solid white;
+}
+
+.sidebar__footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 250px;
+	padding: 30px 10px;
+	font-size: 18px;
+	text-align: center;
+	color: white;
+
+	address {
+		margin-top: 10px;
+		font-style: normal;
+	}
+}
+
+.sidebar__footer__phone {
+	margin-top: 15px;
+	display: block;
+	color: white;
+	&:hover {
+		color: $primary-color;
+	}
+}
+
+.sidebar-nav__item.active {
+	background: $neutral-mid;
+
+	.sidebar-nav__link {
+		border: 0;
+		position: relative;
+
+		&:after {
+			border-top: 27.5px solid transparent;
+			border-bottom: 27.5px solid transparent;
+			content: '';
+			position: absolute;
+			right: -15px;
+			top: 0.5px;
+			border-left: 15px solid $neutral-mid;
+		}
+
+		&:hover {
+			color: white;
+		}
+	}
+}
+
+.sidebar-nav__item.active + .sidebar-nav__item {
+	.sidebar-nav__link {
+		border-top: 0;
+	}
+}
