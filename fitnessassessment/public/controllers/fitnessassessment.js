@@ -74,7 +74,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     			subscapular: this.subscapular,
     			abdomen: this.abdomen,
     			suprailiac: this.suprailiac,
-    			quadraceps: this.quadraceps,
+    			quadriceps: this.quadriceps,
     			chest_bust: this.chest_bust,
     			arm_right: this.arm_right,
     			arm_left: this.arm_left,
@@ -99,7 +99,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		this.subscapular = '';
     		this.abdomen = '';
     		this.suprailiac = '';
-    		this.quadraceps = '';
+    		this.quadriceps = '';
     		this.chest_bust = '';
     		this.arm_right = '';
     		this.arm_left = '';
@@ -262,6 +262,70 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
           		
         	});
       	}
+    };
+
+    /**
+     * Calculator Functions
+     */
+    $scope.bmiCalculation = function(assessment) {
+    	if(assessment) {
+    		return (assessment.weight / (assessment.height * assessment.height)) * 703;
+    	} else {
+    		return false;
+    	}    	
+    };
+
+    $scope.waistHipRatioCalculation = function(assessment) {
+    	if(assessment) {
+    		return assessment.waist / assessment.hips;
+    	} else {
+    		return false;
+    	}    	
+    };
+
+    $scope.bodyFatPercentageCalculator = function(assessment) {
+    	if(assessment) {
+    		//var profileId = assessment.owner;
+	    	var gender = 'female'; // TODO: this needs to be dynamic!
+	    	var age = 30; // TODO: this needs to be dynamic!
+	    	var measurementsSum = assessment.triceps + assessment.pectoral + assessment.midaxilla + assessment.subscapular + assessment.abdomen + assessment.suprailiac + assessment.quadriceps;
+
+	    	// Body Density
+	    	var density;
+	    	if(gender === 'female') {
+	    		density = 1.097 - 0.00046971 * measurementsSum + 0.00000056 * Math.pow(measurementsSum,2) - 0.00012828 * age;
+	    	} else {
+	    		var measurementsSumMale = assessment.pectoral + assessment.abdomen + assessment.quadriceps;
+	    		density = 1.10938 - 0.0008267 * measurementsSumMale + 0.0000016 * Math.pow(measurementsSumMale,2) - 0.0002574 * age;
+	    	}
+	    	
+	    	// Body Fat Percentage
+	    	return (4.95/density - 4.5) * 100;
+    	} else {
+    		return false;
+    	}	    	
+    };
+
+    $scope.fatWeightCalculator = function(assessment) {
+    	if(assessment) {
+	    	var percentFat = $scope.bodyFatPercentageCalculator(assessment);
+	    	var fatWeight = assessment.weight * percentFat / 100;
+
+	    	return fatWeight;
+    	} else {
+    		return false;
+    	}
+    };
+
+    $scope.leanBodyMassCalculator = function(assessment) {
+    	if(assessment) {
+    		var fatWeight = $scope.fatWeightCalculator(assessment);
+    		var leanBodyMass = assessment.weight - fatWeight;
+
+    		return leanBodyMass;
+    	} else {
+    		return false;
+    	}
     };
   }
 ]);

@@ -2,24 +2,58 @@
 
   <h2>Progress Charts</h2>
 
+  <h3>Weight</h3>
   <ul class="assessments unstyled">
     <li data-ng-repeat="assessment in assessments">
       <h2>
-        <a data-ng-href="/#!/assessment/{{assessment._id}}">{{assessment.entry_date | date:"yyyy-MM-dd"}}</a>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{assessment.weight}}</span>
       </h2>
     </li>
   </ul>
 
-  <h3>Weight</h3>
-
   <h3>BMI</h3>
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bmiCalculation(assessment)}}</span>
+      </h2>
+    </li>
+  </ul>
 
-  <h3>Lean Body Fat</h3>
+  <h3>Lean Body Mass</h3>
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{leanBodyMassCalculator(assessment)}}</span>
+      </h2>
+    </li>
+  </ul>
 
   <h3>Fat Weight</h3>
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{fatWeightCalculator(assessment)}}</span>
+      </h2>
+    </li>
+  </ul>
 
   <h3>Body Fat Percentage</h3>
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bodyFatPercentageCalculator(assessment)}}</span>
+      </h2>
+    </li>
+  </ul>
 
   <h3>Waist/Hip Ratio</h3>
+  <ul class="assessments unstyled">
+    <li data-ng-repeat="assessment in assessments">
+      <h2>
+        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{waistHipRatioCalculation(assessment)}}</span>
+      </h2>
+    </li>
+  </ul>
   
 </section>
