@@ -67,13 +67,18 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         profile.$update();
     };
 
-     $scope.updateGoals = function(isValid) {
-        var profile = $scope.profile;
-        profile.action = 'update goals';
-        profile.newGoal = $scope.newGoal;
-        $scope.newGoal = '';
-        profile.$update();
-     };
+    $scope.updateGoals = function(isValid) {
+      var profile = $scope.profile;
+      profile.action = 'update goals';
+      profile.newGoal = $scope.newGoal;
+      $scope.newGoal = '';
+      profile.$update();
+    };
+
+    $scope.toggleActivation = function(profile) {
+      profile.action = 'toggle activation';
+      profile.$update();
+    };
 
     /**
      *

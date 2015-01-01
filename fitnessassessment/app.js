@@ -18,7 +18,7 @@ Fitnessassessment.register(function(app, auth, database) {
 
 	var userModel = database.connection.model('User');
 	userModel.schema.add({
-		test: 'String',
+		active: 'Boolean',
 		companies: [{
 			type: Schema.Types.ObjectId,
 			ref: 'Company'
@@ -84,7 +84,7 @@ Fitnessassessment.register(function(app, auth, database) {
   .add({
     title: 'Trainers',
     link: 'list trainers',
-    roles: ['authenticated'],
+    roles: ['authenticated', 'owner'],
     menu: 'main'
   });
   

@@ -25,6 +25,10 @@ module.exports = function(Fitnessassessment, app, auth, database) {
     assessmentController.listProfiles(req, res);
   });
 
+  app.put('/profiles/trainers/:profileId', auth.isMongoId, function(req, res, next) {
+    assessmentController.updateProfile(req, res);
+  });
+
   app.get('/profiles/:profileId', auth.isMongoId, function(req, res, next) {
   	assessmentController.showProfile(req, res);
   });

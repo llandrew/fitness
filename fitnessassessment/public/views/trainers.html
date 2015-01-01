@@ -12,6 +12,7 @@
           </a>
         </span>
       </h2>
+      <input type="checkbox" ng-model="trainer.active" data-ng-click="toggleActivation(trainer);" /> 
       <div>
         <ul class="clients unstyled">
           <li data-ng-repeat="client in trainer.clients">

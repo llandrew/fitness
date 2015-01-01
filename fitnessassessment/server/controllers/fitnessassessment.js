@@ -66,15 +66,12 @@ exports.listProfiles = function(req, res) {
 
 			_.forEach(profiles, function (profile, key) {
 				User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
-					console.log(profile);
-					console.log(clients);
 					profiles[key]._doc.clients = clients;
 					if (key === profiles.length - 1) {
 						res.json(profiles);
 					}
 				});
 			});
-				//console.log(profiles);
 				//res.json(profiles);
 		});
 	}
@@ -88,36 +85,34 @@ exports.updateProfile = function(req, res) {
 		profile.markModified('trainers');
 	}
 
-	if (req.body.action === 'update goals') {
-		console.log(req.body.goals);
-		profile._doc.goals = req.body.goals;
+	if (req.body.action === 'toggle activation') {
+		profile._doc.active = !profile._doc.active;
+		profile.markModified('active');
 		console.log(profile._doc);
+	}
+
+	if (req.body.action === 'update goals') {
+		profile._doc.goals = req.body.goals;
 		if (req.body.newGoal !== undefined) {
-			console.log(req.body.newGoal);
 			var newGoal = new Goal({
 				title: req.body.newGoal,
 				description: req.body.newGoal,
 				trainer_assigned: (req.body.TrainerAssigned) ? true : false,
 				complete: false
 			});
-			console.log(newGoal);
 			profile._doc.goals.push(newGoal);
 			//profile._doc.goals = [];
 			profile.markModified('goals');
-			//console.log(profile._doc);
 		}
 	}
 
 	if (req.body.action === 'add imagesets') {
 
 		for (var image in req.body.newImages) {
-			console.log(image);
 			var imageSet = new ImageSet({front: {name: req.body.newImages[image].name, src: req.body.newImages[image].src}, back: {name: '', src: ''}, side: {name: '', src: ''}});
-			console.log(imageSet);
 			//profile._doc.imagesets = [];
 			profile._doc.imagesets.push(imageSet);
 			profile.markModified('imagesets');
-			console.log(profile._doc);
 		}
 	}
 
@@ -126,16 +121,10 @@ exports.updateProfile = function(req, res) {
 
 		//removeId = removeId[0].toString();
 
-		console.log(removeId);
-		console.log(typeof removeId);
 
 		_.forEach(profile._doc.imagesets, function(set, key) {
-			console.log('in for each');
-			console.log(set);
 			if (set._id.toString() === removeId) {
-				console.log('set in remove');
 				_.forEach(set, function(image) {
-					console.log(image);
 					if (image.src && image.src !== '') {
 						fs.unlink(config.root + image.src, function(err) {
 							if (err) {
@@ -152,7 +141,6 @@ exports.updateProfile = function(req, res) {
 
 
 	profile.save(function(err, doc) {
-		console.log('saved profile');
 		doc.populate('trainers', function(err, doc) {
 			res.json(doc);
 		});
