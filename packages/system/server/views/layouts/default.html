@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="no-js">
+    {% include '../includes/head.html' %}
+    <body data-ng-controller="ThemeController" ng-cloak class="ng-cloak" ng-class="state">
+
+        <!--defining width columns-->
+        <div class="controls">
+       		<span class="controls__user">
+       			Tina Sprinkle
+       		</span>
+       		<a href="" title="" class="controls__logout">
+       			<span class="icon-sign-out"></span>
+       			Log Out
+       		</a>
+        </div>
+        <div class="fixed-goals">
+	        <a class="goals-tab">
+	        	<span class="goals-tab__toggle">View </span>My Goals
+	        </a><!--goals-tab-->
+	        <div class="goals-expand">
+	       	 	<h3>Trainer Goals</h3>
+	        	<ol>
+	        		<li>
+	        			Example goal from your trainer would 
+	   					go right here. (Date Added 10/21)
+	   				</li>
+					<li>
+						Example goal from your trainer would 
+	     				go right here. (Date Added 10/30)
+	     			</li>
+					<li>
+						Example goal from your trainer would 
+	     				go right here. (Date Added 11/02)
+	     			</li>
+	     		</ol>
+
+	       	 	<h3>Personal Goals</h3>
+	        	<ol>
+	        		<li>
+	        			Example personal goal would 
+	   					go right here. (Date Added 10/21)
+	   				</li>
+					<li>
+						Example personal goal would 
+	     				go right here. (Date Added 10/30)
+	     			</li>
+					<li>
+						Example personal goal would 
+	     				go right here. (Date Added 11/02)
+	     			</li>
+	     		</ol>
+	     		<a href="#" class="bold-link">
+	     			View All Goals
+	     		</a>
+	     	</div><!--goals-expand-->
+        </div><!--fixed-goals-->
+        <div class="column-container">
+	       	<div class="exit-bar-col"></div>
+	       	<div class="side-bar-col"></div>
+	       	<div class="content-col"></div>
+        	<div class="row">
+
+		       	<div class="exit-bar">
+		       		<span class="exit-icon"></span><!--we must find a lighter x, maybe I should just cut it from the psd.-->
+		       	</div>
+		       	<div class="sidebar">
+		       		<div class="sidebar-container">
+			       		<div class="profile">
+			       			<div class="profile__icon" style="background-image: url(https://justenoughheat.com/wp-content/uploads/2014/10/slide.png);"></div><!--profile__icon-->
+				       		<div class="profile__name">
+				       			<span class="profile__name__first">
+				       				Tina 
+				       			</span>
+				       			<span class="profile__name__last">
+				       				Sprinkle
+				       			</span>
+				       		</div>
+			       		</div><!--profile-->
+			       		<nav class="sidebar-nav">
+			       			<ul class="sidebar-nav__list">
+			       				<li class="sidebar-nav__item active">
+			       					<a href="#" title="" class="sidebar-nav__link">
+			       						My Profile
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="goals">
+			       						Goals
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="photos">
+			       						Photos
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="journal">
+			       						Journal
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="support">
+			       						Support
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="print">
+			       						Print
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       				<li class="sidebar-nav__item">
+			       					<a href="#" title="" class="sidebar-nav__link" data-page="measurements">
+			       						Measurements
+			       					</a>
+			       				</li><!--sidebar-nav-item-->
+			       			</ul><!--sidebar-nav-list-->
+			       		</nav>
+			       		<div class="sidebar__footer" itemscope itemtype="http://schema.org/LocalBusiness">
+			       			<img src="assets/img/logo.png" alt="">
+			       			<address itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+					  			<span itemprop="streetAddress">
+					  				1901 W 43rd Ave			  			
+					  			</span><!--streetAddress--><br>
+					  			<span itemprop="addressLocality">
+					  				Kansas City
+					  			</span><!--addressLocality-->,
+					  			<span itemprop="addressRegion">
+					  				KS				  			
+					  			</span><!--addressRegion-->
+					  			<span itemprop="postalCode"> |
+					  				66103	
+					  			</span><!--postalCode-->
+					  		</address>
+					  		<a href="tel:9134997519" itemprop="telephone" class="sidebar__footer__phone">
+					  			913.499.7519
+					  		</a>
+			       		</div><!--sidebar-footer-->
+			       	</div><!--sidebar-container-->
+		       	</div><!--sidebar-->
+		       	<div class="content">
+		       		<main>
+			       		{% block content %}{% endblock %}
+		       		</main>
+		       	</div><!--content-->
+		    </div><!--row-->
+	    </div><!--column-container-->
+       <!--end application content-->        
+    </body>
+</html>
