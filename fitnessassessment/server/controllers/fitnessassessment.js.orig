@@ -1,15 +1,21 @@
 'use strict';
 
-var config     = require('meanio').loadConfig(),
-	mongoose   = require('mongoose'),
-	Company    = mongoose.model('Company'),
-	User 	   = mongoose.model('User'),
-	Team 	   = mongoose.model('Team'),
-	Goal 	   = mongoose.model('Goal'),
-	ImageSet   = mongoose.model('ImageSet'),
-	Assessment = mongoose.model('Assessment'),
-	_ 		   = require('lodash'),
-	fs 		   = require('fs');
+<<<<<<< HEAD
+var mongoose 	= require('mongoose'),
+	Company  	= mongoose.model('Company'),
+	User 	 	= mongoose.model('User'),
+	Assessment 	= mongoose.model('Assessment'),
+	_ 		 	= require('lodash');
+=======
+var config   = require('meanio').loadConfig(),
+	mongoose = require('mongoose'),
+	Company  = mongoose.model('Company'),
+	User 	 = mongoose.model('User'),
+	Goal 	 = mongoose.model('Goal'),
+	ImageSet = mongoose.model('ImageSet'),
+	_ 		 = require('lodash'),
+	fs 		 = require('fs');
+>>>>>>> andrew_2015-01-01
 
 /**
  * 
@@ -23,7 +29,6 @@ exports.findProfile = function(req, res, next, id) {
 	})
 	//.populate('companies')
 	.populate('trainers')
-	.populate('team')
 	//.populate('imagesets')
 	//.populate('clients')
 	.exec(function(err, profile) {
@@ -91,11 +96,6 @@ exports.updateProfile = function(req, res) {
 		profile.markModified('trainers');
 	}
 
-	if (req.body.action === 'add team') {
-		profile._doc.team = req.body.team;
-		profile.markModified('team');
-	}
-
 	if (req.body.action === 'toggle activation') {
 		profile._doc.active = !profile._doc.active;
 		profile.markModified('active');
@@ -152,7 +152,7 @@ exports.updateProfile = function(req, res) {
 
 
 	profile.save(function(err, doc) {
-		doc.populate('trainers team', function(err, doc) {
+		doc.populate('trainers', function(err, doc) {
 			res.json(doc);
 		});
 	});
@@ -252,38 +252,7 @@ exports.updateCompany = function(req, res) {
 
 /**
  *
- * TEAM CONTROLLERS
- * 
- */
-
-exports.listTeams = function(req, res) {
-	Team.find().sort('-create').exec(function(err, teams) {
-		if (err) {
-			return res.status(500).json({
-				error: 'Cannot list the teams'
-			});
-		}
-		res.json(teams);
-	});
-};
-
-exports.createTeam = function(req, res) {
-
-	console.log(req.body);
-	var team = new Team(req.body);
-
-	team.save(function(err) {
-		if (err) {
-			return res.status(500).json({
-				error: 'Cannot create new team.'
-			});
-		}
-		res.json(team);
-	});
-};
-
-/**
- *
+<<<<<<< HEAD
  * ASSESSMENT CONTROLLERS
  * 
  */
@@ -396,4 +365,11 @@ exports.updateAssessment = function(req, res) {
     res.json(assessment);
 
   });
+=======
+ * FILE CONTROLLERS
+ * 
+ */
+
+exports.uploadFinished = function(files) {
+>>>>>>> andrew_2015-01-01
 };

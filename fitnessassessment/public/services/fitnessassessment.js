@@ -19,6 +19,17 @@ angular.module('mean.fitnessassessment')
 		});
 	}
 ])
+.factory('Teams', ['$resource',
+	function($resource) {
+		return $resource('teams/:teamId', {
+			teamId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+])
 .factory('Profiles', ['$resource',
 	function($resource) {
 		return {

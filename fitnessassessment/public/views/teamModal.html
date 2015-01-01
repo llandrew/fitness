@@ -1,0 +1,10 @@
+<section data-ng-init="findTeams()">
+  <ul class="teams unstyled">
+    <li data-ng-repeat="team in teams">
+        <a class="btn" data-ng-click="addTeam(profile, team);">{{team.name}}</a>
+
+      <div>{{team.description}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!trainers || trainers.length">No trainers yet. <br> Why don't you <a href="/#!/trainers/create">Create One</a>?</h1>
+</section>

@@ -27,10 +27,6 @@ Fitnessassessment.register(function(app, auth, database) {
 			type: Schema.Types.ObjectId,
 			ref: 'User'
 		}],
-    team: {
-      type: Schema.Types.ObjectId,
-      ref: 'Team'
-    },
     clients: [Schema.Types.Mixed],
     goals: [Schema.Types.Mixed],
     imagesets: [Schema.Types.Mixed]
@@ -62,12 +58,6 @@ Fitnessassessment.register(function(app, auth, database) {
     menu: 'main'
   })*/
   .add({
-    title: 'Teams',
-    link: 'list teams',
-    roles: ['authenticated'],
-    menu: 'main'
-  })
-  .add({
   	title: 'List Companies',
   	link: 'list companies',
   	roles: ['authenticated'],
@@ -92,12 +82,7 @@ Fitnessassessment.register(function(app, auth, database) {
   	menu: 'main'
   })
   .add({
-    title: 'Trainers',
-    link: 'list trainers',
-    roles: ['authenticated', 'owner'],
-    menu: 'main'
-  })
-  .add({
+<<<<<<< HEAD
   	title: 'Create Assessment',
   	link: 'create assessment',
   	roles: ['authenticated'],
@@ -126,6 +111,12 @@ Fitnessassessment.register(function(app, auth, database) {
   	link: 'progress charts',
   	roles: ['authenticated'],
   	menu: 'main'
+=======
+    title: 'Trainers',
+    link: 'list trainers',
+    roles: ['authenticated', 'owner'],
+    menu: 'main'
+>>>>>>> andrew_2015-01-01
   });
   
   Fitnessassessment.aggregateAsset('css', 'fitnessassessment.css');

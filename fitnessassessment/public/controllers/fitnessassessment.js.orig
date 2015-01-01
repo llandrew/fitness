@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams',
-  function($scope, $modal, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments, Teams) {
+<<<<<<< HEAD
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments',
+  function($scope, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments) {
+=======
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$log', '$stateParams', '$location', '$modal', 'Global', 'Fitnessassessment', 'Companies', 'Profiles',
+  function($scope, $log, $stateParams, $location, $modal, Global, Fitnessassessment, Companies, Profiles) {
+>>>>>>> andrew_2015-01-01
     $scope.global = Global;
     $scope.package = {
       name: 'fitnessassessment'
@@ -85,7 +90,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      */
 
      $scope.isClient = function(profile) {
-        if (!profile) return false;
+<<<<<<< HEAD
      	if (profile.trainers.indexOf($scope.global.user._id) < 0) {
      		return false;
      	} else {
@@ -94,16 +99,42 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      };
 
      $scope.addClientToProfile = function(client) {
-     	console.log('in add client');
      	if (!client) return false;
-     	console.log('after client check');
+
      	var user = $scope.global.user;
+
      	if (typeof client.trainers !== 'object') return false;
      	if (client.trainers.indexOf(user._id) > -1) return false;
 
-     	client.newTrainer = user._id;
-        client.action = 'add trainer';
+     	client.trainers.push(user._id);
      	client.$update();
+=======
+        if (!profile) return false;
+        var isClient = false;
+        if (profile.trainers.length > 0) {
+            isClient = true;
+        }
+         if (profile.trainers !== 'undefined') {
+            for (var trainer in profile.trainers) {
+                if (profile.trainers[trainer].name === $scope.global.user.name) {
+                    isClient = true;
+                }
+            }
+        }
+        return isClient;
+     };
+
+     $scope.addClientToProfile = function(client) {
+        console.log('in add client');
+        if (!client) return false;
+        console.log('after client check');
+        var user = $scope.global.user;
+        if (typeof client.trainers !== 'object') return false;
+        if (client.trainers.indexOf(user._id) > -1) return false;
+
+        client.newTrainer = user._id;
+        client.action = 'add trainer';
+        client.$update();
      };
 
      $scope.addTrainer = function(client, trainer) {
@@ -128,16 +159,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
             }
         }
         return false;
-     };
-
-
-     /**
-      *
-      * TRAINER CONTROLLERS
-      * 
-      */
-     
-     $scope.findTrainers = function() {
+>>>>>>> andrew_2015-01-01
      };
 
     /**
@@ -148,7 +170,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     
     $scope.createAssessment = function(isValid) {
     	if (isValid) {
-    		var assessment = new Assessments.by_id({
+    		var assessment = new Assessments({
     			weight: this.weight,
     			height: this.height,
     			triceps: this.triceps,
@@ -265,50 +287,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 
     /**
      *
-     * TEAM CONTROLLERS
-     * 
-     */
-
-    $scope.findTeams = function() {
-      Teams.query(function(teams) {
-        $scope.teams = teams;
-      });
-    };
-
-    $scope.createTeam = function(isValid) {
-      if (isValid) {
-        var team = new Teams({
-          name: this.name,
-          description: this.description
-        });
-        team.$save(function(response) {
-          $scope.teams.push(response);
-        });
-
-        this.name = '';
-        this.description = '';
-      } else {
-        $scope.submitted = true;
-      }
-    };
-
-    $scope.addTeam = function(profile, team) {
-        console.log($scope.profile);
-        profile.team = team._id;
-        profile.action = 'add team';
-        profile.$update();
-        $scope.teamModal.close();
-     };
-
-    $scope.openTeamModal = function() {
-        $scope.teamModal = $modal.open({
-            templateUrl: 'fitnessassessment/views/teamModal.html',
-            scope: $scope
-        });
-    };
-
-    /**
-     *
      * COMPANY CONTROLLERS
      * 
      */
@@ -377,11 +355,15 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         	});
       	} else {
         	$scope.article.$remove(function(response) {
-          		$location.path('company/');
+<<<<<<< HEAD
+          		
+=======
+>>>>>>> andrew_2015-01-01
         	});
       	}
     };
 
+<<<<<<< HEAD
     /**
      * Calculator Functions
      */
@@ -449,7 +431,9 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		return false;
     	}
     };
-
+  }
+]);
+=======
     $scope.profileFilesUploadsComplete = function(files) {
         console.log('in upload finished');
         console.log(files);
@@ -461,7 +445,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     $scope.profileFilesUploadCallback = function(file) {
         console.log('in upload finished');
         console.log(file);
-	};
+    };
   }
 ]);
 
+>>>>>>> andrew_2015-01-01

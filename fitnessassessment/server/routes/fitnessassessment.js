@@ -89,6 +89,18 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   });
 
   /**
+   * TEAMS
+   */
+  
+  app.get('/teams', auth.requiresLogin, function(req, res, next) {
+    assessmentController.listTeams(req, res);
+  });
+
+  app.post('/teams', auth.requiresLogin, function(req, res, next) {
+    assessmentController.createTeam(req, res);
+  });
+
+  /**
    * PROGRESS CHARTS
    */
 

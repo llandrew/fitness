@@ -1,6 +1,9 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
   <span>{{profile.name}}</span>
-  <h2>{{profile.test}}</h2>
+  <h2>{{profile.team.name}}</h2>
+  <a class="btn" ng-click="openTeamModal()">
+    <i class="glyphicon glyphicon-plus"></i> Assign Team
+  </a>
   <mean-upload file-dest="'/packages/files/'"
 upload-callback="profileFilesUploadsComplete(files)"
 upload-file-callback="profileFilesUploadCallback(file)">

@@ -23,14 +23,16 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	      url: '/example',
 	      templateUrl: 'fitnessassessment/views/index.html'
 	    })
+<<<<<<< HEAD
 	    .state('support', {
 	    	url: '/support',
 	    	templateUrl: 'fitnessassessment/views/support.html'
 	    })
-	    .state('list teams', {
-	    	url: '/teams',
-	    	templateUrl: 'fitnessassessment/views/teams.html'
-	    })
+=======
+
+	    // Profile Routes
+	    
+>>>>>>> andrew_2015-01-01
 	    .state('my profile', {
 	    	url: '/my-profile',
 	    	templateUrl: 'fitnessassessment/views/my-profile.html',
