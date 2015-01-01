@@ -37,11 +37,11 @@ var GoalSchema = new Schema({
 		type: String,
 		trim: true
 	},
-	trainer_assigned_flag: {
+	trainer_assigned: {
 		type: Boolean,
 		default: false
 	},
-	complete_flag: {
+	complete: {
 		type: Boolean,
 		default: false
 	}
@@ -172,6 +172,36 @@ var CompanySchema = new Schema({
   teams: [TeamSchema]
 });
 
+var ImageSetSchema = new Schema({
+	date: {
+		type: Date,
+		required: true,
+		default: Date.now
+	},
+	front: {
+		name: {
+			type: String
+		},
+		src: {
+			type: String
+		}
+	},
+	back: {
+		name: {
+			type: String
+		},
+		src: String
+	},
+	side: {
+		name: {
+			type: String
+		},
+		src: {
+			type: String
+		}
+	}
+});
+
 /**
  * Validations
  */
@@ -182,6 +212,10 @@ CompanySchema.path('name').validate(function(name) {
 CompanySchema.path('content').validate(function(content) {
   return !!content;
 }, 'Content cannot be blank');
+
+GoalSchema.path('title').validate(function(title) {
+	return !!title;
+}, 'Title cannot be blank');
 
 /**
  * Statics
@@ -202,3 +236,4 @@ mongoose.model('Journal', JournalSchema);
 mongoose.model('Goal', GoalSchema);
 mongoose.model('Assessment', AssessmentSchema);
 mongoose.model('Team', TeamSchema);
+mongoose.model('ImageSet', ImageSetSchema);

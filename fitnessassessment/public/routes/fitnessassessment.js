@@ -41,6 +41,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+	    .state('user goals', {
+	    	url: '/profile/goals/edit',
+	    	templateUrl: 'fitnessassessment/views/profile-goals-edit.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 	    .state('user profile', {
 	    	url: '/profile/:profileId',
 	    	templateUrl: 'fitnessassessment/views/user-profile.html',
@@ -48,6 +55,19 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+
+	    // Trainer Routes
+	    
+	    .state('list trainers', {
+	    	url: '/trainers',
+	    	templateUrl: 'fitnessassessment/views/trainers.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+
+	    // Company Routes
+
 	    .state('list companies', {
 	    	url: '/company',
 	    	templateUrl: 'fitnessassessment/views/companies.html',

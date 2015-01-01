@@ -18,7 +18,7 @@ Fitnessassessment.register(function(app, auth, database) {
 
 	var userModel = database.connection.model('User');
 	userModel.schema.add({
-		test: 'String',
+		active: 'Boolean',
 		companies: [{
 			type: Schema.Types.ObjectId,
 			ref: 'Company'
@@ -26,7 +26,24 @@ Fitnessassessment.register(function(app, auth, database) {
 		trainers: [{
 			type: Schema.Types.ObjectId,
 			ref: 'User'
-		}]
+		}],
+    clients: [Schema.Types.Mixed],
+    goals: [Schema.Types.Mixed],
+    imagesets: [Schema.Types.Mixed]
+/*    imagesets: [{
+      front: {
+        name: 'String',
+        src: 'String'
+      },
+      back: {
+        name: 'String',
+        src: 'String'
+      },
+      side: {
+        name: 'String',
+        src: 'String'
+      }
+    }]*/
 	});
 
   //We enable routing. By default the Package Object is passed to the routes
@@ -63,6 +80,12 @@ Fitnessassessment.register(function(app, auth, database) {
   	link: 'my profile',
   	roles: ['authenticated'],
   	menu: 'main'
+  })
+  .add({
+    title: 'Trainers',
+    link: 'list trainers',
+    roles: ['authenticated', 'owner'],
+    menu: 'main'
   })
   .add({
   	title: 'Create Assessment',

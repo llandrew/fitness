@@ -1,10 +1,14 @@
 'use strict';
 
-var mongoose 	= require('mongoose'),
-	Company  	= mongoose.model('Company'),
-	User 	 	= mongoose.model('User'),
-	Assessment 	= mongoose.model('Assessment'),
-	_ 		 	= require('lodash');
+var config   = require('meanio').loadConfig(),
+	mongoose = require('mongoose'),
+	Company  = mongoose.model('Company'),
+	User 	 = mongoose.model('User'),
+	Goal 	 = mongoose.model('Goal'),
+	ImageSet = mongoose.model('ImageSet'),
+	Assessment = mongoose.model('Assessment'),
+	_ 		 = require('lodash'),
+	fs 		 = require('fs');
 
 /**
  * 
@@ -18,6 +22,7 @@ exports.findProfile = function(req, res, next, id) {
 	})
 	//.populate('companies')
 	.populate('trainers')
+	//.populate('imagesets')
 	//.populate('clients')
 	.exec(function(err, profile) {
 		if (err) return next(err);
@@ -31,6 +36,7 @@ exports.findProfile = function(req, res, next, id) {
 
 		User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
 			req.profile._doc.clients = clients;
+			next();
 		});
 
 		Assessment.find().where('owner').equals(profile._id).exec(function(err, assessments) {
@@ -45,14 +51,35 @@ exports.showProfile = function(req, res) {
 };
 
 exports.listProfiles = function(req, res) {
-	User.find().sort('-created').exec(function(err, profiles) {
-		if (err) {
-			return res.status(500).json({
-				error: 'Cannot list the profiles'
+	if (req.route.path === '/profiles/') {
+		User.find().sort('-created').exec(function(err, profiles) {
+			if (err) {
+				return res.status(500).json({
+					error: 'Cannot list the profiles'
+				});
+			}
+			res.json(profiles);
+		});
+	}
+	if (req.route.path === '/profiles/trainers/') {
+		User.find().where('roles').equals('trainer').sort('-created').exec(function(err, profiles) {
+			if (err) {
+				return res.status(500).json({
+					error: 'Cannot lsit the profiles'
+				});
+			}
+
+			_.forEach(profiles, function (profile, key) {
+				User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
+					profiles[key]._doc.clients = clients;
+					if (key === profiles.length - 1) {
+						res.json(profiles);
+					}
+				});
 			});
-		}
-		res.json(profiles);
-	});
+				//res.json(profiles);
+		});
+	}
 };
 
 exports.updateProfile = function(req, res) {
@@ -63,9 +90,65 @@ exports.updateProfile = function(req, res) {
 		profile.markModified('trainers');
 	}
 
+	if (req.body.action === 'toggle activation') {
+		profile._doc.active = !profile._doc.active;
+		profile.markModified('active');
+		console.log(profile._doc);
+	}
+
+	if (req.body.action === 'update goals') {
+		profile._doc.goals = req.body.goals;
+		if (req.body.newGoal !== undefined) {
+			var newGoal = new Goal({
+				title: req.body.newGoal,
+				description: req.body.newGoal,
+				trainer_assigned: (req.body.TrainerAssigned) ? true : false,
+				complete: false
+			});
+			profile._doc.goals.push(newGoal);
+			//profile._doc.goals = [];
+			profile.markModified('goals');
+		}
+	}
+
+	if (req.body.action === 'add imagesets') {
+
+		for (var image in req.body.newImages) {
+			var imageSet = new ImageSet({front: {name: req.body.newImages[image].name, src: req.body.newImages[image].src}, back: {name: '', src: ''}, side: {name: '', src: ''}});
+			//profile._doc.imagesets = [];
+			profile._doc.imagesets.push(imageSet);
+			profile.markModified('imagesets');
+		}
+	}
+
+	if (req.body.action === 'remove imageset') {
+		var removeId = _.difference(_.map(profile._doc.imagesets, '_id'), _.map(req.body.imagesets, '_id'))[0].toString();
+
+		//removeId = removeId[0].toString();
+
+
+		_.forEach(profile._doc.imagesets, function(set, key) {
+			if (set._id.toString() === removeId) {
+				_.forEach(set, function(image) {
+					if (image.src && image.src !== '') {
+						fs.unlink(config.root + image.src, function(err) {
+							if (err) {
+								console.log(err);
+							}
+						});
+					}
+				});
+			}
+		});
+		profile._doc.imagesets = req.body.imagesets;
+		profile.markModified('imagesets');
+	}
+
 
 	profile.save(function(err, doc) {
-
+		doc.populate('trainers', function(err, doc) {
+			res.json(doc);
+		});
 	});
 };
 
