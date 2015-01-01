@@ -1,0 +1,56 @@
+<div class="sidebar" data-role="navigation">
+	<div class="sidebar-container" data-ng-controller="SidebarController">
+		<div class="profile">
+			<div class="profile__icon" style="background-image: url(https://justenoughheat.com/wp-content/uploads/2014/10/slide.png);"></div><!--profile__icon-->
+			<div class="profile__name">
+				<span class="profile__name__first">
+					Tina 
+				</span>
+				<span class="profile__name__last">
+					Sprinkle
+				</span>
+			</div>
+		</div><!--profile-->
+		<nav class="sidebar-nav">
+			<div class="account">
+			    <div class="text-edit">
+			      <div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
+			      <div class="pull-right" data-ng-show="global.authenticated" mean-translate></div>
+			    </div>
+			    <ul class="sidebar-nav__list" data-ng-hide="global.authenticated">
+			      <li class="sidebar-nav__item">
+			      	<a class="sidebar-nav__link" ui-sref='auth.register'>Join</a>
+			      </li>
+			      <li class="sidebar-nav__item">
+			      	<a class="sidebar-nav__link" ui-sref='auth.login'>Log In</a>
+			      </li>
+			    </ul>
+			</div>
+			<ul class="sidebar-nav__list">
+				<li class="sidebar-nav__item" data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+					<a class="sidebar-nav__link" mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
+				</li><!--sidebar-nav-item-->
+			</ul><!--sidebar-nav-list-->
+		</nav>
+		<div class="sidebar__footer" itemscope itemtype="http://schema.org/LocalBusiness">
+			<img src="/theme/assets/img/logo.png" alt="">
+			<address itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+				<span itemprop="streetAddress">
+					1901 W 43rd Ave			  			
+				</span><!--streetAddress--><br>
+				<span itemprop="addressLocality">
+					Kansas City
+				</span><!--addressLocality-->,
+				<span itemprop="addressRegion">
+					KS				  			
+				</span><!--addressRegion-->
+				<span itemprop="postalCode"> |
+					66103	
+				</span><!--postalCode-->
+			</address>
+			<a href="tel:9134997519" itemprop="telephone" class="sidebar__footer__phone">
+				913.499.7519
+			</a>
+		</div><!--sidebar-footer-->
+	</div><!--sidebar-container-->
+</div><!--sidebar-->
