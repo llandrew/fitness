@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams',
+angular.module('mean.fitnessassessment', ['angular-chartist']).controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams', 'angular-chartist',
   function($scope, $modal, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments, Teams) {
     $scope.global = Global;
     $scope.package = {
@@ -461,6 +461,30 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     $scope.profileFilesUploadCallback = function(file) {
         console.log('in upload finished');
         console.log(file);
+	};
+
+	/**
+	 * Progress Charts
+	 */
+	
+	$scope.progressChartWeight = function(assessments) {
+		if(assessments) {
+			console.log(assessments);
+
+			/*var data = {
+			  // A labels array that can contain any sort of values
+			  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    [5, 2, 4, 2, 0]
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart', data);
+			chart = chart;*/
+		} else {
+			return false;
+		}		
 	};
   }
 ]);

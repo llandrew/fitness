@@ -3,8 +3,8 @@
 var fs = require('fs'),
     config = require('meanio').loadConfig(),
     mkdirOrig = fs.mkdir,
-    directory = config.root + '\\files\\public',
-    osSep = '\\';
+    directory = config.root + '/files/public',
+    osSep = '/';
 
 
 function rename(file, dest, user, callback) {
@@ -14,7 +14,7 @@ function rename(file, dest, user, callback) {
             callback({
                 success: true,
                 file: {
-                    src: '\\files\\public' + dest + file.name,
+                    src: '/files/public' + dest + file.name,
                     name: file.name,
                     size: file.size,
                     type: file.type,
