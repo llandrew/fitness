@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.fitnessassessment', ['angular-chartist']).controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams', 'angular-chartist',
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams',
   function($scope, $modal, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments, Teams) {
     $scope.global = Global;
     $scope.package = {
@@ -471,7 +471,7 @@ angular.module('mean.fitnessassessment', ['angular-chartist']).controller('Fitne
 		if(assessments) {
 			console.log(assessments);
 
-			/*var data = {
+			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
 			  // Our series array that contains series objects or in this case series data arrays
@@ -481,7 +481,7 @@ angular.module('mean.fitnessassessment', ['angular-chartist']).controller('Fitne
 			};
 
 			var chart = new Chartist.Line('.ct-chart', data);
-			chart = chart;*/
+			chart = chart;
 		} else {
 			return false;
 		}		

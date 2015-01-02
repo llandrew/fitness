@@ -5,7 +5,7 @@
  */
 var Module = require('meanio').Module;
 
-var Fitnessassessment = new Module('fitnessassessment');
+var Fitnessassessment = new Module('fitnessassessment', ['angular-chartist']);
 
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
