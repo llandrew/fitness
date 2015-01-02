@@ -1,60 +1,67 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="getAssessments()">
 
-  <h2>Progress Charts</h2>
-
-  <h3>Weight</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{assessment.weight}}</span>
-      </h2>
-    </li>
-  </ul>
-  <div class="ct-chart ct-double-octave">{{progressChartWeight(assessments)}}</div>
-
-  <h3>BMI</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bmiCalculation(assessment)}}</span>
-      </h2>
-    </li>
-  </ul>
-
-  <h3>Lean Body Mass</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{leanBodyMassCalculator(assessment)}}</span>
-      </h2>
-    </li>
-  </ul>
-
-  <h3>Fat Weight</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{fatWeightCalculator(assessment)}}</span>
-      </h2>
-    </li>
+  <h1 class="content-heading">Progress Charts</h1>
+  <ul class="content-tabs" data-ng-init="contentTabInitialize()">
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_weight_button active" ng-click="contentTabSwitch('#progress_chart_weight', '.progress_chart_weight_button')">
+			Weight
+		</a>
+	</li>
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_bmi_button" ng-click="contentTabSwitch('#progress_chart_bmi', '.progress_chart_bmi_button')">
+			BMI
+		</a>
+	</li>
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_lean_body_mass_button" ng-click="contentTabSwitch('#progress_chart_lean_body_mass', '.progress_chart_lean_body_mass_button')">
+			Lean Body Mass
+		</a>
+	</li>
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_fat_weight_button" ng-click="contentTabSwitch('#progress_chart_fat_weight', '.progress_chart_fat_weight_button')">
+			Fat Weight
+		</a>
+	</li>
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_body_fat_button" ng-click="contentTabSwitch('#progress_chart_body_fat', '.progress_chart_body_fat_button')">
+			Body Fat Percentage
+		</a>
+	</li>
+	<li class="content-tabs__item">
+		<a href="" class="content-tabs__link progress_chart_waist_hip_ratio_button" ng-click="contentTabSwitch('#progress_chart_waist_hip_ratio', '.progress_chart_waist_hip_ratio_button')">
+			Waist/Hip Ratio
+		</a>
+	</li>
   </ul>
 
-  <h3>Body Fat Percentage</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{bodyFatPercentageCalculator(assessment)}}%</span>
-      </h2>
-    </li>
-  </ul>
+  <div id="progress_chart_weight" class="content-tabs__content">
+	  <h3>Weight</h3>
+	  <div class="ct-chart ct-chart-weight ct-double-octave">{{progressChartWeight(assessments)}}</div>
+  </div>
 
-  <h3>Waist/Hip Ratio</h3>
-  <ul class="assessments unstyled">
-    <li data-ng-repeat="assessment in assessments">
-      <h2>
-        {{assessment.entry_date | date:"yyyy-MM-dd"}} - <span>{{waistHipRatioCalculation(assessment)}}</span>
-      </h2>
-    </li>
-  </ul>
+  <div id="progress_chart_bmi" class="content-tabs__content">
+	  <h3>BMI</h3>
+	  <div class="ct-chart ct-chart-bmi ct-double-octave">{{progressChartBmi(assessments)}}</div>
+  </div>
+
+  <div id="progress_chart_lean_body_mass" class="content-tabs__content">
+	  <h3>Lean Body Mass</h3>
+	  <div class="ct-chart ct-chart-lean-body-mass ct-double-octave">{{progressChartLeanBodyMass(assessments)}}</div>
+  </div>
+
+  <div id="progress_chart_fat_weight" class="content-tabs__content">
+	  <h3>Fat Weight</h3>
+	  <div class="ct-chart ct-chart-fat-weight ct-double-octave">{{progressChartFatWeight(assessments)}}</div>
+  </div>
+
+  <div id="progress_chart_body_fat" class="content-tabs__content">
+	  <h3>Body Fat Percentage</h3>
+	  <div class="ct-chart ct-chart-body-fat ct-double-octave">{{progressChartBodyFat(assessments)}}</div>
+  </div>
+
+  <div id="progress_chart_waist_hip_ratio" class="content-tabs__content">
+	  <h3>Waist/Hip Ratio</h3>
+	  <div class="ct-chart ct-chart-waist-hip ct-double-octave">{{progressChartWaistHipRatio(assessments)}}</div>
+  </div>
   
 </section>
