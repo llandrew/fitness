@@ -30,6 +30,7 @@
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
+		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No trainer goals have been set.</h4>
   	</div>
 
   	<div id="personal_goals" class="content-tabs__content">
@@ -39,6 +40,7 @@
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
+		<h4 data-ng-hide="!personal_goals || personal_goals.length">No personal goals have been set. <a href="" class="new_goal_button" ng-click="contentTabSwitch('#new_goal', '.new_goal_button')">Create a Personal Goal</a></h4>
   	</div>
 
   	<div id="completed_goals" class="content-tabs__content">
@@ -48,6 +50,7 @@
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
+		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No goals have been completed.</h4>
   	</div>
 
   	<div id="new_goal" class="content-tabs__content">
@@ -62,6 +65,10 @@
 	        <div ng-show="submitted && profileGoalsForm.goal.title.$invalid" class="help-block">
 	          <p ng-show="profileGoalsForm.goal.title.$error.required">Goal is required</p>
 	        </div>
+
+	        <a class="btn" data-ng-click="removeGoal(goal);">
+	          <i class="glyphicon glyphicon-trash"></i> Remove
+	        </a>
 	      </div>
 	    </div>
 	    <div class="form-group">
