@@ -35,6 +35,21 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		profileId: profileId
     	}, function(profile) {
     		$scope.profile = profile;
+
+    		$scope.trainer_goals = [];
+    		$scope.personal_goals = [];
+    		$scope.completed_goals = [];
+
+    		$.each( profile.goals, function( key, goal ) {
+    			if(goal.complete) {
+    				$scope.completed_goals.push(goal);
+    			} else if(goal.trainer_assigned) {
+    				$scope.trainer_goals.push(goal);
+    			} else {
+    				$scope.personal_goals.push(goal);
+    			}
+				
+			});
     	});
     };
 

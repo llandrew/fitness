@@ -26,7 +26,7 @@
 	<div id="trainer_goals" class="content-tabs__content">
 	  	<h3>Trainer Goals</h3>
 	  	<ol class="goals">
-			<li class="goals__item" ng-repeat="goal in profile.goals">
+			<li class="goals__item" ng-repeat="goal in trainer_goals">
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
@@ -35,7 +35,7 @@
   	<div id="personal_goals" class="content-tabs__content">
 	  	<h3>Personal Goals</h3>
 	  	<ol class="goals">
-			<li class="goals__item" ng-repeat="goal in profile.goals">
+			<li class="goals__item" ng-repeat="goal in personal_goals">
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
@@ -44,7 +44,7 @@
   	<div id="completed_goals" class="content-tabs__content">
 	  <h3>Completed Goals</h3>
 	  <ol class="goals">
-			<li class="goals__item" ng-repeat="goal in profile.goals">
+			<li class="goals__item" ng-repeat="goal in completed_goals">
 				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
