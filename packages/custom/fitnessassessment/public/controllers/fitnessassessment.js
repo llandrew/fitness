@@ -7,6 +7,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       name: 'fitnessassessment'
     };
 
+    $scope.global.toggleGoalsSlider = function() {
+
+      Profiles.profiles.get({
+        profileId: $scope.global.user._id
+      }, function(user) {
+        $scope.global.user.goals = user.goals;
+        $scope.global.showHideGoals = !$scope.global.showHideGoals;
+      });
+    };
+
     $scope.openTrainerModal = function() {
         $scope.trainerModal = $modal.open({
             templateUrl: 'fitnessassessment/views/modal.html',

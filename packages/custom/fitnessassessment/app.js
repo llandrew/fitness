@@ -62,22 +62,16 @@ Fitnessassessment.register(function(app, auth, database) {
     menu: 'main'
   })*/
   .add({
-    title: 'Teams',
-    link: 'list teams',
-    roles: ['authenticated'],
+  	title: 'My Profile',
+  	link: 'my profile',
+  	roles: ['authenticated'],
+  	menu: 'main'
+  })
+  .add({
+    title: 'Manage Trainers',
+    link: 'list trainers',
+    roles: ['authenticated', 'owner'],
     menu: 'main'
-  })
-  .add({
-  	title: 'List Companies',
-  	link: 'list companies',
-  	roles: ['authenticated'],
-  	menu: 'main'
-  })
-  .add({
-  	title: 'Create Company',
-  	link: 'create company',
-  	roles: ['authenticated'],
-  	menu: 'main'
   })
   .add({
     title: 'Profiles',
@@ -86,15 +80,21 @@ Fitnessassessment.register(function(app, auth, database) {
     menu: 'main'
   })
   .add({
-  	title: 'My Profile',
-  	link: 'my profile',
-  	roles: ['authenticated'],
-  	menu: 'main'
+    title: 'Manage Teams',
+    link: 'list teams',
+    roles: ['authenticated'],
+    menu: 'main'
   })
   .add({
-    title: 'Trainers',
-    link: 'list trainers',
-    roles: ['authenticated', 'owner'],
+    title: 'List Companies',
+    link: 'list companies',
+    roles: ['authenticated'],
+    menu: 'main'
+  })
+  .add({
+    title: 'Create Company',
+    link: 'create company',
+    roles: ['authenticated'],
     menu: 'main'
   })
   .add({
@@ -110,20 +110,20 @@ Fitnessassessment.register(function(app, auth, database) {
   	menu: 'main'
   })
   .add({
+    title: 'Print',
+    link: 'print',
+    roles: ['authenticated'],
+    menu: 'main'
+  })
+  .add({
+    title: 'Progress Charts',
+    link: 'progress charts',
+    roles: ['authenticated'],
+    menu: 'main'
+  })
+  .add({
   	title: 'Support',
   	link: 'support',
-  	roles: ['authenticated'],
-  	menu: 'main'
-  })
-  .add({
-  	title: 'Print',
-  	link: 'print',
-  	roles: ['authenticated'],
-  	menu: 'main'
-  })
-  .add({
-  	title: 'Progress Charts',
-  	link: 'progress charts',
   	roles: ['authenticated'],
   	menu: 'main'
   });

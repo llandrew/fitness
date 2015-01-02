@@ -1,28 +1,26 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfiles('trainers')">
-  <ul class="trainers unstyled">
-    <li data-ng-repeat="trainer in trainers">
-      <h2>
-        <a data-ng-href="#!/profile/{{trainer._id}}">{{trainer.name}}</a>
-        <span data-ng-if="hasAuthorization(trainer)">
-          <a class="btn" href="/#!/profile/{{trainer._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn" data-ng-click="remove(trainer);">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </span>
-      </h2>
-      <input type="checkbox" ng-model="trainer.active" data-ng-click="toggleActivation(trainer);" /> 
-      <div>
-        <ul class="clients unstyled">
-          <li data-ng-repeat="client in trainer.clients">
-            <p>{{client.name}}</p>
-            <a class="btn" ng-click="openTrainerModal()">
-              <i class="glyphicon glyphicon-plus"></i> Assign Trainer
-            </a>
-          </li>
-        </ul>
+  <ul class="user-list">
+    <li data-ng-repeat="trainer in trainers" class="user-list__user active">
+      <div class="switch">
       </div>
+      <div class="profile profile--small">
+        <div class="profile__icon"></div>
+        <div class="profile__user">
+          <span class="profile__user__name">{{trainer.name}}</span>
+          <span class="profile__user__team">{{trainer.team.name}}</span>
+        </div>
+      </div>
+      <ul class="user-clients">
+        <li data-ng-repeat="client in trainer.clients" class="user-clients__client">
+          <div class="profile profile--xs">
+            <div class="profile__icon"></div>
+            <div class="profile__full-name">
+              {{client.name}}
+            </div>
+            <a class="profile__link" ng-click="openTrainerModal()">Reassign Client</a>
+          </div>
+        </li>
+      </ul>
     </li>
   </ul>
   <h1 data-ng-hide="!trainers || trainers.length">No trainers yet. <br> Why don't you <a href="/#!/trainers/create">Create One</a>?</h1>
