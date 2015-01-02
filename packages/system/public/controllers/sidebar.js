@@ -28,6 +28,7 @@ angular.module('mean.system').controller('SidebarController', ['$scope', '$rootS
 
       queryMenu('main', defaultMainMenu);
 
+
       $scope.global = {
         authenticated: !! $rootScope.user,
         user: $rootScope.user

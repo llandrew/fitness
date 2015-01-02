@@ -1,7 +1,7 @@
 <div data-ng-controller="SidebarController">
 	<div class="sidebar-container">
 		<div class="profile">
-			<div class="profile__icon" style="background-image: url(https://justenoughheat.com/wp-content/uploads/2014/10/slide.png);"></div><!--profile__icon-->
+			<div class="profile__icon" style="background-image: url({{global.user.avatar}});"></div><!--profile__icon-->
 			<div class="profile__name">
 				<span class="profile__name__first">
 					Tina 
@@ -19,7 +19,7 @@
 			</ul><!--sidebar-nav-list-->
 		</nav>
 		<div class="sidebar__footer" itemscope itemtype="http://schema.org/LocalBusiness">
-			<img src="assets/img/logo.png" alt="">
+			<img src="/fitnessassessment/assets/img/logo.png" alt="">
 			<address itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
 				<span itemprop="streetAddress">
 					1901 W 43rd Ave			  			

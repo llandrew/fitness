@@ -1,5 +1,6 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
   <span>{{profile.name}}</span>
+  <img data-ng-src="{{profile.avatar}}" alt="Avatar" class="avatar" />
   <h2>{{profile.team.name}}</h2>
   <a class="btn" ng-click="openTeamModal()">
     <i class="glyphicon glyphicon-plus"></i> Assign Team

@@ -117,6 +117,14 @@ exports.updateProfile = function(req, res) {
 		}
 	}
 
+	if (req.body.action === 'add avatar') {
+		var avatarFiles = req.body.newAvatar;
+		if (avatarFiles[0]) {
+			profile._doc.avatar = avatarFiles[0].src.replace(/\\/g, '/');
+			profile.markModified('avatar');
+		}
+	}
+
 	if (req.body.action === 'add imagesets') {
 
 		for (var image in req.body.newImages) {

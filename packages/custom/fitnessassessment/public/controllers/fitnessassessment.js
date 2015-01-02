@@ -464,8 +464,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         console.log('in upload finished');
         console.log(files);
         var profile = $scope.profile;
-        profile.action = 'add imagesets';
-        profile.newImages = files;
+        profile.action = 'add avatar';
+        profile.newAvatar = files;
         profile.$update();
     };
     $scope.profileFilesUploadCallback = function(file) {
