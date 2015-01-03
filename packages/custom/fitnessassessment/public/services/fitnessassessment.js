@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.fitnessassessment')
+angular.module('mean.fitnessassessment', ['angular-chartist'])
 .factory('Fitnessassessment', [
 	function() {
 		return {
