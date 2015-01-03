@@ -12,6 +12,9 @@
         </div>
       </div>
       <ul class="user-clients">
+        <li data-ng-if="trainer.clients.length == 0" class="user-clients__client--empty">
+          <p>No clients</p>
+        </li>
         <li data-ng-repeat="client in trainer.clients" class="user-clients__client">
           <div class="profile profile--xs">
             <div class="profile__icon" style="background-image: url('{{client.avatar}}');"></div>

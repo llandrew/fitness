@@ -10,7 +10,7 @@ angular.module('mean.fitnessassessment').controller('TrainerModalController', ['
     };
 
      $scope.addTrainer = function(trainer) {
-        console.log(client);
+        console.log($scope);
         client.newTrainer = trainer._id;
         client.action = 'add trainer';
         //client.$update();
@@ -31,12 +31,31 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 
     $scope.global.toggleGoalsSlider = function() {
 
-      Profiles.profiles.get({
-        profileId: $scope.global.user._id
-      }, function(user) {
-        $scope.global.user.goals = user.goals;
-        $scope.global.showHideGoals = !$scope.global.showHideGoals;
-      });
+      if (!$scope.global.user.goals) {
+
+        $scope.global.user.goals = {
+          personal: [],
+          trainer: [],
+          completed: []
+        };
+        
+        Profiles.profiles.get({
+          profileId: $scope.global.user._id
+        }, function(user) {
+          angular.forEach( user.goals, function( goal ) {
+            if(goal.complete) {
+              $scope.global.user.goals.completed.push(goal);
+            } else if(goal.trainer_assigned) {
+              $scope.global.user.goals.trainer.push(goal);
+            } else {
+              $scope.global.user.goals.personal.push(goal);
+            }
+          
+          });
+        });
+      }
+
+      $scope.global.showHideGoals = !$scope.global.showHideGoals;
     };
 
     $scope.openTrainerModal = function(client) {
@@ -86,7 +105,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     		$scope.personal_goals = [];
     		$scope.completed_goals = [];
 
-    		$.each( profile.goals, function( key, goal ) {
+    		angular.forEach( profile.goals, function( goal ) {
+
     			if(goal.complete) {
     				$scope.completed_goals.push(goal);
     			} else if(goal.trainer_assigned) {
@@ -95,7 +115,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     				$scope.personal_goals.push(goal);
     			}
 				
-			});
+			 });
     	});
     };
 
@@ -133,11 +153,36 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     };
 
     $scope.updateGoals = function(isValid) {
+
+      if (!$scope.contentTabs.goals.active) {
+        console.log(' no active');
+        return false;
+      }
       var profile = $scope.profile;
       profile.action = 'update goals';
-      profile.newGoal = $scope.newGoal;
+      profile.newGoal = {
+        title: $scope.newGoal,
+        description: $scope.newGoal,
+        trainer_assigned: ($scope.contentTabs.goals.active === 'trainer') ? true : false,
+        completed: false
+      };
       $scope.newGoal = '';
-      profile.$update();
+      profile.$update(function(profile) {
+
+        $scope.trainer_goals = [];
+        $scope.personal_goals = [];
+        $scope.completed_goals = [];
+        angular.forEach( profile.goals, function( goal ) {
+          if(goal.complete) {
+            $scope.completed_goals.push(goal);
+          } else if(goal.trainer_assigned) {
+            $scope.trainer_goals.push(goal);
+          } else {
+            $scope.personal_goals.push(goal);
+          }
+        
+        });
+      });
     };
 
     $scope.toggleActivation = function(profile) {
@@ -531,8 +576,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				series.push(element.weight);
@@ -545,16 +589,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-weight', data);
+			/*var chart = new Chartist.Line('.ct-chart-weight', data);*/
 		} else {
 			return false;
 		}		
@@ -565,8 +609,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				var bmi = $scope.bmiCalculation(element);
@@ -580,16 +623,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-bmi', data);
+			/*var chart = new Chartist.Line('.ct-chart-bmi', data);*/
 		} else {
 			return false;
 		}
@@ -600,8 +643,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				var leanBodyMass = $scope.leanBodyMassCalculator(element);
@@ -615,16 +657,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-lean-body-mass', data);
+			/*var chart = new Chartist.Line('.ct-chart-lean-body-mass', data);*/
 		} else {
 			return false;
 		}
@@ -635,8 +677,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				var fatWeight = $scope.fatWeightCalculator(element);
@@ -650,16 +691,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-fat-weight', data);
+			/*var chart = new Chartist.Line('.ct-chart-fat-weight', data);*/
 		} else {
 			return false;
 		}
@@ -670,8 +711,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				var bodyFatPercentage = $scope.bodyFatPercentageCalculator(element);
@@ -685,16 +725,16 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-body-fat', data);
+			/*var chart = new Chartist.Line('.ct-chart-body-fat', data);*/
 		} else {
 			return false;
 		}
@@ -705,8 +745,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 			var labels = [];
 			var series = [];
 			
-			var i = 0;
-			for(i = 0; i < assessments.length; i++) {
+			for (var i = 0; i < assessments.length; i + 1) {
 				var element = assessments[i];
 
 				var waistHipRatio = $scope.waistHipRatioCalculation(element);
@@ -720,22 +759,55 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 				labels.push(month + '-' + day + '-' + year);
 			}
 
-			var data = {
+/*			var data = {
 			  // A labels array that can contain any sort of values
 			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
 			    series
 			  ]
-			};
+			};*/
 
-			var chart = new Chartist.Line('.ct-chart-waist-hip', data);
+			/*var chart = new Chartist.Line('.ct-chart-waist-hip', data);*/
 		} else {
 			return false;
 		}
 	};
 
-	$scope.contentTabSwitch = function(content, button) {
+  $scope.contentTabs = {
+
+    goals: {
+      tabs : {},
+      active: '',
+      newSwitch: function(tab) {
+        if (!tab) return false;
+        if ($scope.contentTabs.goals.active === 'completed' && tab === 'new') return false;
+        return true;
+      }
+    },
+    init: function(page, tab) {
+
+      if (!page || !tab) return false;
+      $scope.contentTabs[page].tabs[tab] = true;
+      $scope.contentTabs[page].active = tab;
+
+    },
+    switch: function(page, tab) {
+      var tabPage = $scope.contentTabs[page];
+
+      if (tab !== 'new') {
+        angular.forEach(tabPage.tabs, function(value, key) {
+          tabPage.tabs[key] = false;
+        });
+        tabPage.active = tab;
+      }
+
+      if ((typeof tabPage.newSwitch !== 'undefined') ? tabPage.newSwitch(tab) : true) tabPage.tabs[tab] = true;
+      $scope.contentTabs[page] = tabPage;
+    }
+  };
+
+/*	$scope.contentTabSwitch = function(content, button) {
 		$('.content-tabs__item a').removeClass('active');
 		$(button).addClass('active');
 
@@ -750,7 +822,7 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
 		var activeIndex = $('.content-tabs__item a.active').parent().index();
 
 		$('.content-tabs__content').eq(activeIndex).show();
-	};
+	};*/
   }
 ]);
 

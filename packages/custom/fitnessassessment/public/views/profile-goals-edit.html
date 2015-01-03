@@ -1,64 +1,64 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
 	<h1 class="content-heading">Goals</h1>
-	<ul class="content-tabs" data-ng-init="contentTabInitialize()">
+	<ul class="content-tabs" data-ng-init="contentTabs.init('goals', 'trainer')">
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link trainer_goals_button active" ng-click="contentTabSwitch('#trainer_goals', '.trainer_goals_button')">
+			<a href="" class="content-tabs__link trainer_goals_button active" ng-click="contentTabs.switch('goals', 'trainer')">
 				Trainer Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link personal_goals_button" ng-click="contentTabSwitch('#personal_goals', '.personal_goals_button')">
+			<a href="" class="content-tabs__link personal_goals_button" ng-click="contentTabs.switch('goals', 'personal')">
 				Personal Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link completed_goals_button" ng-click="contentTabSwitch('#completed_goals', '.completed_goals_button')">
+			<a href="" class="content-tabs__link completed_goals_button" ng-click="contentTabs.switch('goals', 'completed')">
 				Completed Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link new_goal_button" ng-click="contentTabSwitch('#new_goal', '.new_goal_button')">
+			<a href="" class="content-tabs__link new_goal_button" ng-click="contentTabs.switch('goals', 'new')">
 				+ New Goal
 			</a>
 		</li>
 	</ul>
 
-	<div id="trainer_goals" class="content-tabs__content">
+	<div id="trainer_goals" ng-class="contentTabs.goals.tabs.trainer ? 'content-tabs__content active' : 'content-tabs__content'" ng-show="contentTabs.goals.tabs.trainer" ng-hide="!contentTabs.goals.tabs.trainer">
 	  	<h3>Trainer Goals</h3>
 	  	<ol class="goals">
 			<li class="goals__item" ng-repeat="goal in trainer_goals">
-				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
+				{{goal.title}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
 		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No trainer goals have been set.</h4>
   	</div>
 
-  	<div id="personal_goals" class="content-tabs__content">
+  	<div id="personal_goals" ng-class="contentTabs.goals.tabs.personal ? 'content-tabs__content active' : 'content-tabs__content'" ng-show="contentTabs.goals.tabs.personal" ng-hide="!contentTabs.goals.tabs.personal">
 	  	<h3>Personal Goals</h3>
 	  	<ol class="goals">
 			<li class="goals__item" ng-repeat="goal in personal_goals">
-				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
+				{{goal.title}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
 		<h4 data-ng-hide="!personal_goals || personal_goals.length">No personal goals have been set. <a href="" class="new_goal_button" ng-click="contentTabSwitch('#new_goal', '.new_goal_button')">Create a Personal Goal</a></h4>
   	</div>
 
-  	<div id="completed_goals" class="content-tabs__content">
+  	<div id="completed_goals" ng-class="contentTabs.goals.tabs.completed ? 'content-tabs__content active' : 'content-tabs__content'" ng-show="contentTabs.goals.tabs.completed" ng-hide="!contentTabs.goals.tabs.completed">
 	  <h3>Completed Goals</h3>
 	  <ol class="goals">
 			<li class="goals__item" ng-repeat="goal in completed_goals">
-				{{goal.description}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
+				{{goal.title}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
 			</li><!--goals__item-->	
 		</ol>
 		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No goals have been completed.</h4>
   	</div>
 
-  	<div id="new_goal" class="content-tabs__content">
+  	<div id="new_goal" ng-class="contentTabs.goals.tabs.new ? 'content-tabs__content active' : 'content-tabs__content'" ng-show="contentTabs.goals.tabs.new" ng-hide="!contentTabs.goals.tabs.new">
 	  <h3>+ New Goal</h3>
 
 	  <form name="profileGoalsForm" class="form-horizontal col-md-6 standard" role="form" data-ng-submit="updateGoals(profileGoalsForm.$valid)" novalidate>
 
-	    <div class="form-group" ng-repeat="goal in profile.goals" ng-class="{ 'has-error' : submitted && profileGoalsForm.goals.$invalid }">
+	    <div ng-hide="true" class="form-group" ng-repeat="goal in profile.goals" ng-class="{ 'has-error' : submitted && profileGoalsForm.goals.$invalid }">
 	      <label mean-token="'edit-goal'" for="goal" class="col-md-3 control-label">Goal</label>
 	      <div class="col-md-9">
 	        <input name="goal.title" type="text" class="form-control large" data-ng-model="goal.title" id="goal.title" placeholder="Goal" required>

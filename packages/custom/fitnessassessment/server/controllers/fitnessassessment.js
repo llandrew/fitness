@@ -120,12 +120,7 @@ exports.updateProfile = function(req, res) {
 	if (req.body.action === 'update goals') {
 		profile._doc.goals = req.body.goals;
 		if (req.body.newGoal !== undefined) {
-			var newGoal = new Goal({
-				title: req.body.newGoal,
-				description: req.body.newGoal,
-				trainer_assigned: (req.body.TrainerAssigned) ? true : false,
-				complete: false
-			});
+			var newGoal = new Goal(req.body.newGoal);
 			profile._doc.goals.push(newGoal);
 			//profile._doc.goals = [];
 			profile.markModified('goals');
