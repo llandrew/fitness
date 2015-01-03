@@ -53,7 +53,7 @@ exports.showProfile = function(req, res) {
 
 exports.listProfiles = function(req, res) {
 	if (req.route.path === '/profiles/') {
-		User.find().sort('-created').exec(function(err, profiles) {
+		User.find().sort('-created').populate('trainers').populate('team').exec(function(err, profiles) {
 			if (err) {
 				return res.status(500).json({
 					error: 'Cannot list the profiles'
@@ -63,7 +63,7 @@ exports.listProfiles = function(req, res) {
 		});
 	}
 	if (req.route.path === '/profiles/trainers/') {
-		User.find().where('roles').equals('trainer').sort('-created').exec(function(err, profiles) {
+		User.find().where('roles').equals('trainer').sort('-created').populate('trainers').populate('team').exec(function(err, profiles) {
 			if (err) {
 				return res.status(500).json({
 					error: 'Cannot lsit the profiles'
@@ -71,7 +71,9 @@ exports.listProfiles = function(req, res) {
 			}
 
 			_.forEach(profiles, function (profile, key) {
+				console.log(profile);
 				User.find().where('trainers').equals(profile._id).exec(function(err, clients) {
+					console.log(clients);
 					profiles[key]._doc.clients = clients;
 					if (key === profiles.length - 1) {
 						res.json(profiles);
@@ -81,13 +83,26 @@ exports.listProfiles = function(req, res) {
 				//res.json(profiles);
 		});
 	}
+
+	if (req.route.path === '/profiles/clients/') {
+		User.find().where('roles').equals('client').sort('-created').populate('trainers').populate('team').exec(function(err, profiles) {
+			if (err) {
+				return res.status(500).json({
+					error: 'Cannot list the profiles'
+				});
+			}
+
+			res.json(profiles);
+		});
+	}
 };
 
 exports.updateProfile = function(req, res) {
 	var profile = req.profile;
 
 	if (req.body.action === 'add trainer') {
-		profile._doc.trainers.push(req.body.newTrainer);
+		profile._doc.trainers = [];
+		profile._doc.trainers.push(mongoose.Types.ObjectId(req.body.newTrainer));
 		profile.markModified('trainers');
 	}
 

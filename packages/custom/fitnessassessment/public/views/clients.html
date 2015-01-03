@@ -1,0 +1,17 @@
+<h1 class="content-heading">Manage Clients</h1>
+<section data-ng-controller="FitnessassessmentController" data-ng-init="findProfiles('clients')" class="scroll-container scroll-container--trainers">
+  <ul class="client-list">
+    <li data-ng-repeat="client in clients" ng-class="activateDisplay ? 'client-list__client active' : 'user-list__user'" >
+      <div data-ng-click="toggleActivation(client);" ng-class="client.active ? 'switch' : 'switch switch--off'">
+      </div>
+      <div class="profile profile--small" data-ng-click="activateDisplay=!activateDisplay">
+        <div class="profile__icon" style="background-image: url('{{client.avatar}}');"></div>
+        <div class="profile__user">
+          <span class="profile__user__name">{{client.name}}</span>
+          <span class="profile__user__team">{{client.team.name}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!trainers || trainers.length">No trainers yet. <br> Why don't you <a href="/#!/trainers/create">Create One</a>?</h1>
+</section>

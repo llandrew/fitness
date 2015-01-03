@@ -1,0 +1,9 @@
+<section data-ng-init="findTrainers()">
+  <ul class="trainer-modal-list">
+    <li data-ng-repeat="trainer in trainers">
+    	<img data-ng-src="{{trainer.avatar}}" alt="{{trainer.name}}" />
+        <a class="btn" data-ng-click="addTrainer(trainer);">{{trainer.name}}</a>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!trainers || trainers.length">No trainers yet. <br> Why don't you <a href="/#!/trainers/create">Create One</a>?</h1>
+</section>

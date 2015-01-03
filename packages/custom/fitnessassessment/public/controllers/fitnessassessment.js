@@ -1,5 +1,27 @@
 'use strict';
 
+angular.module('mean.fitnessassessment').controller('TrainerModalController', ['$scope', '$modalInstance', 'client', 'Profiles',
+  function($scope, $modalInstance, client, Profiles) {
+
+    $scope.findTrainers = function() {
+      Profiles.trainers.query(function(trainers) {
+        $scope.trainers = trainers;
+      });
+    };
+
+     $scope.addTrainer = function(trainer) {
+        console.log(client);
+        client.newTrainer = trainer._id;
+        client.action = 'add trainer';
+        //client.$update();
+        Profiles.clients.update({profileId: client._id}, client, function(client) {
+          $modalInstance.close(client);
+        });
+     };
+
+  }
+]);
+
 angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams',
   function($scope, $modal, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments, Teams) {
     $scope.global = Global;
@@ -17,10 +39,24 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       });
     };
 
-    $scope.openTrainerModal = function() {
-        $scope.trainerModal = $modal.open({
-            templateUrl: 'fitnessassessment/views/modal.html',
-            scope: $scope
+    $scope.openTrainerModal = function(client) {
+        var trainerModal = $modal.open({
+            templateUrl: 'fitnessassessment/views/trainer-modal.html',
+            controller: 'TrainerModalController',
+            scope: $scope,
+            resolve: {
+              client: function() {
+                return client;
+              }
+            }
+        });
+
+        trainerModal.result.then(function(result) {
+          console.log(result);
+          Profiles.trainers.query(function(trainers) {
+            console.log($scope);
+            //$scope.trainers = angular.extend($scope.trainers, trainers);
+          });
         });
     };
 
@@ -60,6 +96,12 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
             Profiles.trainers.query(function(trainers) {
                 $scope.trainers = trainers;
             });
+        }
+
+        if (role === 'clients') {
+          Profiles.clients.query(function(clients) {
+            $scope.clients = clients;
+          });
         }
     };
 
@@ -114,14 +156,6 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      	client.newTrainer = user._id;
         client.action = 'add trainer';
      	client.$update();
-     };
-
-     $scope.addTrainer = function(client, trainer) {
-        console.log($scope.profile);
-        client.newTrainer = trainer._id;
-        client.action = 'add trainer';
-        client.$update();
-        $scope.trainerModal.close();
      };
 
      $scope.canEditGoals = function(profile) {

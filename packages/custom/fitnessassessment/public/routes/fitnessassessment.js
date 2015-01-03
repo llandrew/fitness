@@ -70,6 +70,16 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    	}
 	    })
 
+	    // Client Routes
+	    
+	    .state('list clients', {
+	    	url: '/clients',
+	    	templateUrl: 'fitnessassessment/views/clients.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
+
 	    // Company Routes
 
 	    .state('list companies', {

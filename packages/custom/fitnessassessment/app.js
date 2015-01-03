@@ -61,17 +61,22 @@ Fitnessassessment.register(function(app, auth, database) {
     roles: ['authenticated'],
     menu: 'main'
   })*/
-  .add({
+/*  .add({
   	title: 'My Profile',
   	link: 'my profile',
   	roles: ['authenticated'],
   	menu: 'main'
-  })
+  })*/
   .add({
-    title: 'Manage Trainers',
+    title: 'Trainers',
     link: 'list trainers',
     roles: ['authenticated', 'owner'],
     menu: 'main'
+  })
+  .add({
+    title: 'Clients',
+    link: 'list clients',
+    roles: ['authenticated', 'owner', 'trainer']
   })
   .add({
     title: 'Profiles',
@@ -80,23 +85,23 @@ Fitnessassessment.register(function(app, auth, database) {
     menu: 'main'
   })
   .add({
-    title: 'Manage Teams',
+    title: 'Teams',
     link: 'list teams',
     roles: ['authenticated'],
     menu: 'main'
   })
-  .add({
+/*  .add({
     title: 'List Companies',
     link: 'list companies',
-    roles: ['authenticated'],
+    roles: ['authenticated', 'owner'],
     menu: 'main'
   })
   .add({
     title: 'Create Company',
     link: 'create company',
-    roles: ['authenticated'],
+    roles: ['authenticated', 'owner'],
     menu: 'main'
-  })
+  })*/
   .add({
   	title: 'Create Assessment',
   	link: 'create assessment',

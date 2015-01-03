@@ -1,10 +1,10 @@
 <h1 class="content-heading">Manage Trainers</h1>
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfiles('trainers')" class="scroll-container scroll-container--trainers">
   <ul class="user-list">
-    <li data-ng-repeat="trainer in trainers" class="user-list__user active">
+    <li data-ng-repeat="trainer in trainers" ng-class="activateDisplay ? 'user-list__user active' : 'user-list__user'" >
       <div data-ng-click="toggleActivation(trainer);" ng-class="trainer.active ? 'switch' : 'switch switch--off'">
       </div>
-      <div class="profile profile--small">
+      <div class="profile profile--small" data-ng-click="activateDisplay=!activateDisplay">
         <div class="profile__icon" style="background-image: url('{{trainer.avatar}}');"></div>
         <div class="profile__user">
           <span class="profile__user__name">{{trainer.name}}</span>
@@ -19,7 +19,7 @@
               {{client.name}}
             </div>
           </div>
-          <a class="profile__link" ng-click="openTrainerModal()">Reassign Client</a>
+          <a class="profile__link" data-ng-click="openTrainerModal(client)">Reassign Client</a>
         </li>
       </ul>
     </li>

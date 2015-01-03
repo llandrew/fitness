@@ -46,6 +46,13 @@ angular.module('mean.fitnessassessment')
 				update: {
 					method: 'PUT'
 				}
+			}),
+			clients: $resource('profiles/clients/:profileId', {
+				profileId: '@_id',
+			}, {
+				update: {
+					method: 'PUT'
+				}
 			})
 		};
 	}
