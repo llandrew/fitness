@@ -1,21 +1,28 @@
 <section data-ng-controller="ArticlesController" data-ng-init="find()">
-  <ul class="articles unstyled">
-    <li data-ng-repeat="article in articles">
-      <span>{{article.created | date:'medium'}}</span> /
-      <span>{{article.user.name}}</span>
-      <h2>
-        <a data-ng-href="#!/articles/{{article._id}}">{{article.title}}</a>
-        <span data-ng-if="hasAuthorization(article)">
-          <a class="btn" href="/#!/articles/{{article._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn" data-ng-click="remove(article);">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </span>
-      </h2>
-      <div>{{article.content}}</div>
-    </li>
-  </ul>
-  <h1 data-ng-hide="!articles || articles.length">No articles yet. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
+	<h1 class="content-heading">Journal</h1>
+	<form name="articleForm" class="form-horizontal col-md-6 standard clearfix" role="form" data-ng-submit="create(articleForm.$valid)" novalidate>
+		<textarea class="large" placeholder="Type new journal entry here..." name="content" data-ng-model="content" id="content" class="form-control" required></textarea>
+		<div ng-show="submitted && articleForm.content.$invalid" class="help-block">
+          <p ng-show="articleForm.content.$error.required">Content is required</p>
+        </div>
+		<input type="submit" class="right" value="Post Entry">
+	</form>
+
+	<div class="scroll-container scroll-container--journal">
+		<article class="journal" data-ng-repeat="article in articles">
+			<h3>Journal Entry - {{article.created | date:'medium'}}</h3>
+			{{article.content}}
+
+			<span data-ng-if="hasAuthorization(article)">
+	          <a class="btn" href="/#!/articles/{{article._id}}/edit">
+	            <i class="glyphicon glyphicon-edit"></i>
+	          </a>
+	          <a class="btn" data-ng-click="remove(article);">
+	            <i class="glyphicon glyphicon-trash"></i>
+	          </a>
+	        </span>
+		</article>
+	</div><!--scroll-container-->
+	
+	<h1 data-ng-hide="!articles || articles.length">No articles yet. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
 </section>

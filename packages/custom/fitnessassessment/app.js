@@ -5,7 +5,7 @@
  */
 var Module = require('meanio').Module;
 
-var Fitnessassessment = new Module('fitnessassessment');
+var Fitnessassessment = new Module('fitnessassessment', ['angular-chartist']);
 
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
@@ -135,6 +135,7 @@ Fitnessassessment.register(function(app, auth, database) {
   
   Fitnessassessment.aggregateAsset('css', 'fitnessassessment.css');
   Fitnessassessment.aggregateAsset('css', 'normalize.css');
+  Fitnessassessment.aggregateAsset('css', 'chartist.css');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

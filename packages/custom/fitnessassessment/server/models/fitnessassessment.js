@@ -44,6 +44,14 @@ var GoalSchema = new Schema({
 	complete: {
 		type: Boolean,
 		default: false
+	},
+	create_date: {
+		type: Date,
+		default: Date.now
+	},
+	modify_date: {
+		type: Date,
+		default: Date.now
 	}
 });
 

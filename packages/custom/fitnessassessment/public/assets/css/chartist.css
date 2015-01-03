@@ -1,0 +1,15 @@
+.ct-chart .ct-point {
+	stroke: #87ba55 !important;
+}
+
+.ct-chart .ct-line {
+	stroke: #87ba55 !important;
+}
+
+.ct-chart {
+	background: #ecf1f5;
+}
+
+.ct-chart .ct-label {
+	color: #838b8a !important;
+}

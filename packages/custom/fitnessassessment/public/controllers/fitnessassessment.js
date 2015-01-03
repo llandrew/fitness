@@ -22,7 +22,7 @@ angular.module('mean.fitnessassessment').controller('TrainerModalController', ['
   }
 ]);
 
-angular.module('mean.fitnessassessment', ['angular-chartist']).controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams', 'angular-chartist',
+angular.module('mean.fitnessassessment').controller('FitnessassessmentController', ['$scope', '$modal', '$log', '$stateParams', '$location', 'Global', 'Fitnessassessment', 'Companies', 'Profiles', 'Assessments', 'Teams',
   function($scope, $modal, $log, $stateParams, $location, Global, Fitnessassessment, Companies, Profiles, Assessments, Teams) {
     $scope.global = Global;
     $scope.package = {
@@ -81,6 +81,21 @@ angular.module('mean.fitnessassessment', ['angular-chartist']).controller('Fitne
     		profileId: profileId
     	}, function(profile) {
     		$scope.profile = profile;
+
+    		$scope.trainer_goals = [];
+    		$scope.personal_goals = [];
+    		$scope.completed_goals = [];
+
+    		$.each( profile.goals, function( key, goal ) {
+    			if(goal.complete) {
+    				$scope.completed_goals.push(goal);
+    			} else if(goal.trainer_assigned) {
+    				$scope.trainer_goals.push(goal);
+    			} else {
+    				$scope.personal_goals.push(goal);
+    			}
+				
+			});
     	});
     };
 
@@ -513,22 +528,228 @@ angular.module('mean.fitnessassessment', ['angular-chartist']).controller('Fitne
 	
 	$scope.progressChartWeight = function(assessments) {
 		if(assessments) {
-			console.log(assessments);
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
 
-			/*var data = {
+				series.push(element.weight);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
 			  // A labels array that can contain any sort of values
-			  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+			  labels: labels,
 			  // Our series array that contains series objects or in this case series data arrays
 			  series: [
-			    [5, 2, 4, 2, 0]
+			    series
 			  ]
 			};
 
-			var chart = new Chartist.Line('.ct-chart', data);
-			chart = chart;*/
+			var chart = new Chartist.Line('.ct-chart-weight', data);
 		} else {
 			return false;
 		}		
+	};
+
+	$scope.progressChartBmi = function(assessments) {
+		if(assessments) {
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
+
+				var bmi = $scope.bmiCalculation(element);
+				series.push(bmi);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
+			  // A labels array that can contain any sort of values
+			  labels: labels,
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    series
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart-bmi', data);
+		} else {
+			return false;
+		}
+	};
+
+	$scope.progressChartLeanBodyMass = function(assessments) {
+		if(assessments) {
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
+
+				var leanBodyMass = $scope.leanBodyMassCalculator(element);
+				series.push(leanBodyMass);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
+			  // A labels array that can contain any sort of values
+			  labels: labels,
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    series
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart-lean-body-mass', data);
+		} else {
+			return false;
+		}
+	};
+
+	$scope.progressChartFatWeight = function(assessments) {
+		if(assessments) {
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
+
+				var fatWeight = $scope.fatWeightCalculator(element);
+				series.push(fatWeight);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
+			  // A labels array that can contain any sort of values
+			  labels: labels,
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    series
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart-fat-weight', data);
+		} else {
+			return false;
+		}
+	};
+
+	$scope.progressChartBodyFat = function(assessments) {
+		if(assessments) {
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
+
+				var bodyFatPercentage = $scope.bodyFatPercentageCalculator(element);
+				series.push(bodyFatPercentage);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
+			  // A labels array that can contain any sort of values
+			  labels: labels,
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    series
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart-body-fat', data);
+		} else {
+			return false;
+		}
+	};
+
+	$scope.progressChartWaistHipRatio = function(assessments) {
+		if(assessments) {
+			var labels = [];
+			var series = [];
+			
+			var i = 0;
+			for(i = 0; i < assessments.length; i++) {
+				var element = assessments[i];
+
+				var waistHipRatio = $scope.waistHipRatioCalculation(element);
+				series.push(waistHipRatio);
+				
+				var date = new Date(element.entry_date);
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var year = date.getFullYear();
+
+				labels.push(month + '-' + day + '-' + year);
+			}
+
+			var data = {
+			  // A labels array that can contain any sort of values
+			  labels: labels,
+			  // Our series array that contains series objects or in this case series data arrays
+			  series: [
+			    series
+			  ]
+			};
+
+			var chart = new Chartist.Line('.ct-chart-waist-hip', data);
+		} else {
+			return false;
+		}
+	};
+
+	$scope.contentTabSwitch = function(content, button) {
+		$('.content-tabs__item a').removeClass('active');
+		$(button).addClass('active');
+
+		$('.content-tabs__content:visible').hide(0, function() {
+			$(content).show();
+		});		
+	};
+
+	$scope.contentTabInitialize = function() {
+		$('.content-tabs__content').hide();
+
+		var activeIndex = $('.content-tabs__item a.active').parent().index();
+
+		$('.content-tabs__content').eq(activeIndex).show();
 	};
   }
 ]);
