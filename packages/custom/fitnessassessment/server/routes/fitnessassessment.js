@@ -84,6 +84,10 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   	assessmentController.getUserAssessments(req, res);
   });
 
+  app.post('/assessments/images/', auth.isMongoId, function(req, res, next) {
+    assessmentController.createImageset(req, res);
+  });
+
   app.get('/assessments/:assessmentId', auth.isMongoId, function(req, res, next) {
   	assessmentController.showAssessment(req, res);
   });

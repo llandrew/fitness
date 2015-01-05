@@ -3,6 +3,9 @@
   <h3>{{profile.email}}</h3>
   <span>Username: {{profile.username}}</span>
   <div>
+    <div>
+      <a href="/#!/profile/{{profile._id}}/assessment/new">New Assessment</a>
+    </div>
     <div data-ng-if="isClient(profile) === false">
       <a class="btn" data-ng-click="addClientToProfile(profile);">
         <i class="glyphicon glyphicon-plus"></i> Add as Client

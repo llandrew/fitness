@@ -58,78 +58,78 @@ Fitnessassessment.register(function(app, auth, database) {
   /*.add({
     title: 'fitnessassessment example page',
     link: 'fitnessassessment example page',
-    roles: ['authenticated'],
+    roles: [],
     menu: 'main'
   })*/
-/*  .add({
+  .add({
   	title: 'My Profile',
   	link: 'my profile',
-  	roles: ['authenticated'],
+  	roles: [],
   	menu: 'main'
-  })*/
+  })
   .add({
-    title: 'Trainers',
+    title: 'Manage Trainers',
     link: 'list trainers',
-    roles: ['authenticated', 'owner'],
+    roles: ['owner'],
     menu: 'main'
   })
   .add({
-    title: 'Clients',
+    title: 'Client List',
     link: 'list clients',
-    roles: ['authenticated', 'owner', 'trainer']
+    roles: ['owner', 'trainer']
+  })
+  .add({
+    title: 'Manage Teams',
+    link: 'list teams',
+    roles: [],
+    menu: 'main'
   })
   .add({
     title: 'Profiles',
     link: 'user profiles',
-    roles: ['authenticated'],
-    menu: 'main'
-  })
-  .add({
-    title: 'Teams',
-    link: 'list teams',
-    roles: ['authenticated'],
+    roles: [],
     menu: 'main'
   })
 /*  .add({
     title: 'List Companies',
     link: 'list companies',
-    roles: ['authenticated', 'owner'],
+    roles: ['owner'],
     menu: 'main'
   })
   .add({
     title: 'Create Company',
     link: 'create company',
-    roles: ['authenticated', 'owner'],
+    roles: ['owner'],
     menu: 'main'
   })*/
   .add({
   	title: 'Create Assessment',
-  	link: 'create assessment',
-  	roles: ['authenticated'],
+  	link: 'user assessment',
+  	roles: ['trainer'],
   	menu: 'main'
   })
   .add({
   	title: 'Measurements',
   	link: 'measurements',
-  	roles: ['authenticated'],
+  	roles: ['trainer'],
   	menu: 'main'
   })
   .add({
     title: 'Print',
     link: 'print',
-    roles: ['authenticated'],
+    roles: ['trainer'],
     menu: 'main'
   })
   .add({
     title: 'Progress Charts',
     link: 'progress charts',
-    roles: ['authenticated'],
+    roles: ['trainer'],
     menu: 'main'
   })
   .add({
   	title: 'Support',
   	link: 'support',
-  	roles: ['authenticated'],
+  	roles: ['trainer'],
   	menu: 'main'
   });
   

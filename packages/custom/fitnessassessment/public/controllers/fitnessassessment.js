@@ -29,6 +29,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       name: 'fitnessassessment'
     };
 
+    $scope.assessmentPhotos = {};
+
     $scope.global.toggleGoalsSlider = function() {
 
       if (!$scope.global.user.goals) {
@@ -252,52 +254,79 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     
     $scope.createAssessment = function(isValid) {
     	if (isValid) {
-    		var assessment = new Assessments.by_id({
-    			weight: this.weight,
-    			height: this.height,
-    			triceps: this.triceps,
-    			pectoral: this.pectoral,
-    			midaxilla: this.midaxilla,
-    			subscapular: this.subscapular,
-    			abdomen: this.abdomen,
-    			suprailiac: this.suprailiac,
-    			quadriceps: this.quadriceps,
-    			chest_bust: this.chest_bust,
-    			arm_right: this.arm_right,
-    			arm_left: this.arm_left,
-    			waist: this.waist,
-    			hips: this.hips,
-    			thigh_right: this.thigh_right,
-    			thigh_left: this.thigh_left,
-    			knee_right: this.knee_right,
-    			knee_left: this.knee_left,
-    			calf_right: this.calf_right,
-    			calf_left: this.calf_left
-    		});
-    		assessment.$save(function(response) {
-    			$location.path('assessment/' + response._id);
-    		});
 
-    		this.weight = '';
-    		this.height = '';
-    		this.triceps = '';
-    		this.pectoral = '';
-    		this.midaxilla = '';
-    		this.subscapular = '';
-    		this.abdomen = '';
-    		this.suprailiac = '';
-    		this.quadriceps = '';
-    		this.chest_bust = '';
-    		this.arm_right = '';
-    		this.arm_left = '';
-    		this.waist = '';
-    		this.hips = '';
-    		this.thigh_right = '';
-    		this.thigh_left = '';
-    		this.knee_right = '';
-    		this.knee_left = '';
-    		this.calf_right = '';
-    		this.calf_left = '';
+/*        var profile = $scope.profile;
+        profile.action = 'add avatar';
+        profile.newAvatar = files;
+        profile.$update();*/
+
+        var imageSet = new Assessments.images({
+          front: {
+            name: $scope.assessmentPhotos.front[0].name,
+            src: $scope.assessmentPhotos.front[0].src
+          },
+          back: {
+            name: $scope.assessmentPhotos.back[0].name,
+            src: $scope.assessmentPhotos.back[0].src
+          },
+          side: {
+            name: $scope.assessmentPhotos.side[0].name,
+            src: $scope.assessmentPhotos.side[0].src
+          }
+        });
+
+        imageSet.$save(function(doc) {
+
+      		var assessment = new Assessments.by_id({
+      			weight: $scope.weight,
+      			height: $scope.height,
+      			triceps: $scope.triceps,
+      			pectoral: $scope.pectoral,
+      			midaxilla: $scope.midaxilla,
+      			subscapular: $scope.subscapular,
+      			abdomen: $scope.abdomen,
+      			suprailiac: $scope.suprailiac,
+      			quadriceps: $scope.quadriceps,
+      			chest_bust: $scope.chest_bust,
+      			arm_right: $scope.arm_right,
+      			arm_left: $scope.arm_left,
+      			waist: $scope.waist,
+      			hips: $scope.hips,
+      			thigh_right: $scope.thigh_right,
+      			thigh_left: $scope.thigh_left,
+      			knee_right: $scope.knee_right,
+      			knee_left: $scope.knee_left,
+      			calf_right: $scope.calf_right,
+      			calf_left: $scope.calf_left,
+            owner: $stateParams.profileId,
+            images: doc._id
+      		});
+      		assessment.$save(function(response) {
+      			$location.path('assessment/' + response._id);
+      		});
+
+      		$scope.weight = '';
+      		$scope.height = '';
+      		$scope.triceps = '';
+      		$scope.pectoral = '';
+      		$scope.midaxilla = '';
+      		$scope.subscapular = '';
+      		$scope.abdomen = '';
+      		$scope.suprailiac = '';
+      		$scope.quadriceps = '';
+      		$scope.chest_bust = '';
+      		$scope.arm_right = '';
+      		$scope.arm_left = '';
+      		$scope.waist = '';
+      		$scope.hips = '';
+      		$scope.thigh_right = '';
+      		$scope.thigh_left = '';
+      		$scope.knee_right = '';
+      		$scope.knee_left = '';
+      		$scope.calf_right = '';
+      		$scope.calf_left = '';
+        });
+
 
     	} else {
     		$scope.submitted = true;
@@ -566,6 +595,31 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
         console.log('in upload finished');
         console.log(file);
 	};
+
+  /**
+   * Imagesets
+   */
+
+  $scope.uploadFrontAssessmentPhoto = function(files) {
+
+    if (!files) return false;
+    $scope.assessmentPhotos.front = files;
+
+  };
+
+  $scope.uploadSideAssessmentPhoto = function(files) {
+
+    if (!files) return false;
+    $scope.assessmentPhotos.side = files;
+
+  };
+
+  $scope.uploadBackAssessmentPhoto = function(files) {
+
+    if (!files) return false;
+    $scope.assessmentPhotos.back = files;
+
+  };
 
 	/**
 	 * Progress Charts

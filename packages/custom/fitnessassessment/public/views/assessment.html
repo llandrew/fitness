@@ -94,5 +94,12 @@
   		<td>{{assessment.calf_left}}</td>
   	</tr>
   </table>
+
+  <ul>
+    <li data-ng-repeat="image in assessment.images">
+      <img data-ng-src="{{image.src}}" alt="{{image.name}}" />
+      {{image.name}}
+    </li>
+  </ul>
   
 </section>

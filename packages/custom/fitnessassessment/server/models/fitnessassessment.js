@@ -127,6 +127,10 @@ var AssessmentSchema = new Schema({
 	owner: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	images: {
+		type: Schema.ObjectId,
+		ref: 'ImageSet'
 	}
 });
 

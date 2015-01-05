@@ -300,6 +300,20 @@ exports.createTeam = function(req, res) {
 	});
 };
 
+exports.createImageset = function(req, res) {
+
+	var imageset = new ImageSet(req.body);
+
+	imageset.save(function(err) {
+		if (err) {
+			return res.status(500).json({
+				error: 'Cannot save the image set'
+			});
+		}
+		res.json(imageset);
+	});
+};
+
 /**
  *
  * ASSESSMENT CONTROLLERS
@@ -311,7 +325,7 @@ exports.createTeam = function(req, res) {
  */
 exports.createAssessment = function(req, res) {
 	var assessment = new Assessment(req.body);
-	assessment.owner = req.user;
+	//assessment.owner = req.user;
 
 	assessment.save(function(err) {
 		if(err) {
@@ -332,6 +346,7 @@ exports.findAssessment = function(req, res, next, id) {
 	Assessment.findOne({
 		_id: id
 	})
+	.populate('images')
 	.exec(function(err, assessment) {
 		if (err) return next(err);
 		if (!assessment) return next(new Error('Failed to load assessment ' + id));

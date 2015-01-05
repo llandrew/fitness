@@ -73,6 +73,13 @@ angular.module('mean.fitnessassessment')
                 update: {
                     method: 'PUT'
                 }
+            }),
+            images: $resource('assessments/images/:profileId', {
+            	profileId: '@_id'
+            }, {
+            	update: {
+            		method: 'PUT'
+            	}
             })
         };
     }

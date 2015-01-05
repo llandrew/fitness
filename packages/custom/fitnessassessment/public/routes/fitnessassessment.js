@@ -59,6 +59,13 @@ angular.module('mean.fitnessassessment').config(['$stateProvider',
 	    		loggedin: checkLoggedin
 	    	}
 	    })
+	    .state('user assessment', {
+	    	url: '/profile/:profileId/assessment/new',
+	    	templateUrl: 'fitnessassessment/views/assessment-create.html',
+	    	resolve: {
+	    		loggedin: checkLoggedin
+	    	}
+	    })
 
 	    // Trainer Routes
 	    
