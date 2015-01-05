@@ -103,12 +103,6 @@ Fitnessassessment.register(function(app, auth, database) {
     menu: 'main'
   })*/
   .add({
-  	title: 'Create Assessment',
-  	link: 'user assessment',
-  	roles: ['trainer'],
-  	menu: 'main'
-  })
-  .add({
   	title: 'Measurements',
   	link: 'measurements',
   	roles: ['trainer'],
