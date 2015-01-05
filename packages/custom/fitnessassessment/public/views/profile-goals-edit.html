@@ -1,23 +1,23 @@
 <section data-ng-controller="FitnessassessmentController" data-ng-init="findProfile()">
-	<h1 class="content-heading">Goals</h1>
+	<h1 class="content-heading">Goals {{contentTabs.goals.active}}</h1>
 	<ul class="content-tabs" data-ng-init="contentTabs.init('goals', 'trainer')">
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link trainer_goals_button active" ng-click="contentTabs.switch('goals', 'trainer')">
+			<a href="" class="content-tabs__link trainer_goals_button" ng-class="{ 'active': contentTabs.goals.active == 'trainer'}" ng-click="contentTabs.switch('goals', 'trainer')">
 				Trainer Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link personal_goals_button" ng-click="contentTabs.switch('goals', 'personal')">
+			<a href="" class="content-tabs__link personal_goals_button" ng-class="{ 'active': contentTabs.goals.active == 'personal'}" ng-click="contentTabs.switch('goals', 'personal')">
 				Personal Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link completed_goals_button" ng-click="contentTabs.switch('goals', 'completed')">
+			<a href="" class="content-tabs__link completed_goals_button" ng-class="{ 'active': contentTabs.goals.active == 'completed'}" ng-click="contentTabs.switch('goals', 'completed')">
 				Completed Goals
 			</a>
 		</li>
 		<li class="content-tabs__item">
-			<a href="" class="content-tabs__link new_goal_button" ng-click="contentTabs.switch('goals', 'new')">
+			<a href="" class="content-tabs__link new_goal_button" ng-class="{ 'active': contentTabs.goals.active == 'new'}" ng-click="contentTabs.switch('goals', 'new')">
 				+ New Goal
 			</a>
 		</li>
