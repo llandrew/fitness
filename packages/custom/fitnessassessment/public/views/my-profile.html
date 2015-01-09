@@ -26,15 +26,6 @@ upload-file-callback="profileFilesUploadCallback(file)">
     </a>
   </div>
   <div>
-    <h3>Goals</h3>
-    <ul>
-      <li data-ng-repeat="goal in profile.goals">
-        {{goal.title}}
-      </li>
-    </ul>
-    <a class="btn" data-ng-href="/#!/profile/goals/edit">Update Goals</a>
-  </div>
-  <div>
   <div>
   	<h3>Companies</h3>
     <ul>
@@ -61,12 +52,5 @@ upload-file-callback="profileFilesUploadCallback(file)">
   	  <a data-ng-href="#!/profile/{{client._id}}">{{client.name}}</a>
   	  </li>
   	</ul>
-  	<h3>Assessments</h3>
-    <ul>
-  	  <li data-ng-repeat="assessment in profile.assessments">
-  	  <a data-ng-href="#!/assessment/{{assessment._id}}">{{assessment.entry_date | date:"yyyy-MM-dd"}}</a>
-  	  </li>
-  	</ul>
-  	<p><a class="btn btn-info" data-ng-href="#!/progress-charts/{{profile._id}}" role="button">Progress Charts</a></p>
   </div>
 </section>

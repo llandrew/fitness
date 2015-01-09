@@ -1,7 +1,8 @@
 <div class="controls" data-ng-show="global.authenticated" data-ng-include="'/system/views/header.html'">
 
 </div>
-<div class="fixed-goals">
+
+<div class="fixed-goals" data-ng-show="global.authenticated">
     <a class="goals-tab" ng-click="global.toggleGoalsSlider()">
     	<span class="goals-tab__toggle">View </span>My Goals
     </a><!--goals-tab-->

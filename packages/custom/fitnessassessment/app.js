@@ -68,6 +68,12 @@ Fitnessassessment.register(function(app, auth, database) {
   	menu: 'main'
   })
   .add({
+    title: 'Goals',
+    link: 'user goals',
+    roles: [],
+    menu: 'main'
+  })
+  .add({
     title: 'Manage Trainers',
     link: 'list trainers',
     roles: ['owner'],
