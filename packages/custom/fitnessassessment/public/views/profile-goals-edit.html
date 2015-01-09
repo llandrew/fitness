@@ -32,6 +32,10 @@
 				<a class="btn" data-ng-click="removeGoal(goal);">
 		          <i class="glyphicon glyphicon-trash"></i> Remove
 		        </a>
+
+		        <a class="btn" data-ng-click="completeGoal(goal);">
+		          <i class="glyphicon glyphicon-ok"></i> Complete
+		        </a>
 			</li><!--goals__item-->	
 		</ol>
 		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No trainer goals have been set.</h4>
@@ -45,6 +49,10 @@
 
 				<a class="btn" data-ng-click="removeGoal(goal);">
 		          <i class="glyphicon glyphicon-trash"></i> Remove
+		        </a>
+
+		        <a class="btn" data-ng-click="completeGoal(goal);">
+		          <i class="glyphicon glyphicon-ok"></i> Complete
 		        </a>
 			</li><!--goals__item-->	
 		</ol>
@@ -62,7 +70,7 @@
 		        </a>
 			</li><!--goals__item-->	
 		</ol>
-		<h4 data-ng-hide="!trainer_goals || trainer_goals.length">No goals have been completed.</h4>
+		<h4 data-ng-hide="!completed_goals || completed_goals.length">No goals have been completed.</h4>
   	</div>
 
   	<div id="new_goal" ng-class="contentTabs.goals.tabs.new ? 'content-tabs__content active' : 'content-tabs__content'" ng-show="contentTabs.goals.tabs.new" ng-hide="!contentTabs.goals.tabs.new">

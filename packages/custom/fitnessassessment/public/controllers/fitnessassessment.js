@@ -214,6 +214,33 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
      	}
 	};
 
+	$scope.completeGoal = function(goal) {
+		if(goal) {
+			var profile = $scope.profile;
+			profile.action = 'complete goal';
+			profile.goal = goal;
+
+			profile.$update(function(profile) {
+				$scope.trainer_goals = [];
+		        $scope.personal_goals = [];
+		        $scope.completed_goals = [];
+
+		        angular.forEach( profile.goals, function( goal ) {
+		          if(goal.complete) {
+		            $scope.completed_goals.push(goal);
+		          } else if(goal.trainer_assigned) {
+		            $scope.trainer_goals.push(goal);
+		          } else {
+		            $scope.personal_goals.push(goal);
+		          }
+		        
+		        });
+			});
+		} else {
+			return false;
+		}
+	};
+
     $scope.toggleActivation = function(profile) {
       profile.action = 'toggle activation';
       profile.$update();

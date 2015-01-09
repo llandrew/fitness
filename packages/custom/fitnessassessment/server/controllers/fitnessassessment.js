@@ -142,7 +142,13 @@ exports.updateProfile = function(req, res) {
 	if(req.body.action === 'complete goal') {
 		var completed_goal = req.body.goal;
 
-		
+		_.forEach(profile._doc.goals, function(goal, key) {
+			if(goal._id.toString() === completed_goal._id) {
+				req.body.goals[key].complete = true;
+			}
+		});
+		profile._doc.goals = req.body.goals;
+		profile.markModified('goals');
 	}
 
 	if (req.body.action === 'add avatar') {
