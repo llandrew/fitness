@@ -44,6 +44,10 @@ module.exports = function(Fitnessassessment, app, auth, database) {
   	assessmentController.updateProfile(req, res);
   });
 
+  app.delete('profiles/goals', auth.isMongoId, function(req, res, next) {
+  	assessmentController.destroyGoal(req, res);
+  });
+
   /**
    * COMPANIES
    */

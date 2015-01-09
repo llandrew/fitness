@@ -187,6 +187,33 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
       });
     };
 
+	$scope.removeGoal = function(goal) {
+		if (goal) {
+		  	var profile = $scope.profile;
+	      	profile.action = 'delete goal';
+	      	profile.goal = goal;
+
+	      	profile.$update(function(profile) {
+      			$scope.trainer_goals = [];
+		        $scope.personal_goals = [];
+		        $scope.completed_goals = [];
+
+		        angular.forEach( profile.goals, function( goal ) {
+		          if(goal.complete) {
+		            $scope.completed_goals.push(goal);
+		          } else if(goal.trainer_assigned) {
+		            $scope.trainer_goals.push(goal);
+		          } else {
+		            $scope.personal_goals.push(goal);
+		          }
+		        
+		        });
+	      	});
+     	} else {
+     		return false;
+     	}
+	};
+
     $scope.toggleActivation = function(profile) {
       profile.action = 'toggle activation';
       profile.$update();
@@ -849,12 +876,12 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     switch: function(page, tab) {
       var tabPage = $scope.contentTabs[page];
 
-      //if (tab !== 'new') {
+      if (tab !== 'new') {
         angular.forEach(tabPage.tabs, function(value, key) {
           tabPage.tabs[key] = false;
         });
         tabPage.active = tab;
-      //}
+      }
 
       if ((typeof tabPage.newSwitch !== 'undefined') ? tabPage.newSwitch(tab) : true) tabPage.tabs[tab] = true;
       $scope.contentTabs[page] = tabPage;
