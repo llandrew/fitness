@@ -145,6 +145,7 @@ exports.updateProfile = function(req, res) {
 		_.forEach(profile._doc.goals, function(goal, key) {
 			if(goal._id.toString() === completed_goal._id) {
 				req.body.goals[key].complete = true;
+				req.body.goals[key].modify_date = new Date().toISOString();
 			}
 		});
 		profile._doc.goals = req.body.goals;

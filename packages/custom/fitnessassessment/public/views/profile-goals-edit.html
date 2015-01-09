@@ -63,7 +63,7 @@
 	  <h3>Completed Goals</h3>
 	  <ol class="goals">
 			<li class="goals__item" ng-repeat="goal in completed_goals">
-				{{goal.title}} - added {{goal.create_date | date:"yyyy-MM-dd"}}
+				{{goal.title}} - completed {{goal.modify_date | date:"yyyy-MM-dd"}}
 
 				<a class="btn" data-ng-click="removeGoal(goal);">
 		          <i class="glyphicon glyphicon-trash"></i> Remove
