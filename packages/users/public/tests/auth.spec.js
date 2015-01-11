@@ -142,16 +142,6 @@
       });
 
 
-
-      it('should fail to register with duplicate Username', function() {
-        $httpBackend.when('POST', '/register').respond(400, 'Username already taken');
-        scope.register();
-        $httpBackend.flush();
-        // test scope value
-        expect(scope.usernameError).toBe('Username already taken');
-        expect(scope.registerError).toBe(null);
-      });
-
       it('should fail to register with non-matching passwords', function() {
         $httpBackend.when('POST', '/register').respond(400, 'Password mismatch');
         scope.register();

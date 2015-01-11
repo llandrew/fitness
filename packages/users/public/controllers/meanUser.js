@@ -76,6 +76,8 @@ angular.module('mean.users')
         tooltipTextConfirmPass: 'Show password'
       };
 
+      $scope.genders = [{label: 'Female', value: 'female'}, {label: 'Male', value: 'male'}];
+
       $scope.togglePasswordVisible = function() {
         $scope.input.type = $scope.input.type === 'text' ? 'password' : 'text';
         $scope.input.placeholder = $scope.input.placeholder === 'Password' ? 'Visible Password' : 'Password';
@@ -90,13 +92,13 @@ angular.module('mean.users')
       };
 
       $scope.register = function() {
-        $scope.usernameError = null;
         $scope.registerError = null;
         $http.post('/register', {
           email: $scope.user.email,
           password: $scope.user.password,
           confirmPassword: $scope.user.confirmPassword,
-          name: $scope.user.name
+          name: $scope.user.name,
+          gender: $scope.user.gender.value
         })
           .success(function() {
             // authentication OK
@@ -109,9 +111,7 @@ angular.module('mean.users')
           })
           .error(function(error) {
             // Error: authentication failed
-            if (error === 'Username already taken') {
-              $scope.usernameError = error;
-            } else if (error === 'Email already taken') {
+            if (error === 'Email already taken') {
               $scope.emailError = error;
             } else $scope.registerError = error;
           });

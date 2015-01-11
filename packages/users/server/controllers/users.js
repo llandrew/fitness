@@ -56,6 +56,7 @@ exports.create = function(req, res, next) {
   req.assert('email', 'You must enter a valid email address').isEmail();
   req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('gender', 'You must enter a gender').notEmpty();
 
   var errors = req.validationErrors();
   if (errors) {
@@ -66,33 +67,24 @@ exports.create = function(req, res, next) {
   user.roles = ['authenticated'];
   user.save(function(err) {
     if (err) {
-      switch (err.code) {
-        case 11000:
-        case 11001:
-          res.status(400).json([{
-            msg: 'Username already taken',
-            param: 'username'
-          }]);
-          break;
-        default:
-          var modelErrors = [];
+      	var modelErrors = [];
 
-          if (err.errors) {
+      	if (err.errors) {
 
-            for (var x in err.errors) {
-              modelErrors.push({
-                param: x,
-                msg: err.errors[x].message,
-                value: err.errors[x].value
-              });
-            }
+        	for (var x in err.errors) {
+          		modelErrors.push({
+            		param: x,
+            		msg: err.errors[x].message,
+            		value: err.errors[x].value
+          		});
+        	}
 
-            res.status(400).json(modelErrors);
-          }
-      }
+        	res.status(400).json(modelErrors);
+  	  	}
 
-      return res.status(400);
+      	return res.status(400);
     }
+
     req.logIn(user, function(err) {
       if (err) return next(err);
       return res.redirect('/');

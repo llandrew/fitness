@@ -46,6 +46,12 @@
         </span>
         </div>
 
+        <div class="input-wrapper">
+        	<select required id="gender" name="gender" ng-model="user.gender" ng-options="gender.label for gender in genders track by gender.value" class="form-control">
+        		<option value="">-- Choose Gender --</option>
+        	</select>
+        </div>
+
         <div class="button_register">
             <button type="submit" class="submit_button">Sign up</button>
             <p>Already have an account?</p>
