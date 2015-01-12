@@ -42,6 +42,7 @@ angular.module('mean.users')
         })
           .success(function(response) {
             // authentication OK
+            console.log(response.user);
             $scope.loginError = 0;
             $rootScope.user = response.user;
             $rootScope.$emit('loggedin');
@@ -65,13 +66,17 @@ angular.module('mean.users')
   .controller('EditCtrl', ['$scope', '$rootScope', '$http', '$location', 'Global',
     function($scope, $rootScope, $http, $location, Global) {
     	$scope.user = user;
-    	console.log($scope.user);
 
     	$scope.genders = [{label: 'Female', value: 'female'}, {label: 'Male', value: 'male'}];
 
+    	$http.get('/users/me')
+        .success(function(user) {
+        	$scope.user = user;
+         	console.log($scope.user);
+        });
+
     	$scope.update = function() {
 	        $scope.registerError = null;
-	        console.log('updating...');
 	        $http.post('/edit-profile', {
 	          email: $scope.user.email,
 	          password: $scope.user.password,
@@ -85,7 +90,6 @@ angular.module('mean.users')
 	          	console.log('updated');
 	          })
 	          .error(function(error) {
-	          	console.log('error');
 	            // Error: authentication failed
 	            if (error === 'Email already taken') {
 	              $scope.emailError = error;
