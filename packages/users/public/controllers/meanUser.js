@@ -98,7 +98,8 @@ angular.module('mean.users')
           password: $scope.user.password,
           confirmPassword: $scope.user.confirmPassword,
           name: $scope.user.name,
-          gender: $scope.user.gender.value
+          gender: $scope.user.gender.value,
+          birthdate: $scope.user.birthdate
         })
           .success(function() {
             // authentication OK

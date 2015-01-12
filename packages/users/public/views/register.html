@@ -52,6 +52,14 @@
         	</select>
         </div>
 
+        <div class="input-wrapper">
+            <input required id="birthdate" type="text" name="birthdate" placeholder="Birthdate yyyy-mm-dd"
+                   ng-model="user.birthdate">
+
+            <div class="error_message">Please enter a correct info #</div>
+            <span class="pic user"></span>
+        </div>
+
         <div class="button_register">
             <button type="submit" class="submit_button">Sign up</button>
             <p>Already have an account?</p>

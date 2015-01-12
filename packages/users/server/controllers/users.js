@@ -57,6 +57,7 @@ exports.create = function(req, res, next) {
   req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
   req.assert('gender', 'You must enter a gender').notEmpty();
+  req.assert('birthdate', 'You must enter a birthdate').notEmpty();
 
   var errors = req.validationErrors();
   if (errors) {
