@@ -23,6 +23,21 @@ angular.module('mean.users').config(['$meanStateProvider',
       return deferred.promise;
     };
 
+    var checkLoggedin = function($q, $timeout, $http, $location) {
+  		var deferred = $q.defer();
+
+  		$http.get('/loggedin').success(function(user) {
+  			if (user !== '0') $timeout(deferred.resolve);
+
+  			else {
+  				$timeout(deferred.reject);
+  				$location.url('/login');
+  			}
+  		});
+
+  		return deferred.promise;
+  	};
+
 
     // states for my app
     $meanStateProvider
@@ -43,6 +58,13 @@ angular.module('mean.users').config(['$meanStateProvider',
         resolve: {
           loggedin: checkLoggedOut
         }
+      })
+      .state('edit-profile', {
+      	url: '/edit-profile',
+      	templateUrl: 'users/views/edit-profile.html',
+      	resolve: {
+      		loggedin: checkLoggedin
+      	}
       })
       .state('forgot-password', {
         url: '/forgot-password',

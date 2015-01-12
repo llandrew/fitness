@@ -44,6 +44,37 @@ exports.session = function(req, res) {
 };
 
 /**
+ * Update user
+ */
+exports.update = function(req, res, next) {
+  var user = req.body;
+  var userId = user._id;
+
+  user.provider = 'local';
+
+  // because we set our user.provider to local our models/user.js validation will always be true
+  req.assert('name', 'You must enter a name').notEmpty();
+  req.assert('email', 'You must enter a valid email address').isEmail();
+  req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
+  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('gender', 'You must enter a gender').notEmpty();
+  req.assert('birthdate', 'You must enter a birthdate').notEmpty();
+
+  var errors = req.validationErrors();
+  if (errors) {
+    return res.status(400).send(errors);
+  }
+
+  User.update({ _id: userId }, user, { multi: false, upsert: false }, function(err) {
+    if(err) { 
+    	throw err; 
+    } else {
+    	console.log('successful update');
+    }
+  });
+};
+
+/**
  * Create user
  */
 exports.create = function(req, res, next) {

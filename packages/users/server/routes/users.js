@@ -21,6 +21,9 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.route('/reset/:token')
     .post(users.resetpassword);
 
+  app.route('/edit-profile')
+  	.post(users.update);
+
   // Setting up the userId param
   app.param('userId', users.user);
 

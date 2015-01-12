@@ -62,6 +62,38 @@ angular.module('mean.users')
       };
     }
   ])
+  .controller('EditCtrl', ['$scope', '$rootScope', '$http', '$location', 'Global',
+    function($scope, $rootScope, $http, $location, Global) {
+    	$scope.user = user;
+    	console.log($scope.user);
+
+    	$scope.genders = [{label: 'Female', value: 'female'}, {label: 'Male', value: 'male'}];
+
+    	$scope.update = function() {
+	        $scope.registerError = null;
+	        console.log('updating...');
+	        $http.post('/edit-profile', {
+	          email: $scope.user.email,
+	          password: $scope.user.password,
+	          confirmPassword: $scope.user.confirmPassword,
+	          name: $scope.user.name,
+	          gender: $scope.user.gender.value,
+	          birthdate: $scope.user.birthdate,
+	          _id: $scope.user._id
+	        })
+	          .success(function() {
+	          	console.log('updated');
+	          })
+	          .error(function(error) {
+	          	console.log('error');
+	            // Error: authentication failed
+	            if (error === 'Email already taken') {
+	              $scope.emailError = error;
+	            } else $scope.registerError = error;
+	          });
+		};
+    }
+  ])
   .controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'Global',
     function($scope, $rootScope, $http, $location, Global) {
       $scope.user = {};
