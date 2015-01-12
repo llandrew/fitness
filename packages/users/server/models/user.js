@@ -78,6 +78,10 @@ var UserSchema = new Schema({
   linkedin: {},
   avatar: {
     type: String
+  },
+  gender: {
+  	type: String,
+  	required: true
   }
 });
 
