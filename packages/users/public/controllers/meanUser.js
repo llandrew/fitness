@@ -92,15 +92,12 @@ angular.module('mean.users')
 	        var updateData = {
 	        	email: $scope.user.email,
 	        	name: $scope.user.name,
-	        	gender: $scope.user.gender,
-	        	birthdate: $scope.user.birthdate,
-	        	_id: $scope.user._id
+	        	gender: $scope.selectedGender.value,
+	        	birthdate: $scope.birthdate,
+	        	_id: $scope.user._id,
+	        	password: $scope.user.password,
+	        	confirmPassword: $scope.user.confirmPassword
 	        };
-
-	        if($scope.user.password.length > 0 && $scope.user.password.length === $scope.user.confirmPassword.length) {
-	        	updateData.password = $scope.user.password;
-	        	updateData.confirmPassword = $scope.user.confirmPassword;
-	        }
 
 	        $http.post('/edit-profile', updateData)
 	          .success(function() {
