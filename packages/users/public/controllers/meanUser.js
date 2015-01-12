@@ -65,31 +65,49 @@ angular.module('mean.users')
   ])
   .controller('EditCtrl', ['$scope', '$rootScope', '$http', '$location', 'Global',
     function($scope, $rootScope, $http, $location, Global) {
-    	$scope.user = user;
-
     	$scope.genders = [{label: 'Female', value: 'female'}, {label: 'Male', value: 'male'}];
+    	$scope.selectedGender = '';
 
     	$http.get('/users/me')
         .success(function(user) {
         	$scope.user = user;
-         	console.log($scope.user);
+
+         	for(var i = 0; i < $scope.genders.length; i = i+1) {
+	    		if($scope.genders[i].value === $scope.user.gender) {
+	    			$scope.selectedGender = $scope.genders[i];
+	    		}
+	    	}
+
+	    	var birthdate = new Date($scope.user.birthdate);
+			var month = birthdate.getMonth() + 1;
+			var day = birthdate.getDate();
+			var year = birthdate.getFullYear();
+
+			$scope.birthdate = year + '-' + month + '-' + day;
         });
 
     	$scope.update = function() {
 	        $scope.registerError = null;
-	        $http.post('/edit-profile', {
-	          email: $scope.user.email,
-	          password: $scope.user.password,
-	          confirmPassword: $scope.user.confirmPassword,
-	          name: $scope.user.name,
-	          gender: $scope.user.gender.value,
-	          birthdate: $scope.user.birthdate,
-	          _id: $scope.user._id
-	        })
+
+	        var updateData = {
+	        	email: $scope.user.email,
+	        	name: $scope.user.name,
+	        	gender: $scope.user.gender,
+	        	birthdate: $scope.user.birthdate,
+	        	_id: $scope.user._id
+	        };
+
+	        if($scope.user.password.length > 0 && $scope.user.password.length === $scope.user.confirmPassword.length) {
+	        	updateData.password = $scope.user.password;
+	        	updateData.confirmPassword = $scope.user.confirmPassword;
+	        }
+
+	        $http.post('/edit-profile', updateData)
 	          .success(function() {
-	          	console.log('updated');
+	          	$scope.successMsg = 'Your profile was successfully updated.';
 	          })
 	          .error(function(error) {
+	          	console.log('error');
 	            // Error: authentication failed
 	            if (error === 'Email already taken') {
 	              $scope.emailError = error;

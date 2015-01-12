@@ -67,9 +67,24 @@ exports.update = function(req, res, next) {
 
   User.update({ _id: userId }, user, { multi: false, upsert: false }, function(err) {
     if(err) { 
-    	throw err; 
+    	var modelErrors = [];
+
+      	if (err.errors) {
+
+        	for (var x in err.errors) {
+          		modelErrors.push({
+            		param: x,
+            		msg: err.errors[x].message,
+            		value: err.errors[x].value
+          		});
+        	}
+
+        	res.status(400).json(modelErrors);
+  	  	}
+
+      	return res.status(400);
     } else {
-    	console.log('successful update');
+    	res.status(200);
     }
   });
 };
