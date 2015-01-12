@@ -903,7 +903,11 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     switch: function(page, tab) {
       var tabPage = $scope.contentTabs[page];
 
-      if (tab !== 'new') {
+      if ($scope.contentTabs.goals.active === 'completed' && tab === 'new') {
+      	console.log('new!');
+      	$scope.contentTabs.switch('goals', 'personal');
+      }
+      else if (tab !== 'new') {
         angular.forEach(tabPage.tabs, function(value, key) {
           tabPage.tabs[key] = false;
         });
