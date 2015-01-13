@@ -32,8 +32,8 @@ angular.module('mean.fitnessassessment').controller('FitnessassessmentController
     $scope.assessmentPhotos = {};
 
     $scope.global.toggleMenu = function() {
-    	$('.sidebar').toggleClass('hidden');
-		$('.side-bar-col').toggleClass('hidden');
+/*    	$('.sidebar').toggleClass('hidden');
+		$('.side-bar-col').toggleClass('hidden');*/
     };
 
     $scope.global.toggleGoalsSlider = function() {
